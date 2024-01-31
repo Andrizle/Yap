@@ -1,0 +1,4 @@
+.bizTiles {
+    display: flex;
+    flex-direction: row;
+}

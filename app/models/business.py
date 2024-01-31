@@ -28,6 +28,8 @@ class Business(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
+    owner = db.relationship('User', back_populates='business')
+    
     def to_dict(self):
         return {
             'id': self.id,
@@ -49,4 +51,6 @@ class Business(db.Model):
             'is_open_now': self.is_open_now,
             'created_at': self.created_at,
             'updated_at': self.updated_at
+
+
         }

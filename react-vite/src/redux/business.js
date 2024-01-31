@@ -1,9 +1,15 @@
-
 const LOAD_BUSINESSES = 'businesses/getBusinesses'
+
+const CREATE_BUSINESS = 'businesses/createBusiness'
 
 const loadBusinesses = businesses => ({
     type: LOAD_BUSINESSES,
     businesses
+});
+
+const addBusiness = business => ({
+    type: CREATE_BUSINESS,
+    business
 });
 
 export const thunkFetchBusinesses = () => dispatch => {
@@ -12,6 +18,17 @@ export const thunkFetchBusinesses = () => dispatch => {
     .then(d => dispatch(loadBusinesses(d.businesses)))
     .catch(console.error)
 };
+
+export const thunkCreateBusiness = business => dispatch => {
+    fetch('/api/businesses/new', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(business)
+    })
+    .then(r => r.json())
+    .then(d => dispatch(addBusiness(d)))
+    .catch(console.error)
+}
 
 const businessReducer = (state = {}, action) => {
     switch(action.type) {
@@ -22,6 +39,8 @@ const businessReducer = (state = {}, action) => {
             });
             return businessesState;
         }
+        case CREATE_BUSINESS:
+            return {...state, [action.business.id]: action.business}
         default:
             return state;
     }

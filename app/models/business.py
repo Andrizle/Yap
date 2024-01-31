@@ -9,7 +9,7 @@ class Business(db.Model):
        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     name = db.Column(db.String(128), nullable = False)
     icon = db.Column(db.String(256), default='https://s3-media0.fl.yelpcdn.com/assets/public/default_biz_avatar_44x44_v2@2x.yji-ae7f90b9345a64b4c0bd.png')
     category = db.Column(db.String)

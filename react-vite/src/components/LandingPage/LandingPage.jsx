@@ -2,7 +2,6 @@ import './LandingPage.css'
 import Businesses from '../Businesses';
 
 
-
 function LandingPage() {
 
     return (

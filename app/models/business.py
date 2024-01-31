@@ -9,14 +9,14 @@ class Business(db.Model):
        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     name = db.Column(db.String(128), nullable = False)
     icon = db.Column(db.String(256), default='https://s3-media0.fl.yelpcdn.com/assets/public/default_biz_avatar_44x44_v2@2x.yji-ae7f90b9345a64b4c0bd.png')
     category = db.Column(db.String)
     price = db.Column(db.String(4), nullable= False)
     review_count = db.Column(db.Integer, default=0)
     rating = db.Column(db.Integer, default=0)
-    phone = db.Column(db.Integer, nullable=False)
+    phone = db.Column(db.String(20), nullable=False)
     street_address = db.Column(db.String, nullable = False)
     suite_unit = db.Column(db.String, nullable = True)
     country = db.Column(db.String, nullable = False)
@@ -29,7 +29,7 @@ class Business(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     owner = db.relationship('User', back_populates='business')
-    
+
     def to_dict(self):
         return {
             'id': self.id,

@@ -16,7 +16,7 @@ class Business(db.Model):
     price = db.Column(db.String(4), nullable= False)
     review_count = db.Column(db.Integer, default=0)
     rating = db.Column(db.Integer, default=0)
-    phone = db.Column(db.Integer, nullable=False)
+    phone = db.Column(db.Unicode, nullable=False)
     street_address = db.Column(db.String, nullable = False)
     suite_unit = db.Column(db.String, nullable = True)
     country = db.Column(db.String, nullable = False)

@@ -16,7 +16,6 @@ function Businesses() {
 
     return (
         <>
-            <h1>Welcome!</h1>
             {console.log(businesses)}
             {businesses.map(business =>
                 <div key={business.id} className='bizTiles'>

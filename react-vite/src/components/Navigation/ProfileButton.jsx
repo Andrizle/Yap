@@ -17,7 +17,7 @@ function ProfileButton() {
   };
 
   useEffect(() => {
-    if (!showMenu) return;
+    if (!showMenu) return
 
     const closeMenu = (e) => {
       if (ulRef.current && !ulRef.current.contains(e.target)) {
@@ -39,19 +39,19 @@ function ProfileButton() {
   };
 
   return (
-    <>
+    <div id="profileBtn">
       <button onClick={toggleMenu}>
         <i className="fas fa-user-circle" />
       </button>
       {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
+        <div className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
-              <li>
+              <div>{user.username}</div>
+              <div>{user.email}</div>
+              <div>
                 <button onClick={logout}>Log Out</button>
-              </li>
+              </div>
             </>
           ) : (
             <>
@@ -67,9 +67,9 @@ function ProfileButton() {
               />
             </>
           )}
-        </ul>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 

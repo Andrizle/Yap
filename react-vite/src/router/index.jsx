@@ -3,6 +3,7 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import LandingPage from '../components/LandingPage';
+import CreateBusiness from '../components/CreateBusiness/CreateBusiness';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,15 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <SignupFormPage />,
       },
+      {
+        path: "business",
+        children: [
+          {
+            path: "new",
+            element: <CreateBusiness />
+          }
+        ]
+      }
     ],
   },
 ]);

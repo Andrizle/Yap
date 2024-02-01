@@ -19,15 +19,19 @@ export const thunkFetchBusinesses = () => dispatch => {
     .catch(console.error)
 };
 
-export const thunkCreateBusiness = business => dispatch => {
-    fetch('/api/businesses/new', {
+export const thunkCreateBusiness = business => async dispatch => {
+    const response = await fetch('/api/businesses/new', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(business)
     })
-    .then(r => r.json())
-    .then(d => dispatch(addBusiness(d)))
-    .catch(console.error)
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(addBusiness(data))
+    } else {
+        return print(await response.json())
+    }
 }
 
 const businessReducer = (state = {}, action) => {

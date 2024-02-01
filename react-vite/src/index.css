@@ -1,1 +1,9 @@
 /* TODO: Add sitewide styles */
+.modalBtn {
+    border: solid black 1px;
+    border-radius: 5px;
+    box-shadow: black 2px 2px;
+    cursor: pointer;
+    padding: 10px;
+    width: fit-content;
+}

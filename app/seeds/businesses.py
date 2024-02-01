@@ -6,7 +6,7 @@ from sqlalchemy.sql import text
 def seed_businesses():
     demo_biz = Business(
         name = "Crispy Delights",
-        category = "restaurant",
+        category = "Restaurants",
         price = "$",
         phone = "1 (555) 345-6789",
         street_address = "987 Maple Lane",
@@ -22,7 +22,7 @@ def seed_businesses():
         review_count = 0)
     flavors = Business(
         name = "Flavors of Fusion",
-        category = "restaurant",
+        category = "Restaurants",
         price = "$$",
         phone = "1 (555) 234-5678",
         street_address = "789 Pine Street",
@@ -38,7 +38,7 @@ def seed_businesses():
         review_count = 0)
     green = Business(
         name = "The Green Platter",
-        category = "restaurant",
+        category = "Restaurants",
         price = "$$$",
         phone = "1 (555) 456-7890",
         street_address = "456 Oak Avenue",
@@ -54,7 +54,7 @@ def seed_businesses():
         review_count = 0)
     mediterranean = Business(
         name = "Mediterranean Breeze",
-        category = "restaurant",
+        category = "Restaurants",
         price = "$$$",
         phone = "1 (555) 567-8901",
         street_address = "123 Main Street",

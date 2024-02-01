@@ -1,0 +1,16 @@
+#businessHoursModal {
+    padding: 20px;
+    width: 500px;
+}
+
+.dayRowContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    min-width: none;
+}
+
+.timeRangeContainer {
+    display: flex;
+    padding: 0 10px ;
+}

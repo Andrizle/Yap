@@ -12,11 +12,9 @@ function Businesses() {
     }, [dispatch])
 
     if (!businesses) return null;
-    console.log(businesses)
 
     return (
         <>
-            {console.log(businesses)}
             {businesses.map(business =>
                 <div key={business.id} className='bizTiles'>
                     <img src={business.icon} alt="" />

@@ -33,7 +33,6 @@ export default function HoursOfOperation({setHours}) {
             fri,
             sat,
         ]
-        console.log(HOO)
 
         setHours(HOO)
 

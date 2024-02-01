@@ -151,7 +151,7 @@ export default function CreateBusiness() {
                                 </div>
                                 <div className='dayRangeContainer'>
                                     <div className='dayOpenContainer'>
-                                        <select name="" id="openDay" disabled={allDay} onChange={e => setOpenDay(e.target.value)}>
+                                        <select name="" id="openDay" disabled={allDay} onChange={e => setOpenDay(e.target.value)} required={!allDay}>
                                             <option value="Sun">Sun</option>
                                             <option value="Mon">Mon</option>
                                             <option value="Tues">Tues</option>
@@ -167,7 +167,7 @@ export default function CreateBusiness() {
                                         </svg>
                                     </div>
                                     <div>
-                                        <select name="" id="openDay" disabled={allDay} onChange={e => setCloseDay(e.target.value)}>
+                                        <select name="" id="closeDay" disabled={allDay} onChange={e => setCloseDay(e.target.value)} required={!allDay}>
                                             <option value="Sun">Sun</option>
                                             <option value="Mon">Mon</option>
                                             <option value="Tues">Tues</option>
@@ -180,7 +180,7 @@ export default function CreateBusiness() {
                                 </div>
                                 <div className="timeRangeContainer">
                                     <div className="dayOpenContainer">
-                                        <select name="" id="openHours" disabled={allDay} onChange={e => setOpenHour(e.target.value)}>
+                                        <select name="" id="openHours" disabled={allDay} onChange={e => setOpenHour(e.target.value)} required={!allDay}>
                                             <optgroup>
                                                 <option value='' label="Opens at" disabled="">Opens at</option>
                                                 <option value="12:00 AM">12:00 AM</option>
@@ -288,7 +288,7 @@ export default function CreateBusiness() {
                                         </svg>
                                     </div>
                                     <div className="dayCloseContainer">
-                                        <select name="" id="closingHours" disabled={allDay} onChange={e => setCloseHour(e.target.value)}>
+                                        <select name="" id="closingHours" disabled={allDay} onChange={e => setCloseHour(e.target.value)} required={!allDay}>
                                             <optgroup>
                                                 <option value="" label="Closes at" disabled="">Closes at</option>
                                                 <option value="12:00 AM">12:00 AM</option>

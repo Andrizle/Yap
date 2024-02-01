@@ -20,7 +20,7 @@ class Business(db.Model):
     street_address = db.Column(db.String, nullable = False)
     suite_unit = db.Column(db.String, nullable = True)
     country = db.Column(db.String, nullable = False)
-    zip_code = db.Column(db.Integer, nullable = False)
+    zip_code = db.Column(db.String, nullable = False)
     city = db.Column(db.String, nullable = False)
     state = db.Column(db.String, nullable = False)
     hours = db.Column(db.String)

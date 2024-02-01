@@ -109,7 +109,7 @@ export default function CreateBusiness() {
                             type="text"
                             name="zip_code"
                             value={zip_code}
-                            onChange={e => setZip_code(e.target.value)}
+                            onChange={e => setZip_code(`${e.target.value}`)}
                         />
                     </div>
                     <div id='cityStateContainer'>

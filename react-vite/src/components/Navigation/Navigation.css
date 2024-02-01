@@ -1,3 +1,28 @@
+#navContainer {
+  display: flex;
+  justify-content: space-between;
+  min-height: 100px;
+  overflow: hidden;
+}
+
+#rightSideNav {
+  /* border: solid black 1px; */
+  display: flex;
+  flex-direction: row;
+}
+
+#addBusinessNavBtn{
+  position: relative;
+  right: 100px;
+  top: 10px;
+}
+
+#profileBtn {
+  position: relative;
+  right: 50px;
+  top: 10px;
+}
+
 .profile-dropdown {
-  position: absolute;
+  position: relative;
 }

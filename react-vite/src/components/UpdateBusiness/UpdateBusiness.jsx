@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { thunkCreateBusiness } from '../../redux/business';
-import './CreateBusiness.css'
+import { useNavigate, useParams } from 'react-router-dom';
+import { thunkEditBusiness } from '../../redux/business';
+import './UpdateBusiness.css'
 // import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 // import HoursOfOperation from '../HourOfOperationModal/HoursOfOperation';
 
@@ -26,9 +26,11 @@ function getTodaysFullEndTime(closingHour) {
     return Date.parse(closeTime)
 }
 
-export default function CreateBusiness() {
+export default function UpdateBusiness() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { businessId } = useParams();
+    const business = useSelector(state => state.business[businessId])
     const currentUser = useSelector(state => state.session.user)
     const [name, setName] = useState("")
     const [icon, setIcon] = useState("")
@@ -68,15 +70,19 @@ export default function CreateBusiness() {
     const is_open_now = Date.now() > getTodaysFullStartTime(openHour.split(" ")[0]) && Date.now() < getTodaysFullEndTime(closeHour.split(' ')[0])
 
     useEffect(() => {
-        setHours(`${openDay} - ${closeDay} : ${openHour} - ${closeHour}`)
-    }, [openDay, closeDay, openHour, closeHour])
+
+    })
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log(currentUser)
 
+        if (hours === '') {
+            setHours(`${openDay} - ${closeDay} : ${openHour} - ${closeHour}`)
+        }
 
-        const backendResponse = await dispatch(thunkCreateBusiness({
+        const backendResponse = await dispatch(thunkEditBusiness({
             owner_id: currentUser.id,
             name,
             category,
@@ -92,16 +98,20 @@ export default function CreateBusiness() {
             is_open_now
         }))
         .catch(async res => {
-            setErrors(res)});
+            const data = await res.json();
+            if (data?.errors) {
+                setErrors(data.errors);
+            }});
 
-        if (!backendResponse?.errors) {
-            navigate('/')
+        if (backendResponse) {
+            navigate(`/business/${backendResponse.id}`)
         }
-
+        console.log(Object.values(errors))
     }
 
     return (
         <div id='addBusinessContainer'>
+            <p>{Object.keys(errors)} {Object.values(errors)}</p>
             <h1>Add A New Business Listing</h1>
             <form onSubmit={handleSubmit} id='addBusinessForm'>
                 <h2>What is the Name of your Business?</h2>
@@ -124,7 +134,7 @@ export default function CreateBusiness() {
                             onChange={e => setStreet_address(e.target.value)}
                             required
                         />
-                        <label htmlFor="Suite_unit">Suite/unit (optional) {errors.suite_unit && <span>{errors.suite_unit}</span>}</label>
+                        <label htmlFor="Suite_unit">Suite/unit{errors.suite_unit && <span>{errors.suite_unit}</span>}</label>
                         <input
                             type="text"
                             name="Suite_unit"
@@ -171,7 +181,6 @@ export default function CreateBusiness() {
                 </div>
                 <div id='phoneContainer'>
                     <h2>Phone Number</h2>
-                    {errors.phone && <span>{errors.phone}</span>}
                     <p>What&apos;s the best number for customers to reach you at?</p>
                     <input
                         type="number"
@@ -182,7 +191,6 @@ export default function CreateBusiness() {
                 </div>
                 <div id='hoursContainer'>
                     <h2>Hours of Operation</h2>
-                    {errors.hours && <span>{errors.hours}</span>}
                     <div id='addHoursContainer'>
                         <img src="https://s3-media0.fl.yelpcdn.com/assets/public/40x40_operation_hours_v2.yji-0bc0d9d4b51e6fcfdc40.svg" alt="picture of clock" />
                         <div id='hoursText'>
@@ -478,7 +486,6 @@ export default function CreateBusiness() {
                     <h2>Service & Price</h2>
                     <div id='categoryContainer'>
                         <p>What sort of service are you providing?</p>
-                        {errors.categories && <span>{errors.categories}</span>}
                         <select
                             name=""
                             id="categorySelect"
@@ -502,7 +509,6 @@ export default function CreateBusiness() {
                     </div>
                     <div id='priceContainer'>
                         <p>What prices can customers expect?</p>
-                        {errors.price && <span>{errors.price}</span>}
                         <select name=""
                             id="priceSelect"
                             onChange={e => setPrice(e.target.value)}

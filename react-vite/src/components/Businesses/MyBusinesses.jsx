@@ -1,14 +1,18 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { thunkFetchBusinesses } from '../../redux/business';
+import { useNavigate } from 'react-router-dom';
+import { thunkFetchMyBusinesses } from '../../redux/business';
+import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
+import RemoveBusinessModal from '../RemoveBusinessModal/RemoveBusinessModal';
 import './Businesses.css'
 
-function Businesses() {
-    const businesses = Object.values(useSelector(state => state.business['allBusinesses']))
+function MyBusinesses() {
+    const businesses = Object.values(useSelector(state => state.business.ownedBusinesses))
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(thunkFetchBusinesses())
+        dispatch(thunkFetchMyBusinesses())
     }, [dispatch])
 
     if (!businesses) return null;
@@ -41,10 +45,19 @@ function Businesses() {
                             {business.hours}
                         </div>
                     </div>
+                    <div>
+                        <button
+                            className='modalBtn'
+                            onClick={() => navigate(`/business/${business.id}/edit`)}>Update</button>
+                        <OpenModalMenuItem
+                            itemText="Delete"
+                            modalComponent={<RemoveBusinessModal businessId={business.id} />}
+                        />
+                    </div>
                 </div>
             )}
         </>
     )
 }
 
-export default Businesses;
+export default MyBusinesses;

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, URLField, IntegerField, SelectField
+from wtforms import StringField, BooleanField, URLField, IntegerField
 from wtforms.validators import DataRequired, Length, ValidationError
 
 def price_validation(form, field):

@@ -160,7 +160,7 @@ export default function HoursOfOperation({setHours}) {
                                 </select>
                             </div>
                             <div>
-                                <svg width="24" height="24" class="icon_svg">
+                                <svg width="24" height="24" className="icon_svg">
                                     <rect width="16" height="2" x="4" y="11" rx="1"></rect>
                                 </svg>
                             </div>
@@ -382,7 +382,7 @@ export default function HoursOfOperation({setHours}) {
                                 </select>
                             </div>
                             <div>
-                                <svg width="24" height="24" class="icon_svg">
+                                <svg width="24" height="24" className="icon_svg">
                                     <rect width="16" height="2" x="4" y="11" rx="1"></rect>
                                 </svg>
                             </div>
@@ -604,7 +604,7 @@ export default function HoursOfOperation({setHours}) {
                                 </select>
                             </div>
                             <div>
-                                <svg width="24" height="24" class="icon_svg">
+                                <svg width="24" height="24" className="icon_svg">
                                     <rect width="16" height="2" x="4" y="11" rx="1"></rect>
                                 </svg>
                             </div>
@@ -826,7 +826,7 @@ export default function HoursOfOperation({setHours}) {
                                 </select>
                             </div>
                             <div>
-                                <svg width="24" height="24" class="icon_svg">
+                                <svg width="24" height="24" className="icon_svg">
                                     <rect width="16" height="2" x="4" y="11" rx="1"></rect>
                                 </svg>
                             </div>
@@ -1048,7 +1048,7 @@ export default function HoursOfOperation({setHours}) {
                                 </select>
                             </div>
                             <div>
-                                <svg width="24" height="24" class="icon_svg">
+                                <svg width="24" height="24" className="icon_svg">
                                     <rect width="16" height="2" x="4" y="11" rx="1"></rect>
                                 </svg>
                             </div>
@@ -1270,7 +1270,7 @@ export default function HoursOfOperation({setHours}) {
                                 </select>
                             </div>
                             <div>
-                                <svg width="24" height="24" class="icon_svg">
+                                <svg width="24" height="24" className="icon_svg">
                                     <rect width="16" height="2" x="4" y="11" rx="1"></rect>
                                 </svg>
                             </div>
@@ -1492,7 +1492,7 @@ export default function HoursOfOperation({setHours}) {
                                 </select>
                             </div>
                             <div>
-                                <svg width="24" height="24" class="icon_svg">
+                                <svg width="24" height="24" className="icon_svg">
                                     <rect width="16" height="2" x="4" y="11" rx="1"></rect>
                                 </svg>
                             </div>

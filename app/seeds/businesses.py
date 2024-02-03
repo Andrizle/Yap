@@ -16,7 +16,6 @@ def seed_businesses():
         city = "Hamletville",
         state = "FL",
         hours = "Mon - Fri : 10:00 AM - 7:00 PM",
-        is_open_now = True,
         owner_id = 1,
         rating = 0,
         review_count = 0)
@@ -32,7 +31,6 @@ def seed_businesses():
         city = "Villagetown",
         state = "TX",
         hours = "Tues - Sun : 12:00 PM - 8:00 PM",
-        is_open_now = False,
         owner_id = 2,
         rating = 0,
         review_count = 0)
@@ -48,7 +46,6 @@ def seed_businesses():
         city = "Townsville",
         state = "CA",
         hours = "Wed - Sat : 5:00 PM - 11:00 PM",
-        is_open_now = True,
         owner_id = 3,
         rating = 0,
         review_count = 0)
@@ -64,7 +61,6 @@ def seed_businesses():
         city = "Cityville",
         state = "NY",
         hours = "Thurs - Mon : 1:00 PM - 10:00 PM",
-        is_open_now = False,
         owner_id = 1,
         rating = 0,
         review_count = 0

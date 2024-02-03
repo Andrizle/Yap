@@ -26,7 +26,7 @@ class Business(db.Model):
     state = db.Column(db.String, nullable = False)
     hours = db.Column(db.JSON)
     #is_open_now boolean will come from comparing current time to open and close hour for day in frontend
-    is_open_now = db.Column(db.Boolean)
+    # is_open_now = db.Column(db.Boolean)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
@@ -50,9 +50,6 @@ class Business(db.Model):
             'city': self.city,
             'state': self.state,
             'hours': self.hours,
-            'is_open_now': self.is_open_now,
             'created_at': self.created_at,
             'updated_at': self.updated_at
-
-
         }

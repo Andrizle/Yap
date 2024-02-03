@@ -6,25 +6,26 @@ import './CreateBusiness.css'
 // import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 // import HoursOfOperation from '../HourOfOperationModal/HoursOfOperation';
 
-function getTodaysFullStartTime(startingHour) {
-    const now = Date(Date.now())
+// function getTodaysFullStartTime(startingHour) {
+//     const now = Date(Date.now())
+//     console.log("🚀 ~ getTodaysFullStartTime ~ now:", now)
 
-    let nowArr = now.split(' ')
+//     let nowArr = now.split(' ')
 
-    const startTime = nowArr.splice(4, 1, startingHour)
+//     nowArr.splice(4, 1, startingHour)
 
-    return Date.parse(startTime)
-}
+//     return Date.parse(nowArr.join(' '))
+// }
 
-function getTodaysFullEndTime(closingHour) {
-    const now = Date(Date.now())
+// function getTodaysFullEndTime(closingHour) {
+//     const now = Date(Date.now())
 
-    let nowArr = now.split(' ')
+//     let nowArr = now.split(' ')
 
-    const closeTime = nowArr.splice(4, 1, closingHour)
+//     nowArr.splice(4, 1, closingHour)
 
-    return Date.parse(closeTime)
-}
+//     return Date.parse(nowArr.join(' '))
+// }
 
 export default function CreateBusiness() {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export default function CreateBusiness() {
     const [category, setCategory] = useState("")
     const [price, setPrice] = useState("")
     const [phone, setPhone] = useState("")
+    const [validPhone, setValidPhone] = useState(true);
     const [street_address, setStreet_address] = useState("")
     const [suite_unit, setSuite_unit] = useState("")
     const [country, setCountry] = useState("")
@@ -64,8 +66,15 @@ export default function CreateBusiness() {
 
     const [errors, setErrors] = useState({})
 
+    const handlePhoneChange = (e) => {
+        const enteredPhone = e.target.value;
+        const phoneRegex = /^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+        setPhone(enteredPhone.substr(0, 20));
+        setValidPhone(phoneRegex.test(enteredPhone));
+    };
+
     //check if the current time falls in the open hours range
-    const is_open_now = Date.now() > getTodaysFullStartTime(openHour.split(" ")[0]) && Date.now() < getTodaysFullEndTime(closeHour.split(' ')[0])
+    // const is_open_now = Date.now() > getTodaysFullStartTime(openHour.split(" ")[0]) && Date.now() < getTodaysFullEndTime(closeHour.split(' ')[0])
 
     useEffect(() => {
         setHours(`${openDay} - ${closeDay} : ${openHour} - ${closeHour}`)
@@ -89,7 +98,7 @@ export default function CreateBusiness() {
             city,
             state,
             hours,
-            is_open_now
+            // is_open_now
         }))
         .catch(async res => {
             setErrors(res)});
@@ -143,7 +152,7 @@ export default function CreateBusiness() {
                         />
                         <label htmlFor="zip_code">Zip code {errors.zip_code && <span>{errors.zip_code}</span>}</label>
                         <input
-                            type="text"
+                            type="number"
                             name="zip_code"
                             value={zip_code}
                             onChange={e => setZip_code(`${e.target.value}`)}
@@ -176,9 +185,10 @@ export default function CreateBusiness() {
                     <input
                         type="number"
                         value={phone} id="phoneInput"
-                        onChange={e => setPhone(e.target.value.substr(0, 20))}
+                        onChange={handlePhoneChange}
                         required
                     />
+                    {validPhone ? null : <p className='errors'>Please enter a valid phone number <br />with a format similar to: 1 555 123 4567</p>}
                 </div>
                 <div id='hoursContainer'>
                     <h2>Hours of Operation</h2>
@@ -519,7 +529,8 @@ export default function CreateBusiness() {
                     </div>
                 </div>
                 <div id='addBusinessBtn'>
-                    <button type='submit'>Post Business</button>
+                    <button type='submit'
+                    disabled={!validPhone}>Post Business</button>
                 </div>
             </form>
         </div>

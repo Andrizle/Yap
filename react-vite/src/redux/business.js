@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf"
 //types - every variable must be unique
 const LOAD_BUSINESSES = 'businesses/getBusinesses'
 const LOAD_OWNED_BUSINESSES = 'businesses/getOwnedBusinesses'
+const LOAD_BUSINESS = 'businesses/getBusiness'
 
 const RECEIVE_BUSINESS = 'businesses/receiveBusiness'
 
@@ -21,6 +22,11 @@ const loadOwnedBusinesses = businesses => ({
     businesses
 });
 
+const loadBusiness = business => ({
+    type:LOAD_BUSINESS,
+    business
+})
+
 const receiveBusiness = business => ({
     type: RECEIVE_BUSINESS,
     business
@@ -38,28 +44,28 @@ const deleteBusiness = businessId => ({
 
 //business thunk action creators
 export const thunkFetchBusinesses = () => dispatch => {
-    fetch('/api/businesses')
+    return fetch('/api/businesses')
     .then(r => r.json())
     .then(d => dispatch(loadBusinesses(d.businesses)))
     .catch(console.error)
 };
 
 export const thunkFetchBusiness = businessId => dispatch => {
-    fetch(`/api/businesses/${businessId}`)
+    return fetch(`/api/businesses/${businessId}`)
     .then(r => r.json())
-    .then(d => dispatch(addBusiness(d)))
+    .then(d => dispatch(loadBusiness(d)))
     .catch(console.error)
 }
 
 export const thunkFetchMyBusinesses = () => dispatch => {
-    fetch('/api/businesses/current')
+    return fetch('/api/businesses/current')
     .then(r => r.json())
     .then(d => dispatch(loadOwnedBusinesses(d.businesses)))
     .catch(console.error)
 }
 
 export const thunkCreateBusiness = business => dispatch => {
-    fetch('/api/businesses/new', {
+    return fetch('/api/businesses/new', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(business)
@@ -69,18 +75,29 @@ export const thunkCreateBusiness = business => dispatch => {
     .catch(console.error)
 }
 
-export const thunkEditBusiness = (businessId, business) => {
-    fetch(`/api/businesses/${businessId}`, {
+export const thunkEditBusiness = (businessId, business) => async dispatch => {
+    console.log("🚀 ~ thunkEditBusiness ~ business b4 fetch:", business)
+
+    const response = await fetch(`/api/businesses/${businessId}`, {
         method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(business)
     })
-    .then(r => r.json())
-    .then(d => dispatch(receiveBusiness(d)))
-    .catch(console.error)
+
+    if (response) {
+        const business = await response.json();
+        console.log("🚀 ~ thunkEditBusiness ~ business:", business)
+
+        if (business) {
+            dispatch(receiveBusiness(business))
+
+            return business
+        }
+    }
 }
 
 export const thunkDeleteBusiness = businessId => dispatch => {
-    fetch(`/api/business/${businessId}`, {method: 'DELETE'})
+    return fetch(`/api/business/${businessId}`, {method: 'DELETE'})
     .then(dispatch(deleteBusiness(businessId)))
     .catch(console.log)
 }
@@ -88,7 +105,8 @@ export const thunkDeleteBusiness = businessId => dispatch => {
 // structure of business state
 const initialState = {
     allBusinesses: {},
-    ownedBusinesses: {}
+    ownedBusinesses: {},
+    singleBusiness: null
 }
 
 const businessReducer = (state = initialState, action) => {
@@ -114,6 +132,10 @@ const businessReducer = (state = initialState, action) => {
             //initialize new state, spread in old state, and replace old ownedBusinesses with newOwnedBusinesses
             const newState = {...state, ownedBusinesses: newOwnedBusinesses}
             return newState;
+        }
+        case LOAD_BUSINESS: {
+            const newSingleBusiness = action.business
+            return {...state, singleBusiness: newSingleBusiness}
         }
         case RECEIVE_BUSINESS:
             //handle creating a business
@@ -154,7 +176,8 @@ const businessReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allBusinesses: newAllBusinesses,
-                ownedBusinesses: newOwnedBusinesses
+                ownedBusinesses: newOwnedBusinesses,
+                singleBusiness: null
             }
 
         }

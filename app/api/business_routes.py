@@ -44,7 +44,7 @@ def create_business():
             icon = form.data["icon"],
             category = form.data["category"],
             price = form.data["price"],
-            review_count = form.data["review_count"],
+            review_count = form.data['rating'],
             rating = form.data["rating"],
             phone = form.data["phone"],
             street_address = form.data["street_address"],
@@ -54,14 +54,13 @@ def create_business():
             city = form.data["city"],
             state = form.data["state"],
             hours = form.data["hours"],
-            is_open_now = form.data["is_open_now"]
             )
 
         db.session.add(business)
         db.session.commit()
 
         return business.to_dict()
-    return form.errors, 400
+    return {'errors': form.errors}, 400
 
 @business_routes.route('/<int:id>', methods=['PUT', 'PATCH'])
 @login_required
@@ -75,29 +74,28 @@ def update_business(id):
     form = BusinessForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-         if user["id"] == business.owner_id:
+        if user["id"] == business.owner_id:
+            data = request.json
 
-            business.name = form.data["name"] if "name" in form.data else business.name,
-            business.icon = form.data["icon"] if "icon" in form.data else business.icon,
-            business.category = form.data["category"] if "category" in form.data else business.category,
-            business.price = form.data["price"] if "price" in form.data else business.price,
-            business.review_count = form.data["review_count"] if "review_count" in form.data else business.review_count,
-            business.rating = form.data["rating"] if "rating" in form.data else business.rating,
-            business.phone = form.data["phone"] if "phone" in form.data else business.phone,
-            business.street_address = form.data["street_address"] if "street_address" in form.data else business.street_address,
-            business.suite_unit = form.data["suite_unit"] if "suite_unit" in form.data else business.suite_unit,
-            business.country = form.data["country"] if "country" in form.data else business.country,
-            business.zip_code = form.data["zip_code"] if "zip_code" in form.data else business.zip_code,
-            business.city = form.data["city"] if "city" in form.data else business.city,
-            business.state = form.data["state"] if "state" in form.data else business.state,
-            business.hours = form.data["hours"] if "hours" in form.data else business.hours,
-            business.is_open_now = form.data["is_open_now"] if "is_open_now" in form.data else business.is_open_now
-
+            business.name = form.name.data
+            business.icon = 'https://s3-media0.fl.yelpcdn.com/assets/public/default_biz_avatar_44x44_v2@2x.yji-ae7f90b9345a64b4c0bd.png'
+            business.category = form.category.data
+            business.price = form.price.data
+            business.review_count = form.review_count.data or 0
+            business.rating = form.rating.data or 0
+            business.phone = form.phone.data
+            business.street_address = form.street_address.data
+            business.suite_unit = form.suite_unit.data
+            business.country = form.country.data
+            business.zip_code = form.zip_code.data
+            business.city = form.city.data
+            business.state = form.state.data
+            business.hours = form.hours.data
             db.session.commit()
             return business.to_dict()
-         else:
-            return {'errors': {'message': 'Unauthorized'}}, 401
-    return form.errors, 400
+        else:
+           return {'errors': {'message': 'Unauthorized'}}, 401
+    return {'errors': form.errors}, 400
 
 #Delete a business by business id
 @business_routes.route('/<int:id>', methods=['DELETE'])

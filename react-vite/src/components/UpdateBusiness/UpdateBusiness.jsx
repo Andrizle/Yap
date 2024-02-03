@@ -1,42 +1,46 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { thunkEditBusiness } from '../../redux/business';
+import { thunkEditBusiness, thunkFetchBusiness } from '../../redux/business';
 import './UpdateBusiness.css'
 // import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 // import HoursOfOperation from '../HourOfOperationModal/HoursOfOperation';
 
-function getTodaysFullStartTime(startingHour) {
-    const now = Date(Date.now())
+// function getTodaysFullStartTime(startingHour) {
+//     const now = Date(Date.now())
+//     console.log("🚀 ~ getTodaysFullStartTime ~ now:", now)
 
-    let nowArr = now.split(' ')
+//     let nowArr = now.split(' ')
 
-    const startTime = nowArr.splice(4, 1, startingHour)
+//     nowArr.splice(4, 1, startingHour)
 
-    return Date.parse(startTime)
-}
+//     return Date.parse(nowArr.join(' '))
+// }
 
-function getTodaysFullEndTime(closingHour) {
-    const now = Date(Date.now())
+// function getTodaysFullEndTime(closingHour) {
+//     const now = Date(Date.now())
 
-    let nowArr = now.split(' ')
+//     let nowArr = now.split(' ')
 
-    const closeTime = nowArr.splice(4, 1, closingHour)
+//     nowArr.splice(4, 1, closingHour)
 
-    return Date.parse(closeTime)
-}
+//     return Date.parse(nowArr.join(' '))
+// }
+
+
 
 export default function UpdateBusiness() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { businessId } = useParams();
-    const business = useSelector(state => state.business[businessId])
+    const business = useSelector(state => state.business.singleBusiness)
     const currentUser = useSelector(state => state.session.user)
     const [name, setName] = useState("")
     const [icon, setIcon] = useState("")
     const [category, setCategory] = useState("")
     const [price, setPrice] = useState("")
     const [phone, setPhone] = useState("")
+    const [validPhone, setValidPhone] = useState(true);
     const [street_address, setStreet_address] = useState("")
     const [suite_unit, setSuite_unit] = useState("")
     const [country, setCountry] = useState("")
@@ -66,24 +70,52 @@ export default function UpdateBusiness() {
 
     const [errors, setErrors] = useState({})
 
+    const handlePhoneChange = (e) => {
+        const enteredPhone = e.target.value;
+        const phoneRegex = /^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+        setPhone(enteredPhone.substr(0, 20));
+        setValidPhone(phoneRegex.test(enteredPhone));
+    };
+
     //check if the current time falls in the open hours range
-    const is_open_now = Date.now() > getTodaysFullStartTime(openHour.split(" ")[0]) && Date.now() < getTodaysFullEndTime(closeHour.split(' ')[0])
+    // const is_open_now = Date.now() > getTodaysFullStartTime(openHour.split(" ")[0]) && Date.now() < getTodaysFullEndTime(closeHour.split(' ')[0])
 
     useEffect(() => {
+        dispatch(thunkFetchBusiness(businessId))
+    }, [dispatch, businessId])
 
-    })
+    useEffect(() => {
+        if (business){
+            setName(business.name)
+            setIcon(business.icon)
+            setCategory(business.category)
+            setPrice(business.price)
+            setPhone(business.phone)
+            setStreet_address(business.street_address)
+            setSuite_unit(business.suite_unit)
+            setCountry(business.country)
+            setZip_code(business.zip_code)
+            setCity(business.city)
+            setState(business.state)
+
+            const hoursArr = business.hours.split(' ')
+
+            setOpenDay(hoursArr[0])
+            setCloseDay(hoursArr[2])
+            setOpenHour(`${hoursArr[4]} ${hoursArr[5]}`)
+            setCloseHour(`${hoursArr[7]} ${hoursArr[8]}`)
+        }
+    }, [business])
+
+    useEffect(() => {
+        setHours(`${openDay} - ${closeDay} : ${openHour} - ${closeHour}`)
+
+    }, [openDay, closeDay, openHour, closeHour])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(currentUser)
-
-        if (hours === '') {
-            setHours(`${openDay} - ${closeDay} : ${openHour} - ${closeHour}`)
-        }
-
-        const backendResponse = await dispatch(thunkEditBusiness({
-            owner_id: currentUser.id,
+        const updatedBusiness = {
             name,
             category,
             price,
@@ -95,27 +127,27 @@ export default function UpdateBusiness() {
             city,
             state,
             hours,
-            is_open_now
-        }))
-        .catch(async res => {
-            const data = await res.json();
-            if (data?.errors) {
-                setErrors(data.errors);
-            }});
-
-        if (backendResponse) {
-            navigate(`/business/${backendResponse.id}`)
+            // is_open_now
         }
-        console.log(Object.values(errors))
+
+
+
+        const backendResponse = await dispatch(thunkEditBusiness(businessId, updatedBusiness))
+
+
+        if (!backendResponse.errors) {
+            navigate('/')
+        } else {
+            setErrors(backendResponse.errors)
+        }
     }
 
     return (
         <div id='addBusinessContainer'>
-            <p>{Object.keys(errors)} {Object.values(errors)}</p>
-            <h1>Add A New Business Listing</h1>
+            <h1>Update Your Business Info</h1>
             <form onSubmit={handleSubmit} id='addBusinessForm'>
                 <h2>What is the Name of your Business?</h2>
-                <label htmlFor="name">Business Name {errors.name && <span>{errors.name}</span>}</label>
+                <label htmlFor="name">Business Name {errors.name && <span className='errors'>{errors.name}</span>}</label>
                 <input
                     type="text"
                     name="name"
@@ -126,7 +158,7 @@ export default function UpdateBusiness() {
                 <div id='addressContainer'>
                     <div id='streetSuiteContainer'>
                         <h2>Address</h2>
-                        <label htmlFor="Street_address">Street Address {errors.Street_address && <span>{errors.Street_address}</span>}</label>
+                        <label htmlFor="Street_address">Street Address {errors.Street_address && <span className='errors'>{errors.Street_address}</span>}</label>
                         <input
                             type="text"
                             name="Street_address"
@@ -134,7 +166,7 @@ export default function UpdateBusiness() {
                             onChange={e => setStreet_address(e.target.value)}
                             required
                         />
-                        <label htmlFor="Suite_unit">Suite/unit{errors.suite_unit && <span>{errors.suite_unit}</span>}</label>
+                        <label htmlFor="Suite_unit">Suite/unit{errors.suite_unit && <span className='errors'>{errors.suite_unit}</span>}</label>
                         <input
                             type="text"
                             name="Suite_unit"
@@ -143,7 +175,7 @@ export default function UpdateBusiness() {
                         />
                     </div>
                     <div id='countryZipContainer'>
-                        <label htmlFor="country">Country {errors.country && <span>{errors.country}</span>}</label>
+                        <label htmlFor="country">Country {errors.country && <span className='errors'>{errors.country}</span>}</label>
                         <input
                             type="text"
                             name="country"
@@ -151,7 +183,7 @@ export default function UpdateBusiness() {
                             onChange={e => setCountry(e.target.value)}
                             required
                         />
-                        <label htmlFor="zip_code">Zip code {errors.zip_code && <span>{errors.zip_code}</span>}</label>
+                        <label htmlFor="zip_code">Zip code {errors.zip_code && <span className='errors'>{errors.zip_code}</span>}</label>
                         <input
                             type="text"
                             name="zip_code"
@@ -161,7 +193,7 @@ export default function UpdateBusiness() {
                         />
                     </div>
                     <div id='cityStateContainer'>
-                        <label htmlFor="city">City {errors.city && <span>{errors.city}</span>}</label>
+                        <label htmlFor="city">City {errors.city && <span className='errors'>{errors.city}</span>}</label>
                         <input
                             type="text"
                             name="city"
@@ -169,7 +201,7 @@ export default function UpdateBusiness() {
                             onChange={e => setCity(e.target.value)}
                             required
                         />
-                        <label htmlFor="state">State {errors.state && <span>{errors.state}</span>}</label>
+                        <label htmlFor="state">State {errors.state && <span className='errors'>{errors.state}</span>}</label>
                         <input
                             type="text"
                             name="state"
@@ -180,17 +212,18 @@ export default function UpdateBusiness() {
                     </div>
                 </div>
                 <div id='phoneContainer'>
-                    <h2>Phone Number</h2>
+                    <h2>Phone Number</h2>{errors.phone && <span className='errors'> {errors.phone} </span>}
                     <p>What&apos;s the best number for customers to reach you at?</p>
                     <input
-                        type="number"
+                        type="text"
                         value={phone} id="phoneInput"
-                        onChange={e => setPhone(e.target.value.substr(0, 20))}
+                        onChange={handlePhoneChange}
                         required
                     />
+                    {validPhone ? null : <p className='errors'>Please enter a valid phone number <br />with a format similar to: 1 555 123 4567</p>}
                 </div>
                 <div id='hoursContainer'>
-                    <h2>Hours of Operation</h2>
+                    <h2>Hours of Operation</h2>{errors.hours && <span className='errors'>{errors.hours}</span>}
                     <div id='addHoursContainer'>
                         <img src="https://s3-media0.fl.yelpcdn.com/assets/public/40x40_operation_hours_v2.yji-0bc0d9d4b51e6fcfdc40.svg" alt="picture of clock" />
                         <div id='hoursText'>
@@ -210,7 +243,8 @@ export default function UpdateBusiness() {
                                             name=""
                                             id="openDay"
                                             disabled={allDay}
-                                            onChange={e => setOpenDay(e.target.value)}
+                                            value={openDay}
+                                            onChange={e => {setOpenDay(e.target.value)}}
                                             required={!allDay}
                                             onClick={() => setOpenDayOpen(true)}>
                                             <option
@@ -236,6 +270,7 @@ export default function UpdateBusiness() {
                                             name=""
                                             id="closeDay"
                                             disabled={allDay}
+                                            value={closeDay}
                                             onChange={e => setCloseDay(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setCloseDayOpen(true)}>
@@ -256,6 +291,7 @@ export default function UpdateBusiness() {
                                             name=""
                                             id="openHours"
                                             disabled={allDay}
+                                            value={openHour}
                                             onChange={e => setOpenHour(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setOpenHourOpen(true)}>
@@ -368,6 +404,7 @@ export default function UpdateBusiness() {
                                             name=""
                                             id="closingHours"
                                             disabled={allDay}
+                                            value={closeHour}
                                             onChange={e => setCloseHour(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setCloseHourOpen(true)}>
@@ -485,11 +522,12 @@ export default function UpdateBusiness() {
                 <div id='catPriceContainer'>
                     <h2>Service & Price</h2>
                     <div id='categoryContainer'>
-                        <p>What sort of service are you providing?</p>
+                        <p>What sort of service are you providing?</p>{errors.category && <span className='errors'>{errors.category}</span>}
                         <select
                             name=""
                             id="categorySelect"
                             onChange={e => setCategory(e.target.value)}
+                            value={category}
                             required
                             onClick={() => setCategoryOpen(true)}>
                                 <option value=""
@@ -508,10 +546,11 @@ export default function UpdateBusiness() {
                         </select>
                     </div>
                     <div id='priceContainer'>
-                        <p>What prices can customers expect?</p>
+                        <p>What prices can customers expect?</p>{errors.price && <span className='errors'>{errors.price}</span>}
                         <select name=""
                             id="priceSelect"
                             onChange={e => setPrice(e.target.value)}
+                            value={price}
                             required
                             onClick={() => setPriceOpen(true)}>
                                 <option value=""
@@ -525,7 +564,9 @@ export default function UpdateBusiness() {
                     </div>
                 </div>
                 <div id='addBusinessBtn'>
-                    <button type='submit'>Post Business</button>
+                    <button
+                    type='submit'
+                    disabled={!validPhone}>Post Business</button>
                 </div>
             </form>
         </div>

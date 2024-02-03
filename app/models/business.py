@@ -14,6 +14,7 @@ class Business(db.Model):
     icon = db.Column(db.String(256), default='https://s3-media0.fl.yelpcdn.com/assets/public/default_biz_avatar_44x44_v2@2x.yji-ae7f90b9345a64b4c0bd.png')
     category = db.Column(db.String)
     price = db.Column(db.String(4), nullable= False)
+    #ratings and reviews will come from relationship with reviews
     review_count = db.Column(db.Integer, default=0)
     rating = db.Column(db.Integer, default=0)
     phone = db.Column(db.String(20), nullable=False)
@@ -23,8 +24,9 @@ class Business(db.Model):
     zip_code = db.Column(db.String, nullable = False)
     city = db.Column(db.String, nullable = False)
     state = db.Column(db.String, nullable = False)
-    hours = db.Column(db.String)
-    is_open_now = db.Column(db.Boolean)
+    hours = db.Column(db.JSON)
+    #is_open_now boolean will come from comparing current time to open and close hour for day in frontend
+    # is_open_now = db.Column(db.Boolean)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
@@ -48,9 +50,6 @@ class Business(db.Model):
             'city': self.city,
             'state': self.state,
             'hours': self.hours,
-            'is_open_now': self.is_open_now,
             'created_at': self.created_at,
             'updated_at': self.updated_at
-
-
         }

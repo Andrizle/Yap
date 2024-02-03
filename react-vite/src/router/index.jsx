@@ -4,6 +4,8 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import LandingPage from '../components/LandingPage';
 import CreateBusiness from '../components/CreateBusiness/CreateBusiness';
+import UpdateBusiness from '../components/UpdateBusiness/UpdateBusiness';
+import MyBusinesses from '../components/Businesses/MyBusinesses';
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +29,19 @@ export const router = createBrowserRouter([
           {
             path: "new",
             element: <CreateBusiness />
+          },
+          {
+            path: "current",
+            element: <MyBusinesses />
+          },
+          {
+            path: ":businessId",
+            children: [
+              {
+                path: "edit",
+                element: <UpdateBusiness />
+              }
+            ]
           }
         ]
       }

@@ -15,8 +15,7 @@ def seed_businesses():
         zip_code = '40004',
         city = "Hamletville",
         state = "FL",
-        hours = "Mon-Fri: 10:00 AM - 7:00 PM",
-        is_open_now = True,
+        hours = "Mon - Fri : 10:00 AM - 7:00 PM",
         owner_id = 1,
         rating = 0,
         review_count = 0)
@@ -31,9 +30,8 @@ def seed_businesses():
         zip_code = '30003',
         city = "Villagetown",
         state = "TX",
-        hours = "Tue-Sun: 12:00 PM - 8:00 PM",
-        is_open_now = False,
-        owner_id = 1,
+        hours = "Tues - Sun : 12:00 PM - 8:00 PM",
+        owner_id = 2,
         rating = 0,
         review_count = 0)
     green = Business(
@@ -47,9 +45,8 @@ def seed_businesses():
         zip_code = '20002',
         city = "Townsville",
         state = "CA",
-        hours = "Wed-Sat: 5:00 PM - 11:00 PM",
-        is_open_now = True,
-        owner_id = 1,
+        hours = "Wed - Sat : 5:00 PM - 11:00 PM",
+        owner_id = 3,
         rating = 0,
         review_count = 0)
     mediterranean = Business(
@@ -63,8 +60,7 @@ def seed_businesses():
         zip_code = '10001',
         city = "Cityville",
         state = "NY",
-        hours = "Thu-Mon: 1:00 PM - 10:00 PM",
-        is_open_now = False,
+        hours = "Thurs - Mon : 1:00 PM - 10:00 PM",
         owner_id = 1,
         rating = 0,
         review_count = 0

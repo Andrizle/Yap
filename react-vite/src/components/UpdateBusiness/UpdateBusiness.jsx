@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { thunkCreateBusiness } from '../../redux/business';
-import './CreateBusiness.css'
+import { useNavigate, useParams } from 'react-router-dom';
+import { thunkEditBusiness, thunkFetchBusiness } from '../../redux/business';
+import './UpdateBusiness.css'
 // import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 // import HoursOfOperation from '../HourOfOperationModal/HoursOfOperation';
 
@@ -27,9 +27,13 @@ import './CreateBusiness.css'
 //     return Date.parse(nowArr.join(' '))
 // }
 
-export default function CreateBusiness() {
+
+
+export default function UpdateBusiness() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { businessId } = useParams();
+    const business = useSelector(state => state.business.singleBusiness)
     const currentUser = useSelector(state => state.session.user)
     const [name, setName] = useState("")
     const [icon, setIcon] = useState("")
@@ -77,16 +81,41 @@ export default function CreateBusiness() {
     // const is_open_now = Date.now() > getTodaysFullStartTime(openHour.split(" ")[0]) && Date.now() < getTodaysFullEndTime(closeHour.split(' ')[0])
 
     useEffect(() => {
+        dispatch(thunkFetchBusiness(businessId))
+    }, [dispatch, businessId])
+
+    useEffect(() => {
+        if (business){
+            setName(business.name)
+            setIcon(business.icon)
+            setCategory(business.category)
+            setPrice(business.price)
+            setPhone(business.phone)
+            setStreet_address(business.street_address)
+            setSuite_unit(business.suite_unit)
+            setCountry(business.country)
+            setZip_code(business.zip_code)
+            setCity(business.city)
+            setState(business.state)
+
+            const hoursArr = business.hours.split(' ')
+
+            setOpenDay(hoursArr[0])
+            setCloseDay(hoursArr[2])
+            setOpenHour(`${hoursArr[4]} ${hoursArr[5]}`)
+            setCloseHour(`${hoursArr[7]} ${hoursArr[8]}`)
+        }
+    }, [business])
+
+    useEffect(() => {
         setHours(`${openDay} - ${closeDay} : ${openHour} - ${closeHour}`)
+
     }, [openDay, closeDay, openHour, closeHour])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-
-
-        const backendResponse = await dispatch(thunkCreateBusiness({
-            owner_id: currentUser.id,
+        const updatedBusiness = {
             name,
             category,
             price,
@@ -99,22 +128,26 @@ export default function CreateBusiness() {
             state,
             hours,
             // is_open_now
-        }))
-        .catch(async res => {
-            setErrors(res)});
-
-        if (!backendResponse?.errors) {
-            navigate('/')
         }
 
+
+
+        const backendResponse = await dispatch(thunkEditBusiness(businessId, updatedBusiness))
+
+
+        if (!backendResponse.errors) {
+            navigate('/')
+        } else {
+            setErrors(backendResponse.errors)
+        }
     }
 
     return (
         <div id='addBusinessContainer'>
-            <h1>Add A New Business Listing</h1>
+            <h1>Update Your Business Info</h1>
             <form onSubmit={handleSubmit} id='addBusinessForm'>
                 <h2>What is the Name of your Business?</h2>
-                <label htmlFor="name">Business Name {errors.name && <span>{errors.name}</span>}</label>
+                <label htmlFor="name">Business Name {errors.name && <span className='errors'>{errors.name}</span>}</label>
                 <input
                     type="text"
                     name="name"
@@ -125,7 +158,7 @@ export default function CreateBusiness() {
                 <div id='addressContainer'>
                     <div id='streetSuiteContainer'>
                         <h2>Address</h2>
-                        <label htmlFor="Street_address">Street Address {errors.Street_address && <span>{errors.Street_address}</span>}</label>
+                        <label htmlFor="Street_address">Street Address {errors.Street_address && <span className='errors'>{errors.Street_address}</span>}</label>
                         <input
                             type="text"
                             name="Street_address"
@@ -133,7 +166,7 @@ export default function CreateBusiness() {
                             onChange={e => setStreet_address(e.target.value)}
                             required
                         />
-                        <label htmlFor="Suite_unit">Suite/unit (optional) {errors.suite_unit && <span>{errors.suite_unit}</span>}</label>
+                        <label htmlFor="Suite_unit">Suite/unit{errors.suite_unit && <span className='errors'>{errors.suite_unit}</span>}</label>
                         <input
                             type="text"
                             name="Suite_unit"
@@ -142,7 +175,7 @@ export default function CreateBusiness() {
                         />
                     </div>
                     <div id='countryZipContainer'>
-                        <label htmlFor="country">Country {errors.country && <span>{errors.country}</span>}</label>
+                        <label htmlFor="country">Country {errors.country && <span className='errors'>{errors.country}</span>}</label>
                         <input
                             type="text"
                             name="country"
@@ -150,9 +183,9 @@ export default function CreateBusiness() {
                             onChange={e => setCountry(e.target.value)}
                             required
                         />
-                        <label htmlFor="zip_code">Zip code {errors.zip_code && <span>{errors.zip_code}</span>}</label>
+                        <label htmlFor="zip_code">Zip code {errors.zip_code && <span className='errors'>{errors.zip_code}</span>}</label>
                         <input
-                            type="number"
+                            type="text"
                             name="zip_code"
                             value={zip_code}
                             onChange={e => setZip_code(`${e.target.value}`)}
@@ -160,7 +193,7 @@ export default function CreateBusiness() {
                         />
                     </div>
                     <div id='cityStateContainer'>
-                        <label htmlFor="city">City {errors.city && <span>{errors.city}</span>}</label>
+                        <label htmlFor="city">City {errors.city && <span className='errors'>{errors.city}</span>}</label>
                         <input
                             type="text"
                             name="city"
@@ -168,7 +201,7 @@ export default function CreateBusiness() {
                             onChange={e => setCity(e.target.value)}
                             required
                         />
-                        <label htmlFor="state">State {errors.state && <span>{errors.state}</span>}</label>
+                        <label htmlFor="state">State {errors.state && <span className='errors'>{errors.state}</span>}</label>
                         <input
                             type="text"
                             name="state"
@@ -179,11 +212,10 @@ export default function CreateBusiness() {
                     </div>
                 </div>
                 <div id='phoneContainer'>
-                    <h2>Phone Number</h2>
-                    {errors.phone && <span>{errors.phone}</span>}
+                    <h2>Phone Number</h2>{errors.phone && <span className='errors'> {errors.phone} </span>}
                     <p>What&apos;s the best number for customers to reach you at?</p>
                     <input
-                        type="number"
+                        type="text"
                         value={phone} id="phoneInput"
                         onChange={handlePhoneChange}
                         required
@@ -191,8 +223,7 @@ export default function CreateBusiness() {
                     {validPhone ? null : <p className='errors'>Please enter a valid phone number <br />with a format similar to: 1 555 123 4567</p>}
                 </div>
                 <div id='hoursContainer'>
-                    <h2>Hours of Operation</h2>
-                    {errors.hours && <span>{errors.hours}</span>}
+                    <h2>Hours of Operation</h2>{errors.hours && <span className='errors'>{errors.hours}</span>}
                     <div id='addHoursContainer'>
                         <img src="https://s3-media0.fl.yelpcdn.com/assets/public/40x40_operation_hours_v2.yji-0bc0d9d4b51e6fcfdc40.svg" alt="picture of clock" />
                         <div id='hoursText'>
@@ -212,7 +243,8 @@ export default function CreateBusiness() {
                                             name=""
                                             id="openDay"
                                             disabled={allDay}
-                                            onChange={e => setOpenDay(e.target.value)}
+                                            value={openDay}
+                                            onChange={e => {setOpenDay(e.target.value)}}
                                             required={!allDay}
                                             onClick={() => setOpenDayOpen(true)}>
                                             <option
@@ -238,6 +270,7 @@ export default function CreateBusiness() {
                                             name=""
                                             id="closeDay"
                                             disabled={allDay}
+                                            value={closeDay}
                                             onChange={e => setCloseDay(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setCloseDayOpen(true)}>
@@ -258,6 +291,7 @@ export default function CreateBusiness() {
                                             name=""
                                             id="openHours"
                                             disabled={allDay}
+                                            value={openHour}
                                             onChange={e => setOpenHour(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setOpenHourOpen(true)}>
@@ -370,6 +404,7 @@ export default function CreateBusiness() {
                                             name=""
                                             id="closingHours"
                                             disabled={allDay}
+                                            value={closeHour}
                                             onChange={e => setCloseHour(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setCloseHourOpen(true)}>
@@ -487,12 +522,12 @@ export default function CreateBusiness() {
                 <div id='catPriceContainer'>
                     <h2>Service & Price</h2>
                     <div id='categoryContainer'>
-                        <p>What sort of service are you providing?</p>
-                        {errors.categories && <span>{errors.categories}</span>}
+                        <p>What sort of service are you providing?</p>{errors.category && <span className='errors'>{errors.category}</span>}
                         <select
                             name=""
                             id="categorySelect"
                             onChange={e => setCategory(e.target.value)}
+                            value={category}
                             required
                             onClick={() => setCategoryOpen(true)}>
                                 <option value=""
@@ -511,11 +546,11 @@ export default function CreateBusiness() {
                         </select>
                     </div>
                     <div id='priceContainer'>
-                        <p>What prices can customers expect?</p>
-                        {errors.price && <span>{errors.price}</span>}
+                        <p>What prices can customers expect?</p>{errors.price && <span className='errors'>{errors.price}</span>}
                         <select name=""
                             id="priceSelect"
                             onChange={e => setPrice(e.target.value)}
+                            value={price}
                             required
                             onClick={() => setPriceOpen(true)}>
                                 <option value=""
@@ -529,7 +564,8 @@ export default function CreateBusiness() {
                     </div>
                 </div>
                 <div id='addBusinessBtn'>
-                    <button type='submit'
+                    <button
+                    type='submit'
                     disabled={!validPhone}>Post Business</button>
                 </div>
             </form>

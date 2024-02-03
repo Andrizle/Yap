@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, URLField, IntegerField, SelectField
+from wtforms import StringField, URLField, IntegerField
 from wtforms.validators import DataRequired, Length, ValidationError
 
 def price_validation(form, field):
@@ -31,4 +31,3 @@ class BusinessForm(FlaskForm):
     city = StringField('City', validators=[DataRequired()])
     state = StringField('State', validators=[DataRequired()])
     hours = StringField('hours', validators=[DataRequired()])
-    is_open_now = BooleanField('Open now?')

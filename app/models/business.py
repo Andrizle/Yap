@@ -24,7 +24,7 @@ class Business(db.Model):
     zip_code = db.Column(db.String, nullable = False)
     city = db.Column(db.String, nullable = False)
     state = db.Column(db.String, nullable = False)
-    hours = db.Column(db.JSON)
+    hours = db.Column(db.String)
     #is_open_now boolean will come from comparing current time to open and close hour for day in frontend
     # is_open_now = db.Column(db.Boolean)
     created_at = db.Column(db.DateTime, default=datetime.now)

@@ -75,7 +75,6 @@ def update_business(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         if user["id"] == business.owner_id:
-            data = request.json
 
             business.name = form.name.data
             business.icon = 'https://s3-media0.fl.yelpcdn.com/assets/public/default_biz_avatar_44x44_v2@2x.yji-ae7f90b9345a64b4c0bd.png'
@@ -101,6 +100,7 @@ def update_business(id):
 @business_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_business(id):
+    print('-----------------------------MADE IT TO THE OTHER SIDE ===================')
     business = Business.query.get(id)
     user = current_user.to_dict()
 

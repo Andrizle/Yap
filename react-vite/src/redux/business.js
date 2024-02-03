@@ -76,7 +76,6 @@ export const thunkCreateBusiness = business => dispatch => {
 }
 
 export const thunkEditBusiness = (businessId, business) => async dispatch => {
-    console.log("🚀 ~ thunkEditBusiness ~ business b4 fetch:", business)
 
     const response = await fetch(`/api/businesses/${businessId}`, {
         method: 'PUT',
@@ -86,7 +85,6 @@ export const thunkEditBusiness = (businessId, business) => async dispatch => {
 
     if (response) {
         const business = await response.json();
-        console.log("🚀 ~ thunkEditBusiness ~ business:", business)
 
         if (business) {
             dispatch(receiveBusiness(business))
@@ -97,7 +95,8 @@ export const thunkEditBusiness = (businessId, business) => async dispatch => {
 }
 
 export const thunkDeleteBusiness = businessId => dispatch => {
-    return fetch(`/api/business/${businessId}`, {method: 'DELETE'})
+    console.log("🚀 ~ thunkDeleteBusiness ~ thunkDeleteBusiness:", thunkDeleteBusiness)
+    return csrfFetch(`/api/businesses/${businessId}`, {method: 'DELETE'})
     .then(dispatch(deleteBusiness(businessId)))
     .catch(console.log)
 }

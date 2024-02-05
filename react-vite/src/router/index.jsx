@@ -6,6 +6,7 @@ import LandingPage from '../components/LandingPage';
 import CreateBusiness from '../components/CreateBusiness/CreateBusiness';
 import UpdateBusiness from '../components/UpdateBusiness/UpdateBusiness';
 import MyBusinesses from '../components/Businesses/MyBusinesses';
+import SingleBusiness from '../components/Businesses/SingleBusiness';
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
               {
                 path: "edit",
                 element: <UpdateBusiness />
+              },
+              {
+                index: true,
+                element: <SingleBusiness />
               }
             ]
           }

@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Business, db
-from app.forms import BusinessForm
+from app.models import Business, Review, Image, db
+from app.forms import BusinessForm, ReviewForm, ImageForm
 
 business_routes = Blueprint('businesses', __name__)
 
@@ -28,6 +28,28 @@ def owned_businesses():
 
     businesses = Business.query.filter(Business.owner_id == user['id']).all()
     return { 'businesses': [business.to_dict() for business in businesses]}
+
+#Get all reviews for a business by business ID
+@business_routes.route('/<int:id>/reviews')
+def business_reviews(id):
+    reviews = Review.query.filter(Review.business_id == id).all()
+
+    if reviews:
+        return {'reviews': [review.to_dict() for review in reviews]}
+    else:
+        return {'errors': {'message': "Business Not Found"}}, 404
+
+#Get all images for a business by business ID
+@business_routes.route('/<int:id>/images')
+def business_images(id):
+    images = Image.query.filter(Image.business_id == id).all()
+
+    if images:
+        return {'images': [image.to_dict() for image in images]}
+    else:
+        return {'errors': {'message': "Business Not Found"}}, 404
+
+
 
 # Create New Business
 @business_routes.route('/new', methods=['POST'])
@@ -62,6 +84,59 @@ def create_business():
         return business.to_dict()
     return {'errors': form.errors}, 400
 
+#Post a review to a business by business ID
+@business_routes.route('/<int:id>/reviews', methods=['POST'])
+@login_required
+def create_review(id):
+    form = ReviewForm()
+    business=Business.query.get(id)
+
+    if not business:
+        return {'errors': {'message': 'Business Not fount'}}, 404
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_review = Review(
+            author_id = current_user.id,
+            business_id = business.id,
+            review = form.data['review'],
+            stars = form.data['stars'],
+            image = form.data['image']
+        )
+
+        db.session.add(new_review)
+        db.session.commit()
+
+        return new_review.to_dict()
+    return {'errors': form.errors}, 400
+
+#Post an image to a business by business ID
+@business_routes.route('<int:id>/images', methods=['POST'])
+@login_required
+def create_image(id):
+    form = ImageForm()
+    business = Business.query.get(id)
+
+    if not business:
+        return {'errors': {'message': 'Business Not fount'}}, 404
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_image = Image(
+            author_id = current_user.id,
+            business_id = business.id,
+            image = form.data['image']
+        )
+
+        db.session.add(new_image)
+        db.session.commit()
+
+        return new_image.to_dict()
+    else:
+        return {'errors': form.errors}, 400
+
+
+#Update business by business ID
 @business_routes.route('/<int:id>', methods=['PUT', 'PATCH'])
 @login_required
 def update_business(id):

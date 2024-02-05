@@ -4,6 +4,22 @@ from sqlalchemy.sql import text
 
 # Adds a demo business, you can add other businesses here if you want
 def seed_businesses():
+    savor = Business(
+          name = "Savor Bistro",
+          category = "restaurant",
+          price = "$$$",
+          phone = "1 (555) 123-4567",
+          street_address = "123 Main Street",
+          suite_unit = '',
+          country = 'United States',
+          zip_code = '55123',
+          city = "Cityville",
+          state = "LA",
+          hours = "Mon - Sat: 11:00 AM - 9:00 PM",
+          owner_id = 2,
+          rating = 0,
+          review_count = 0
+    )
     demo_biz = Business(
         name = "Crispy Delights",
         category = "Restaurants",
@@ -67,6 +83,7 @@ def seed_businesses():
     )
 
     db.session.add(demo_biz)
+    db.session.add(savor)
     db.session.add(mediterranean)
     db.session.add(green)
     db.session.add(flavors)

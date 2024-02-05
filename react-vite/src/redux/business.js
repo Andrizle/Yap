@@ -106,7 +106,6 @@ export const thunkDeleteBusiness = businessId => dispatch => {
 const initialState = {
     allBusinesses: {},
     ownedBusinesses: {},
-    singleBusiness: null
 }
 
 const businessReducer = (state = initialState, action) => {
@@ -134,8 +133,7 @@ const businessReducer = (state = initialState, action) => {
             return newState;
         }
         case LOAD_BUSINESS: {
-            const newSingleBusiness = action.business
-            return {...state, singleBusiness: newSingleBusiness}
+            return {allBusinesses: {[action.business.id]: action.business}}
         }
         case RECEIVE_BUSINESS:
             //handle creating a business

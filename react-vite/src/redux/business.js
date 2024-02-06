@@ -76,7 +76,6 @@ export const thunkCreateBusiness = business => dispatch => {
 }
 
 export const thunkEditBusiness = (businessId, business) => async dispatch => {
-    console.log("🚀 ~ thunkEditBusiness ~ business b4 fetch:", business)
 
     const response = await fetch(`/api/businesses/${businessId}`, {
         method: 'PUT',
@@ -86,7 +85,6 @@ export const thunkEditBusiness = (businessId, business) => async dispatch => {
 
     if (response) {
         const business = await response.json();
-        console.log("🚀 ~ thunkEditBusiness ~ business:", business)
 
         if (business) {
             dispatch(receiveBusiness(business))
@@ -133,7 +131,7 @@ const businessReducer = (state = initialState, action) => {
             return newState;
         }
         case LOAD_BUSINESS: {
-            return {allBusinesses: {[action.business.id]: action.business}}
+            return {...state, allBusinesses: {[action.business.id]: action.business}}
         }
         case RECEIVE_BUSINESS:
             //handle creating a business

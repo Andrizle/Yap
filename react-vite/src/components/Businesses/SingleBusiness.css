@@ -2,3 +2,27 @@
     color: black;
     text-decoration: none;
 }
+
+#writeReviewBtn {
+    align-items: center;
+    background-color: rgba(224,7,7,1);
+    color: white;
+    justify-content: center;
+    width:fit-content;
+}
+#writeReviewButtonTextContainer {
+    align-items: center;
+    display: flex;
+}
+
+.writeReviewButtonText {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 0 10px;
+}
+
+.icon_svg {
+    fill: currentColor;
+}

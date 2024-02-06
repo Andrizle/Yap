@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
 
     business = db.relationship('Business', back_populates='owner', cascade='all, delete-orphan')
     review=db.relationship('Review', back_populates='author', cascade='all, delete-orphan')
-    images=db.relationship('Image', back_populates='author')
+    image=db.relationship('Image', back_populates='author')
 
     @property
     def password(self):

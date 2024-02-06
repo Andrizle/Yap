@@ -140,7 +140,7 @@ def seed_reviews():
         review = "Good variety of vegetarian options. The staff is friendly and attentive.",
         stars = 4,
         business_id = 3,
-        author_id = 5
+        author_id = 4
     )
 
     db.session.add(Bistro1)

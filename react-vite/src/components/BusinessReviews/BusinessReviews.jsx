@@ -5,12 +5,14 @@ import { thunkFetchReviews } from "../../redux/reviews";
 import OpenModalButton from "../OpenModalButton";
 import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
 import './BusinessReviews.css'
+import { thunkFetchBusiness } from "../../redux/business";
 
 export default function BusinessReviews() {
     const dispatch = useDispatch();
     const { businessId } = useParams();
     const sessionUser = useSelector(state => state.session.user)
     const reviews = Object.values(useSelector(state => state.reviews.business))
+    const business = useSelector(state => state.business)
 
     function compareNumbers(a, b) {
         return b.id - a.id;
@@ -18,7 +20,8 @@ export default function BusinessReviews() {
 
     useEffect(() => {
             dispatch(thunkFetchReviews(businessId))
-        }, [dispatch, businessId])
+            dispatch(thunkFetchBusiness(businessId))
+        }, [dispatch, businessId, business.review_count])
 
     if (!reviews) return null;
 
@@ -36,7 +39,7 @@ export default function BusinessReviews() {
                     <h3 className="reviewer">{review.author?.username}</h3>
                     <div className="reviewDate">{month(review.createdAt)} {review.created_at.split(' ')[3]}</div>
                     <div className="reviewText">{review.review}</div>
-                    {sessionUser?.id == review.userId ?
+                    {sessionUser?.id == review.author_id ?
                         <OpenModalButton
                             buttonText='Delete'
                             modalComponent={<DeleteReviewModal review={review} />}

@@ -29,6 +29,7 @@ export default function PostReviewModal({business}) {
 
         const newReview = {
             author_id: sessionUser.id,
+            business_id: business.id,
             review,
             stars
         }
@@ -38,7 +39,6 @@ export default function PostReviewModal({business}) {
         .catch(async (res) => {
             const data = await res.json();
             if (data?.errors) {
-                console.log(data.errors)
               setErrors(data.errors);
             } else if (data?.message) {
                 setMessage(data)

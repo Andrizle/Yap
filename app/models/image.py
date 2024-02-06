@@ -19,9 +19,9 @@ class Image(db.Model):
     created_at=db.Column(db.DateTime, default=datetime.now)
     updated_at=db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    author = db.relationship('User', back_populates='images')
-    business=db.relationship('Business', back_populates='images')
-    review=db.relationship('Review', back_populates='images')
+    author = db.relationship('User', back_populates='image')
+    business=db.relationship('Business', back_populates='image')
+    review=db.relationship('Review', back_populates='image')
 
     def to_dict(self):
         return {

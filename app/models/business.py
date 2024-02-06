@@ -32,10 +32,12 @@ class Business(db.Model):
 
     owner = db.relationship('User', back_populates='business')
     review=db.relationship('Review', back_populates='business', cascade='all, delete-orphan')
-    images=db.relationship('Image', back_populates='business', cascade='all, delete-orphan')
+    image=db.relationship('Image', back_populates='business', cascade='all, delete-orphan')
 
 
     def to_dict(self):
+
+        avgRating = sum(review.to_dict()['stars'] for review in self.review)/len(self.review)
         return {
             'id': self.id,
             'owner_id': self.owner_id,
@@ -43,8 +45,8 @@ class Business(db.Model):
             'icon': self.icon,
             'category': self.category,
             'price': self.price,
-            'review_count': self.review_count,
-            'rating': self.rating,
+            'review_count': len(self.review),
+            'rating': avgRating,
             'phone': self.phone,
             'street_address': self.street_address,
             'suite_unit': self.suite_unit,

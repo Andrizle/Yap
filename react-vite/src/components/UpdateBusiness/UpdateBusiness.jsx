@@ -33,7 +33,7 @@ export default function UpdateBusiness() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { businessId } = useParams();
-    const business = useSelector(state => state.business.singleBusiness)
+    const business = useSelector(state => state.business.allBusinesses[businessId])
     const currentUser = useSelector(state => state.session.user)
     const [name, setName] = useState("")
     const [icon, setIcon] = useState("")
@@ -566,7 +566,7 @@ export default function UpdateBusiness() {
                 <div id='addBusinessBtn'>
                     <button
                     type='submit'
-                    disabled={!validPhone}>Post Business</button>
+                    disabled={!validPhone}>Save</button>
                 </div>
             </form>
         </div>

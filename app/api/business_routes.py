@@ -20,6 +20,7 @@ def single_business(id):
     else:
         return { 'errors': {'message': 'Business Not Found'}}, 404
 
+
 #Get all businesses owned by the currently logged in user
 @business_routes.route('/current')
 @login_required
@@ -28,6 +29,7 @@ def owned_businesses():
 
     businesses = Business.query.filter(Business.owner_id == user['id']).all()
     return { 'businesses': [business.to_dict() for business in businesses]}
+
 
 #Get all reviews for a business by business ID
 @business_routes.route('/<int:id>/reviews')
@@ -38,6 +40,7 @@ def business_reviews(id):
         return {'reviews': [review.to_dict() for review in reviews]}
     else:
         return {'errors': {'message': "Business Not Found"}}, 404
+
 
 #Get all images for a business by business ID
 @business_routes.route('/<int:id>/images')
@@ -101,7 +104,6 @@ def create_review(id):
             business_id = business.id,
             review = form.data['review'],
             stars = form.data['stars'],
-            image = form.data['image']
         )
 
         db.session.add(new_review)

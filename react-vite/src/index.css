@@ -10,4 +10,5 @@
 
 .errors {
     color: rgb(197, 11, 11);
+    min-height: 18px;
 }

@@ -132,7 +132,7 @@ const businessReducer = (state = initialState, action) => {
             return newState;
         }
         case LOAD_BUSINESS: {
-            return {allBusinesses: {[action.business.id]: action.business}}
+            return {...state, allBusinesses: {[action.business.id]: action.business}}
         }
         case RECEIVE_BUSINESS:
             //handle creating a business

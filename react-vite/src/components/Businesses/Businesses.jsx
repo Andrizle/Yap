@@ -25,7 +25,7 @@ function Businesses() {
                                 {business.name}
                             </div>
                             <div>
-                                {business.rating}
+                                {business.rating.toFixed(1)}
                             </div>
                             <div>
                                 ({business.review_count})

@@ -28,13 +28,27 @@ function LoginFormModal() {
     }
   };
 
+  const demoUser = (e) => {
+    e.preventDefault();
+    setErrors({});
+    dispatch(thunkLogin({credential: 'Demo-lition', password: 'password'}))
+    .then(closeModal)
+    .catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) {
+        setErrors(data.errors);
+      }
+    });
+  };
+
   return (
-    <>
+    <div id="loginModal">
       <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="loginForm">
         <label>
           Email
           <input
+            className="loginInputs"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -45,6 +59,7 @@ function LoginFormModal() {
         <label>
           Password
           <input
+            className="loginInputs"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -53,8 +68,9 @@ function LoginFormModal() {
         </label>
         {errors.password && <p>{errors.password}</p>}
         <button type="submit">Log In</button>
+        <button className='bigButton' onClick={demoUser}>Log in as Demo User</button>
       </form>
-    </>
+    </div>
   );
 }
 

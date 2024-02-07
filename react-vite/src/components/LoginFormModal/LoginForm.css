@@ -1,0 +1,12 @@
+#loginModal {
+    padding: 15px;
+    width: 275px;
+}
+
+.loginInputs {
+    width: 250px;
+}
+
+#loginForm > * {
+    margin: 5px;
+}

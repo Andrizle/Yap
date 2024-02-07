@@ -182,6 +182,7 @@ def update_business(id):
 @business_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_business(id):
+    print('-----------------------------MADE IT TO THE OTHER SIDE ===================')
     business = Business.query.get(id)
     user = current_user.to_dict()
 

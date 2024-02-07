@@ -121,6 +121,7 @@ export const thunkDeleteBusiness = businessId => async dispatch => {
 
         return businessId
     }
+
 }
 
 // structure of business state

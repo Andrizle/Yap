@@ -25,14 +25,18 @@ function Businesses() {
                                 <h2>
                                     {business.name}
                                 </h2>
-                                <div className='bizRatingContainer'>
-                                     <div>
-                                    {business.rating.toFixed(1)}
+                                {
+                                    business.review_count != 0 ?
+                                    <div className='bizRatingContainer'>
+                                         <div>
+                                        {business.rating.toFixed(1)}
+                                        </div>
+                                        <div className='bizReviewCountContainer'>
+                                            ({business.review_count} {business.review_count === 1 ? 'review' : 'reviews'})
+                                        </div>
                                     </div>
-                                    <div className='bizReviewCountContainer'>
-                                        ({business.review_count} {business.review_count === 1 ? 'review' : 'reviews'})
-                                    </div>
-                                </div>
+                                    : null
+                                }
                                 <div className='bizCatPriceContainer'>
                                     <div className='bizCategoryContainer'>
                                     {business.category}

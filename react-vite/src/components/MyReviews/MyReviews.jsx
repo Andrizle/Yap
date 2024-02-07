@@ -19,7 +19,6 @@ export default function MyReviews() {
     }, [dispatch])
 
     if (!reviews || !businesses) return null;
-    console.log(reviews, businesses)
 
     return (
         <div className='reviewTilesContainer'>

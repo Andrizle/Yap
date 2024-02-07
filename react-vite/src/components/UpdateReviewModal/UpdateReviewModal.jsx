@@ -46,7 +46,6 @@ export default function UpdateReviewModal({reviewId, business}) {
         .catch(async (res) => {
             const data = await res.json();
             if (data?.errors) {
-                console.log(data.errors)
               setErrors(data.errors);
             }
           });

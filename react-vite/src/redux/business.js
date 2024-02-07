@@ -41,36 +41,58 @@ const deleteBusiness = businessId => ({
 })
 
 //business thunk action creators
-export const thunkFetchBusinesses = () => dispatch => {
-    return fetch('/api/businesses')
-    .then(r => r.json())
-    .then(d => dispatch(loadBusinesses(d.businesses)))
-    .catch(console.error)
+export const thunkFetchBusinesses = () => async dispatch => {
+    const response = await fetch('/api/businesses')
+
+    if (response.ok) {
+        const businesses = await response.json();
+
+        dispatch(loadBusinesses(businesses.businesses))
+
+        return businesses
+    }
 };
 
-export const thunkFetchBusiness = businessId => dispatch => {
-    return fetch(`/api/businesses/${businessId}`)
-    .then(r => r.json())
-    .then(d => dispatch(loadBusiness(d)))
-    .catch(console.error)
+export const thunkFetchBusiness =  businessId => async dispatch => {
+    const response = await fetch(`/api/businesses/${businessId}`)
+
+    if (response.ok) {
+        const business = await response.json();
+
+        dispatch(loadBusiness(business))
+
+        return business
+    }
 }
 
-export const thunkFetchMyBusinesses = () => dispatch => {
-    return fetch('/api/businesses/current')
-    .then(r => r.json())
-    .then(d => dispatch(loadOwnedBusinesses(d.businesses)))
-    .catch(console.error)
+export const thunkFetchMyBusinesses = () => async dispatch => {
+    const response = await fetch('/api/businesses/current')
+
+    if (response.ok) {
+        const businesses = await response.json();
+
+        dispatch(loadOwnedBusinesses(businesses.businesses))
+
+        return businesses
+    }
 }
 
-export const thunkCreateBusiness = business => dispatch => {
-    return fetch('/api/businesses/new', {
+export const thunkCreateBusiness = business => async dispatch => {
+    const response = await fetch('/api/businesses/new', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(business)
     })
-    .then(r => r.json())
-    .then(d => dispatch(receiveBusiness(d)))
-    .catch(console.error)
+
+    if (response.ok) {
+        const business = await response.json();
+
+        dispatch(receiveBusiness(business))
+
+        return business
+    } else {
+        console.log('in thunk create error handling', response)
+    }
 }
 
 export const thunkEditBusiness = (businessId, business) => async dispatch => {
@@ -81,22 +103,25 @@ export const thunkEditBusiness = (businessId, business) => async dispatch => {
         body: JSON.stringify(business)
     })
 
-    if (response) {
+    if (response.ok) {
         const business = await response.json();
 
-        if (business) {
-            dispatch(receiveBusiness(business))
+        dispatch(receiveBusiness(business))
 
-            return business
-        }
+        return business
+
     }
 }
 
-export const thunkDeleteBusiness = businessId => dispatch => {
-    console.log("🚀 ~ thunkDeleteBusiness ~ thunkDeleteBusiness:", thunkDeleteBusiness)
-    return csrfFetch(`/api/businesses/${businessId}`, {method: 'DELETE'})
-    .then(dispatch(deleteBusiness(businessId)))
-    .catch(console.log)
+export const thunkDeleteBusiness = businessId => async dispatch => {
+    const response = await fetch(`/api/businesses/${businessId}`, {method: 'DELETE'})
+
+    if (response.ok) {
+        dispatch(deleteBusiness(businessId))
+
+        return businessId
+    }
+
 }
 
 // structure of business state

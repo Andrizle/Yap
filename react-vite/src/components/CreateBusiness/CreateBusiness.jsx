@@ -44,7 +44,7 @@ export default function CreateBusiness() {
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
 
-    //state variables for regarding the hours of operation section
+    //state variables regarding the hours of operation section
     const [hours, setHours] = useState('')
     const [openDay, setOpenDay] = useState("")
     const [closeDay, setCloseDay] = useState("")
@@ -101,10 +101,12 @@ export default function CreateBusiness() {
             // is_open_now
         }))
         .catch(async res => {
+            console.log(res)
             setErrors(res)});
 
         if (!backendResponse?.errors) {
-            navigate('/')
+            console.log(backendResponse)
+            navigate(`/business/${backendResponse.id}`)
         }
 
     }

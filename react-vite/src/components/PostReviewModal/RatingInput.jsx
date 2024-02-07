@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const RatingInput = ({ stars, onChange }) => {
+const RatingInput = ({ stars, onChange, type }) => {
   const [activeRating, setActiveRating] = useState(stars)
 
+  useEffect(() => {
+    if (type == 'update') {
+      setActiveRating(stars)
+    }
+  }, [stars, type])
 
   return (
     <>

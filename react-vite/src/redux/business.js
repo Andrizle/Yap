@@ -1,5 +1,3 @@
-import { csrfFetch } from "./csrf"
-
 //types - every variable must be unique
 const LOAD_BUSINESSES = 'businesses/getBusinesses'
 const LOAD_OWNED_BUSINESSES = 'businesses/getOwnedBusinesses'
@@ -111,7 +109,7 @@ const businessReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_BUSINESSES: {
             //initialize new all businesses state
-            const newAllBusinesses = {};
+            const newAllBusinesses = {...state.allBusinesses};
             //create an instance of each business in the new all business state
             action.businesses.forEach(business => {
                 newAllBusinesses[business.id] = business
@@ -122,7 +120,7 @@ const businessReducer = (state = initialState, action) => {
         }
         case LOAD_OWNED_BUSINESSES: {
             //initialize new owned businesses state
-            const newOwnedBusinesses = {};
+            const newOwnedBusinesses = {...state.ownedBusinesses};
             //create an instance of each business in the new owned business state
             action.businesses.forEach(business => {
                 newOwnedBusinesses[business.id] = business
@@ -132,7 +130,7 @@ const businessReducer = (state = initialState, action) => {
             return newState;
         }
         case LOAD_BUSINESS: {
-            return {...state, allBusinesses: {[action.business.id]: action.business}}
+            return {...state, allBusinesses: {...state.allBusinesses, [action.business.id]: action.business}}
         }
         case RECEIVE_BUSINESS:
             //handle creating a business

@@ -1,0 +1,6 @@
+.reviewTilesContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 5fr);
+    gap: 16px;
+    padding: 0px 8px 8px;
+}

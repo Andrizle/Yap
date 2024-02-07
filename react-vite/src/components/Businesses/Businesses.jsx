@@ -15,39 +15,45 @@ function Businesses() {
     if (!businesses) return null;
 
     return (
-        <>
-            {businesses.map(business =>
-                <div key={business.id} className='biz'>
-                    <Link to={`/business/${business.id}`} className='bizTiles' key={business.id}>
-                        <img src={business.icon} alt="" />
-                        <div>
-                            <div>
-                                {business.name}
+        <div id='bizPage'>
+            <div id='bizTilesContainer'>
+                {businesses.map(business =>
+                    <div key={business.id} className='biz'>
+                        <Link to={`/business/${business.id}`} className='bizTiles' key={business.id}>
+                            <img src={business.icon} alt="" />
+                            <div className='bizDetailsContainer'>
+                                <h2>
+                                    {business.name}
+                                </h2>
+                                <div className='bizRatingContainer'>
+                                     <div>
+                                    {business.rating.toFixed(1)}
+                                    </div>
+                                    <div className='bizReviewCountContainer'>
+                                        ({business.review_count} {business.review_count === 1 ? 'review' : 'reviews'})
+                                    </div>
+                                </div>
+                                <div className='bizCatPriceContainer'>
+                                    <div className='bizCategoryContainer'>
+                                    {business.category}
+                                    </div>
+                                    <div className='bizPriceContainer'>
+                                        {business.price}
+                                    </div>
+                                </div>
+                                <div className='bizCityContainer'>
+                                    {business.city}
+                                </div>
+                                <div>
+                                    {business.hours}
+                                </div>
                             </div>
-                            <div>
-                                {business.rating.toFixed(1)}
-                            </div>
-                            <div>
-                                ({business.review_count})
-                            </div>
-                            <div>
-                                {business.category}
-                            </div>
-                            <div>
-                                {business.price}
-                            </div>
-                            <div>
-                                {business.city}
-                            </div>
-                            <div>
-                                {business.hours}
-                            </div>
-                        </div>
-                    </Link>
+                        </Link>
 
-                </div>
-            )}
-        </>
+                    </div>
+                )}
+            </div>
+        </div>
     )
 }
 

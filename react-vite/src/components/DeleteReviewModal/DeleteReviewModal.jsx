@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { thunkDeleteReview } from '../../redux/reviews';
+import { thunkFetchBusinesses } from '../../redux/business';
 
 
 function DeleteReviewModal({review}) {
@@ -11,6 +12,7 @@ function DeleteReviewModal({review}) {
     e.preventDefault();
 
     await dispatch(thunkDeleteReview(review))
+    .then(dispatch(thunkFetchBusinesses()))
     .then(closeModal);
   };
 

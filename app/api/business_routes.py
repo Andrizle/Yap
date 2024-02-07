@@ -34,12 +34,17 @@ def owned_businesses():
 #Get all reviews for a business by business ID
 @business_routes.route('/<int:id>/reviews')
 def business_reviews(id):
+    business = Business.query.get(id)
     reviews = Review.query.filter(Review.business_id == id).all()
+
+    if not business:
+        return {'errors': {'message': 'Business Not found'}}, 404
 
     if reviews:
         return {'reviews': [review.to_dict() for review in reviews]}
     else:
-        return {'errors': {'message': "Business Not Found"}}, 404
+        return {'reviews': []}
+
 
 
 #Get all images for a business by business ID

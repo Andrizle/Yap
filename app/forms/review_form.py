@@ -6,11 +6,10 @@ from app.models import Review
 def reviewed(form, field):
     author_id = field.data
     business_id = form.data['business_id']
-    print("🚀 ~ business_id:", form.data['id'])
     if form.data['id']:
         return
 
-    review = Review.query.filter(Review.business_id == form.data['business_id'], Review.author_id == author_id).first()
+    review = Review.query.filter(Review.business_id == business_id, Review.author_id == author_id).first()
 
     if review:
         raise ValidationError('User already has a review for this business')

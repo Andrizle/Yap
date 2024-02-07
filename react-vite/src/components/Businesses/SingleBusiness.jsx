@@ -23,9 +23,6 @@ export default function SingleBusiness() {
     if (!business || !reviews) return null;
 
 
-    console.log(reviews, business)
-
-
     return (
         <div className="singleBusinessContainer">
             <div className="imagesContainer">
@@ -36,7 +33,18 @@ export default function SingleBusiness() {
                     <div className="businessNameContainer">
                         <h1 className="businessName">{business.name}</h1>
                     </div>
-                    <div className="businessReviews">{business.rating.toFixed(1)} ({business.review_count})</div>
+                    {
+                        business.review_count != 0 ?
+                        <div className='bizRatingContainer'>
+                             <div>
+                            {business.rating.toFixed(1)}
+                            </div>
+                            <div className='bizReviewCountContainer'>
+                                ({business.review_count} {business.review_count === 1 ? 'review' : 'reviews'})
+                            </div>
+                        </div>
+                        : null
+                    }
                     <div className="businessPriceCategory">
                         <span>{business.price}</span>
                         <span> • </span>

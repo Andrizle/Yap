@@ -24,5 +24,11 @@
 }
 
 .profile-dropdown {
-  position: relative;
+  background-color: rgb(219, 215, 215);
+  border-radius: 5px;
+  padding: 15px;
+  position: fixed;
+
+  right: 20px;
+  z-index: 1;
 }

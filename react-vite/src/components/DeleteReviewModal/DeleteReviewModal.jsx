@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { thunkDeleteReview } from '../../redux/reviews';
+import { thunkDeleteReview, thunkFetchMyReviews } from '../../redux/reviews';
 import { thunkFetchBusinesses } from '../../redux/business';
 
 
@@ -13,6 +13,7 @@ function DeleteReviewModal({review}) {
 
     await dispatch(thunkDeleteReview(review))
     .then(dispatch(thunkFetchBusinesses()))
+    .then(dispatch(thunkFetchMyReviews()))
     .then(closeModal);
   };
 

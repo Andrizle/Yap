@@ -1,5 +1,3 @@
-import { csrfFetch } from "./csrf"
-
 const LOAD_REVIEWS = 'reviews/getReviews'
 const LOAD_MY_REVIEWS = 'reviews/getMyReviews'
 const RECEIVE_REVIEW = 'reviews/receiveReview'
@@ -34,7 +32,7 @@ function deleteReview(reviewId) {
 
 //thunk action creators
 export const thunkFetchReviews = (businessId) => async dispatch => {
-    const response = await csrfFetch(`/api/businesses/${businessId}/reviews`);
+    const response = await fetch(`/api/businesses/${businessId}/reviews`);
 
     if (response.ok) {
         const reviews = await response.json();
@@ -45,15 +43,20 @@ export const thunkFetchReviews = (businessId) => async dispatch => {
     }
 }
 
-export const thunkFetchMyReviews = () => dispatch => {
-    return fetch('/api/reviews/current')
-    .then(r => r.json())
-    .then(d => dispatch(loadMyReviews(d.reviews)))
-    .catch(console.errors)
+export const thunkFetchMyReviews = () => async dispatch => {
+    const response = await fetch('/api/reviews/current')
+
+    if (response.ok) {
+        const reviews = await response.json();
+
+        dispatch(loadMyReviews(reviews.reviews))
+
+        return reviews
+    }
 }
 
 export const thunkPostReview = (review, businessId) => async dispatch => {
-    const response = await csrfFetch(`/api/businesses/${businessId}/reviews`, {
+    const response = await fetch(`/api/businesses/${businessId}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(review)
@@ -77,7 +80,6 @@ export const thunkUpdateReview = (review, reviewId) => async dispatch => {
     })
 
     if (response.ok) {
-        console.log('The response was ok')
         const review = await response.json();
 
         dispatch(receiveReview(review))
@@ -87,7 +89,7 @@ export const thunkUpdateReview = (review, reviewId) => async dispatch => {
 }
 
 export const thunkDeleteReview = (review) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${review.id}`, {
+    const response = await fetch(`/api/reviews/${review.id}`, {
         method: 'DELETE'
     });
 
@@ -143,7 +145,11 @@ const reviewReducer = (state = initialState, action) => {
         case DELETE_REVIEW: {
             const newBusinessReviews = {...state.business}
             delete newBusinessReviews[action.reviewId]
-            const newState = {...state, business: newBusinessReviews}
+
+            const newUserReviews = {...state.user}
+            delete newUserReviews[action.reviewId]
+
+            const newState = {...state, business: newBusinessReviews, user: newUserReviews}
             return newState
         }
         default:

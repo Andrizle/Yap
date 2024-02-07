@@ -37,7 +37,10 @@ class Business(db.Model):
 
     def to_dict(self):
 
-        avgRating = sum(review.to_dict()['stars'] for review in self.review)/len(self.review)
+        if len(self.review):
+            avgRating = sum(review.to_dict()['stars'] for review in self.review)/len(self.review)
+        else:
+            avgRating = 0
         return {
             'id': self.id,
             'owner_id': self.owner_id,

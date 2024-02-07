@@ -1,6 +1,50 @@
+#bizTilesContainer {
+    justify-self: center;
+}
+
 .bizTiles {
     display: flex;
     flex-direction: row;
+    height: 271px;
     color: black;
     text-decoration: none;
+}
+
+.bizDetailsContainer {
+    margin: 0 20px;
+}
+
+.bizRatingContainer {
+    display: flex;
+    margin: 10px 0;
+}
+
+.bizReviewCountContainer {
+    color: #6E7072;
+    margin-left: 10px;
+}
+
+.bizCatPriceContainer {
+    display: flex;
+}
+
+.bizCategoryContainer {
+    background-color: #E3E3E3;
+    border-radius: 5px;
+    color: #6E7072;
+    font-weight: semibold;
+    padding: 1px 5px;
+}
+
+.bizPriceContainer {
+    align-self: flex-end;
+    color: #6E7072;
+    font-size: 13px;
+    margin-left: 7px;
+    position: relative;
+    bottom: 2px;
+}
+
+.bizCityContainer {
+    margin: 12px 0;
 }

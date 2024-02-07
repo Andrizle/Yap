@@ -1,20 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { thunkPostReview } from '../../redux/reviews';
+import { thunkFetchMyReviews, thunkUpdateReview } from '../../redux/reviews';
 import { useEffect, useState } from 'react';
-import RatingInput from './RatingInput';
-import './PostReviewModal.css';
-import { thunkFetchBusinesses } from '../../redux/business';
+import RatingInput from '../PostReviewModal/RatingInput';
+import './UpdateReviewModal.css';
 
-export default function PostReviewModal({business}) {
+export default function UpdateReviewModal({reviewId, business}) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user)
+    const review = useSelector(state => state.reviews.user[reviewId])
     const { closeModal } = useModal();
-    const [review, setReview] = useState('');
+    const [reviewText, setReviewText] = useState('');
     const [stars, setStars] = useState('');
     const [allow, setAllow] = useState(true)
 
     const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        setReviewText(review.review)
+        setStars(review.stars)
+    }, [review])
 
     useEffect(() => {
         if (review.length < 10 || !stars) {
@@ -22,24 +27,26 @@ export default function PostReviewModal({business}) {
         } else {setAllow(false)}
     }, [review.length, stars])
 
-    const updateReview = e => setReview(e.target.value)
+    const updateReview = e => setReviewText(e.target.value)
 
     const handleSubmit = async e => {
         e.preventDefault();
 
-        const newReview = {
+        const updatedReview = {
+            id: review.id,
             author_id: sessionUser.id,
             business_id: business.id,
-            review,
+            review: reviewText,
             stars
         }
 
-        await dispatch(thunkPostReview(newReview, business.id))
-        .then(dispatch(thunkFetchBusinesses()))
+        await dispatch(thunkUpdateReview(updatedReview, review.id))
+        .then(dispatch(thunkFetchMyReviews()))
         .then(closeModal)
         .catch(async (res) => {
             const data = await res.json();
             if (data?.errors) {
+                console.log(data.errors)
               setErrors(data.errors);
             }
           });
@@ -59,6 +66,7 @@ export default function PostReviewModal({business}) {
                         <RatingInput
                             onChange={onChange}
                             stars={stars}
+                            type='update'
                         /> <span>Stars</span>
                     </div>
                         {errors.stars && <p className='errors'>{errors.stars}</p> }
@@ -66,7 +74,7 @@ export default function PostReviewModal({business}) {
                             id='reviewModalText'
                             placeholder='Leave your review here...'
                             type="text"
-                            value={review}
+                            value={reviewText}
                             onChange={updateReview}
                         />
                         {errors.review && <p className='errors'>{errors.review}</p> }
@@ -74,11 +82,9 @@ export default function PostReviewModal({business}) {
                         type='submit'
                         className='bigButton modalBtn' id='submitReviewButton'
                         disabled={allow}
-                    >Post Review</button>
+                    >Save Changes</button>
                 </form>
             </div>
-
-
         </div>
     )
 }

@@ -6,7 +6,9 @@ from app.models import Review
 def reviewed(form, field):
     author_id = field.data
     business_id = form.data['business_id']
-    print("🚀 ~ business_id:", business_id)
+    print("🚀 ~ business_id:", form.data['id'])
+    if form.data['id']:
+        return
 
     review = Review.query.filter(Review.business_id == form.data['business_id'], Review.author_id == author_id).first()
 
@@ -20,6 +22,7 @@ def star_validation(form, field):
         raise ValidationError("Must give a star rating between 1 and 5")
 
 class ReviewForm(FlaskForm):
+    id = IntegerField('ID')
     author_id=IntegerField('Author ID', validators=[reviewed])
     business_id=IntegerField('Business ID')
     review = StringField('Review', validators=[DataRequired(), Length(min=20, message='Please write a review of at least 20 characters')])

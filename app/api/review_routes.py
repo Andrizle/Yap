@@ -66,10 +66,11 @@ def create_review(id):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        print('==============MADE IT TO THE OTHER SIDE==================')
         if current_user.id == review.author_id:
-            review.review = form.name.review
-            review.stars = form.name.stars
-            review.image = form.name.image
+            review.review = form.review.data
+            review.stars = form.stars.data
+            # review.image = form.name.image
             db.session.commit()
             return review.to_dict()
         else:

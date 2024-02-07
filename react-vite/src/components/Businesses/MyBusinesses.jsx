@@ -22,25 +22,29 @@ function MyBusinesses() {
         <>
             {businesses.map(business =>
                 <div key={business.id} className='bizTiles'>
-                    <Link to={`/business/${business.id}`}className='bizTiles'>
+                    <Link to={`/business/${business.id}`} className='bizTiles' key={business.id}>
                         <img src={business.icon} alt="" />
-                        <div>
-                            <div>
+                        <div className='bizDetailsContainer'>
+                            <h2>
                                 {business.name}
+                            </h2>
+                            <div className='bizRatingContainer'>
+                                 <div>
+                                {business.rating.toFixed(1)}
+                                </div>
+                                <div className='bizReviewCountContainer'>
+                                    ({business.review_count} {business.review_count === 1 ? 'review' : 'reviews'})
+                                </div>
                             </div>
-                            <div>
-                                {business.rating}
-                            </div>
-                            <div>
-                                ({business.review_count})
-                            </div>
-                            <div>
+                            <div className='bizCatPriceContainer'>
+                                <div className='bizCategoryContainer'>
                                 {business.category}
+                                </div>
+                                <div className='bizPriceContainer'>
+                                    {business.price}
+                                </div>
                             </div>
-                            <div>
-                                {business.price}
-                            </div>
-                            <div>
+                            <div className='bizCityContainer'>
                                 {business.city}
                             </div>
                             <div>
@@ -48,10 +52,10 @@ function MyBusinesses() {
                             </div>
                         </div>
                     </Link>
-
                     <div>
                         <button
                             className='modalBtn'
+                            id='writeReviewBtn'
                             onClick={() => navigate(`/business/${business.id}/edit`)}>Update</button>
                         <OpenModalMenuItem
                             itemText="Delete"

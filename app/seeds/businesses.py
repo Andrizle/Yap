@@ -6,7 +6,7 @@ from sqlalchemy.sql import text
 def seed_businesses():
     savor = Business(
           name = "Savor Bistro",
-          category = "restaurant",
+          category = "Restaurants",
           price = "$$$",
           phone = "1 (555) 123-4567",
           street_address = "123 Main Street",

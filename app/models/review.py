@@ -27,6 +27,7 @@ class Review(db.Model):
             'author_id': self.author_id,
             'author': self.author.to_dict(),
             'business_id': self.business_id,
+            # 'business': self.business.to_dict(),
             'review': self.review,
             'stars': self.stars,
             'created_at': self.created_at,

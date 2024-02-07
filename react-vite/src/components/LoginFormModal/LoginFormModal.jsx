@@ -31,7 +31,7 @@ function LoginFormModal() {
   const demoUser = (e) => {
     e.preventDefault();
     setErrors({});
-    dispatch(thunkLogin({credential: 'Demo-lition', password: 'password'}))
+    dispatch(thunkLogin({email: 'demo@aa.io', password: 'password'}))
     .then(closeModal)
     .catch(async (res) => {
       const data = await res.json();

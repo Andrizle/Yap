@@ -1,0 +1,26 @@
+.noBizContent {
+    border: 1px rgb(204, 204, 204) solid;
+    border-radius: 5px;
+}
+
+.noBizContentHeader {
+    padding: 0 20px;
+}
+
+.noBizContentDivider {
+    border-bottom: 1px rgb(204, 204, 204) solid;
+}
+
+.noBizContentDetails {
+    display: flex;
+    flex-flow: row;
+    padding: 20px 40px;
+}
+
+#noBizLogo{
+    width: fit-content;
+}
+
+.noBizContentText {
+    padding-left: 20px;
+}

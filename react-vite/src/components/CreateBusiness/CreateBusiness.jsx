@@ -106,7 +106,7 @@ export default function CreateBusiness() {
 
         if (!backendResponse?.errors) {
             console.log(backendResponse)
-            navigate(`/business/${backendResponse.id}`)
+            navigate(`/business/current`)
         }
 
     }

@@ -135,7 +135,7 @@ export default function UpdateBusiness() {
 
 
         if (!backendResponse.errors) {
-            navigate('/')
+            navigate('/business/current')
         } else {
             setErrors(backendResponse.errors)
         }

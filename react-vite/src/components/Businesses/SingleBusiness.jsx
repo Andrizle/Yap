@@ -73,7 +73,7 @@ export default function SingleBusiness() {
                             })</span>
                         </h2>
                         {
-                            sessionUser?.id !== business.owner_id ?
+                            sessionUser && sessionUser?.id !== business.owner_id ?
                             <OpenModalButton
                                 buttonText={<div id="writeReviewButtonTextContainer">
                                                 <svg width="24" height="24" className="icon_svg">

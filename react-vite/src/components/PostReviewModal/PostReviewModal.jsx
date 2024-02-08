@@ -12,20 +12,40 @@ export default function PostReviewModal({business}) {
     const { closeModal } = useModal();
     const [review, setReview] = useState('');
     const [stars, setStars] = useState('');
-    const [allow, setAllow] = useState(true)
+    // const [allow, setAllow] = useState(true)
 
     const [errors, setErrors] = useState({});
 
-    useEffect(() => {
-        if (review.length < 10 || !stars) {
-            setAllow(true)
-        } else {setAllow(false)}
-    }, [review.length, stars])
+    // useEffect(() => {
+    //     if (review.length < 20 || !stars) {
+    //         setAllow(true)
+    //         setErrors({
+    //             review: 'Please write a review of at least 20 characters',
+
+
+    //     })
+    //     } else {setAllow(false); setErrors({})}
+    // }, [review.length, stars])
 
     const updateReview = e => setReview(e.target.value)
 
     const handleSubmit = async e => {
         e.preventDefault();
+
+        if (review.length < 20 && !stars) {
+            return setErrors({
+                review: 'Please write a review of at least 20 characters',
+                stars: 'Please select a rating for your review'
+            })
+        } else if (review.length < 20) {
+            return setErrors({
+                review: 'Please write a review of at least 20 characters'
+            })
+        } else if (!stars) {
+            return setErrors({
+                stars: 'Please select a rating for your review'
+            })
+        }
 
         const newReview = {
             author_id: sessionUser.id,
@@ -69,11 +89,12 @@ export default function PostReviewModal({business}) {
                             value={review}
                             onChange={updateReview}
                         />
+                        <div> Minimum characters: {review.length}/20</div>
                         {errors.review && <p className='errors'>{errors.review}</p> }
                     <button
                         type='submit'
                         className='bigButton modalBtn' id='submitReviewButton'
-                        disabled={allow}
+                        // disabled={allow}
                     >Post Review</button>
                 </form>
             </div>

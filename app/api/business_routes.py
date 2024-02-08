@@ -25,9 +25,8 @@ def single_business(id):
 @business_routes.route('/current')
 @login_required
 def owned_businesses():
-    user = current_user.to_dict()
 
-    businesses = Business.query.filter(Business.owner_id == user['id']).all()
+    businesses = Business.query.filter(Business.owner_id == current_user.id).all()
     return { 'businesses': [business.to_dict() for business in businesses]}
 
 

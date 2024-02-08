@@ -145,7 +145,7 @@ const businessReducer = (state = initialState, action) => {
         }
         case LOAD_OWNED_BUSINESSES: {
             //initialize new owned businesses state
-            const newOwnedBusinesses = {...state.ownedBusinesses};
+            const newOwnedBusinesses = {};
             //create an instance of each business in the new owned business state
             action.businesses.forEach(business => {
                 newOwnedBusinesses[business.id] = business

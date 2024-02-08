@@ -3,13 +3,6 @@
     text-decoration: none;
 }
 
-#writeReviewBtn {
-    align-items: center;
-    background-color: rgba(224,7,7,1);
-    color: white;
-    justify-content: center;
-    width:fit-content;
-}
 #writeReviewButtonTextContainer {
     align-items: center;
     display: flex;

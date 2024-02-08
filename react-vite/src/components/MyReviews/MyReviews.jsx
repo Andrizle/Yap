@@ -31,7 +31,7 @@ export default function MyReviews() {
                     </div>
                     <div className='myReviewButtonsContainer'>
                             <OpenModalButton
-                                id='writeReviewBtn'
+                                className='redBtn'
                                 buttonText='Update'
                                 modalComponent={<UpdateReviewModal reviewId={review.id} business={businesses[review.business_id]}/>}
                             />

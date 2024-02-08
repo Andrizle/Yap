@@ -12,7 +12,25 @@ body {
     width: fit-content;
 }
 
-.errors {
+p.errors {
     color: rgb(197, 11, 11);
-    min-height: 18px;
+    margin-block-end: 0;
+    margin-block-start: 0;
 }
+
+.redBtn {
+    align-items: center;
+    background-color: rgba(224,7,7,1);
+    color: white;
+    justify-content: center;
+    width:fit-content;
+}
+
+/* .inputLabel {
+    background-color: white;
+    margin-left: 10px;
+    position: relative;
+    top: 2px;
+    width: fit-content;
+    z-index: 1;
+} */

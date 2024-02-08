@@ -1,12 +1,27 @@
 #loginModal {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 15px;
     width: 275px;
 }
 
 .loginInputs {
+    margin: 10px 0;
     width: 250px;
 }
 
-#loginForm > * {
-    margin: 5px;
+#loginForm {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
+
+#loginBtn {
+    margin: 10px;
+}
+
+/* #loginForm > * {
+    margin: 10px;
+} */

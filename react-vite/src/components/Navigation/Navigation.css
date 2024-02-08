@@ -16,15 +16,27 @@
 }
 
 #addBusinessNavBtn{
+  color: black;
+  font-weight: 550;
   position: relative;
   right: 100px;
   top: 10px;
+  text-decoration: none;
 }
 
 #profileBtn {
   position: relative;
   right: 50px;
   top: 10px;
+}
+
+#navUserBtns {
+  display: flex;
+  margin-top: 5px;
+}
+
+#signupBtn {
+  margin: 0 10px;
 }
 
 .profile-dropdown {
@@ -35,4 +47,8 @@
 
   right: 20px;
   z-index: 1;
+}
+
+#navBottomDiv {
+  border-bottom: 1px rgb(204, 204, 204) solid;
 }

@@ -17,6 +17,7 @@ function Navigation() {
         {sessionUser && <NavLink to='/business/new' id="addBusinessNavBtn">Add a Business</NavLink>}
         <ProfileButton />
       </div>
+      {/* <div id="navBottomDiv"></div> */}
     </div>
 
   );

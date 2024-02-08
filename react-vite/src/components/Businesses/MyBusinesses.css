@@ -1,3 +1,11 @@
+#myBizHeader {
+    padding: 0 15px;
+}
+
+.bizTiles {
+    padding: 15px;
+}
+
 .noBizContent {
     border: 1px rgb(204, 204, 204) solid;
     border-radius: 5px;

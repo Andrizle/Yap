@@ -8,6 +8,7 @@ function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cls, setCls] = useState(true)
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -46,7 +47,7 @@ function LoginFormModal() {
       <h1>Log In</h1>
       <form onSubmit={handleSubmit} id="loginForm">
         <label>
-          Email
+          <span className="inputLabel">Email</span>
           <input
             className="loginInputs"
             type="text"
@@ -55,9 +56,9 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
+        {errors.email && <p className="errors">{errors.email}</p>}
+        <label >
+          <span className="inputLabel">Password</span>
           <input
             className="loginInputs"
             type="password"
@@ -66,9 +67,9 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
-        <button className='bigButton' onClick={demoUser}>Log in as Demo User</button>
+        {errors.password && <p className="errors">{errors.password}</p>}
+        <button type="submit" className="modalBtn" id="loginBtn">Log In</button>
+        <button className='modalBtn redBtn' onClick={demoUser}>Log in as Demo User</button>
       </form>
     </div>
   );

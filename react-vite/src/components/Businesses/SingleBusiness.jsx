@@ -81,7 +81,7 @@ export default function SingleBusiness() {
                                                 </svg>
                                                 <span className="writeReviewButtonText">Post Your Review</span>
                                             </div>}
-                                id='writeReviewBtn'
+                                className='redBtn'
                                 modalComponent={<PostReviewModal
                                                 business={business}
                                 />}
@@ -106,7 +106,7 @@ export default function SingleBusiness() {
                                                 </svg>
                                                 <span className="writeReviewButtonText">Post Your Review</span>
                                             </div>}
-                                id='writeReviewBtn'
+                                className='redBtn'
                                 modalComponent={<PostReviewModal
                                                     business={business}
                                                 />}

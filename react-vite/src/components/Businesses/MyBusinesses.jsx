@@ -8,7 +8,7 @@ import './MyBusinesses.css'
 
 function MyBusinesses() {
     const sessionUser = useSelector(state => state.session.user)
-    let businesses = useSelector(state => state.business['ownedBusinesses'])
+    const businesses = Object.values(useSelector(state => state.business.ownedBusinesses))
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -17,12 +17,15 @@ function MyBusinesses() {
     }, [dispatch])
 
     if (!businesses) return null;
-    businesses = Object.values(businesses)
+    // businesses = Object.values(businesses)
 
     return (
         <>
-            <h1>Good evening, {sessionUser.username}</h1>
-            {Object.values(businesses).length ? businesses.map(business =>
+            <div id='myBizHeader'>
+                <h1 >Good evening, {sessionUser.username}</h1>
+                {businesses.length != 0 && <h4>Here's a look at your Businesses</h4>}
+            </div>
+            {businesses.length ? businesses.map(business =>
                 <div key={business.id} className='bizTiles'>
                     <Link to={`/business/${business.id}`} className='bizTiles' key={business.id}>
                         <img src={business.icon} alt="" />
@@ -56,8 +59,7 @@ function MyBusinesses() {
                     </Link>
                     <div>
                         <button
-                            className='modalBtn'
-                            id='writeReviewBtn'
+                            className='modalBtn redBtn'
                             onClick={() => navigate(`/business/${business.id}/edit`)}>Update</button>
                         <OpenModalMenuItem
                             itemText="Delete"
@@ -90,8 +92,7 @@ function MyBusinesses() {
                                 </span>
                                 <p>Start by making one now!</p>
                                 <button
-                                    id='writeReviewBtn'
-                                    className='modalBtn noBizAddBtn'
+                                    className='modalBtn noBizAddBtn redBtn'
                                     onClick={() => navigate('/business/new')}>Add a Business
                                 </button>
                             </div>

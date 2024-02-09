@@ -142,89 +142,129 @@ export default function UpdateBusiness() {
     }
 
     return (
+        <div id='createBusinessPage'>
+
         <div id='addBusinessContainer'>
-            <h1>Update Your Business Info</h1>
+            <h1>Add A New Business Listing</h1>
             <form onSubmit={handleSubmit} id='addBusinessForm'>
                 <h2>What is the Name of your Business?</h2>
-                <label htmlFor="name">Business Name {errors.name && <span className='errors'>{errors.name}</span>}</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                    required
-                />
+                <div id='bizNameContainer'>
+                    <div className='bizNameIcon'>
+                        <img height="40" width="40" src="https://s3-media0.fl.yelpcdn.com/assets/public/40x40_known_for_v2.yji-a323759f35a47f5a7d09.svg"></img>
+                    </div>
+                    <div id='bizNameInputContainer'>
+                        <label htmlFor="name">Business Name {errors.name && <span>{errors.name}</span>}</label>
+                        <input
+                            className='createInputs'
+                            type="text"
+                            name="name"
+                            value={name}
+                            onChange={e => setName(e.target.value)}
+                            required
+                        />
+                    </div>
+                </div>
+                <div className='createDividers'></div>
+                <h2>Address</h2>
                 <div id='addressContainer'>
                     <div id='streetSuiteContainer'>
-                        <h2>Address</h2>
-                        <label htmlFor="Street_address">Street Address {errors.Street_address && <span className='errors'>{errors.Street_address}</span>}</label>
-                        <input
-                            type="text"
-                            name="Street_address"
-                            value={street_address}
-                            onChange={e => setStreet_address(e.target.value)}
-                            required
-                        />
-                        <label htmlFor="Suite_unit">Suite/unit{errors.suite_unit && <span className='errors'>{errors.suite_unit}</span>}</label>
-                        <input
-                            type="text"
-                            name="Suite_unit"
-                            value={suite_unit}
-                            onChange={e => setSuite_unit(e.target.value)}
-                        />
+                        <label htmlFor="Street_address">Street Address {errors.Street_address && <span>{errors.Street_address}</span>}
+                            <input
+                                className='createInputs'
+                                type="text"
+                                name="Street_address"
+                                value={street_address}
+                                onChange={e => setStreet_address(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <label htmlFor="Suite_unit">Suite/unit (optional) {errors.suite_unit && <span>{errors.suite_unit}</span>}
+                            <input
+                                className='createInputs'
+                                type="text"
+                                name="Suite_unit"
+                                value={suite_unit}
+                                onChange={e => setSuite_unit(e.target.value)}
+                            />
+                        </label>
                     </div>
                     <div id='countryZipContainer'>
-                        <label htmlFor="country">Country {errors.country && <span className='errors'>{errors.country}</span>}</label>
-                        <input
-                            type="text"
-                            name="country"
-                            value={country}
-                            onChange={e => setCountry(e.target.value)}
-                            required
-                        />
-                        <label htmlFor="zip_code">Zip code {errors.zip_code && <span className='errors'>{errors.zip_code}</span>}</label>
-                        <input
-                            type="text"
-                            name="zip_code"
-                            value={zip_code}
-                            onChange={e => setZip_code(`${e.target.value}`)}
-                            required
-                        />
+                        <label htmlFor="country">Country {errors.country && <span>{errors.country}</span>}
+                            <input
+                                className='createInputs'
+                                type="text"
+                                name="country"
+                                value={country}
+                                onChange={e => setCountry(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <label htmlFor="zip_code">Zip code {errors.zip_code && <span>{errors.zip_code}</span>}
+                            <input
+                                className='createInputs'
+                                type="number"
+                                name="zip_code"
+                                value={zip_code}
+                                onChange={e => setZip_code(`${e.target.value}`)}
+                                required
+                            />
+                        </label>
                     </div>
                     <div id='cityStateContainer'>
-                        <label htmlFor="city">City {errors.city && <span className='errors'>{errors.city}</span>}</label>
-                        <input
-                            type="text"
-                            name="city"
-                            value={city}
-                            onChange={e => setCity(e.target.value)}
-                            required
-                        />
-                        <label htmlFor="state">State {errors.state && <span className='errors'>{errors.state}</span>}</label>
-                        <input
-                            type="text"
-                            name="state"
-                            value={state}
-                            onChange={e => setState(e.target.value)}
-                            required
-                        />
+                        <div id='cityContainer'>
+                            <label htmlFor="city" id='cityLabel'>City {errors.city && <span>{errors.city}</span>}
+                                <input
+                                    className='createInputs'
+                                    id='cityInput'
+                                    type="text"
+                                    name="city"
+                                    value={city}
+                                    onChange={e => setCity(e.target.value)}
+                                    required
+                                />
+                             </label>
+                        </div>
+                        <div>
+                            <label htmlFor="state">State {errors.state && <span>{errors.state}</span>}
+                                <input
+                                    className='createInputs'
+                                    id='stateInput'
+                                    type="text"
+                                    name="state"
+                                    value={state}
+                                    onChange={e => setState(e.target.value)}
+                                    required
+                                />
+                            </label>
+                        </div>
                     </div>
                 </div>
+                    <div className='createDividers'></div>
+                <h2>Phone Number</h2>{errors.phone && <span>{errors.phone}</span>}
                 <div id='phoneContainer'>
-                    <h2>Phone Number</h2>{errors.phone && <span className='errors'> {errors.phone} </span>}
-                    <p>What&apos;s the best number for customers to reach you at?</p>
-                    <input
-                        type="text"
-                        value={phone} id="phoneInput"
-                        onChange={handlePhoneChange}
-                        required
-                    />
-                    {validPhone ? null : <p className='errors'>Please enter a valid phone number <br />with a format similar to: 1 555 123 4567</p>}
+                    <div id='phoneIcon'>
+                        <svg width="24" height="24" class="icon_svg">
+                            <path d="M13.59 23.07A7 7 0 0 1 8.64 21L3 15.36a7 7 0 0 1 0-9.9l1.39-1.41a1 1 0 0 1 1.42 0l5 5a1 1 0 0 1 0 1.41 2.001 2.001 0 0 0 2.83 2.83 1 1 0 0 1 1.41 0l4.95 5a1 1 0 0 1 0 1.42L18.54 21a7 7 0 0 1-4.95 2.07ZM5.1 6.17l-.71.71a5 5 0 0 0 0 7.07l5.66 5.66a5 5 0 0 0 7.07 0l.71-.71-3.63-3.63a4 4 0 0 1-4.86-.61 4 4 0 0 1-.61-4.86L5.1 6.17Zm12.78 5.95a1 1 0 0 1-1-1 4 4 0 0 0-4-4 1 1 0 0 1 0-2 6 6 0 0 1 6 6 1 1 0 0 1-1 1Zm4.19 0a1 1 0 0 1-1-1 8.19 8.19 0 0 0-8.19-8.19 1 1 0 0 1 0-2c5.625.006 10.184 4.565 10.19 10.19a1 1 0 0 1-1 1Z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p id='phoneText'>What&apos;s the best number for customers to reach you at?</p>
+                        <input
+                            type="number"
+                            value={phone} id="phoneInput"
+                            onChange={handlePhoneChange}
+                            required
+                        />
+                        {validPhone ? null : <p className='errors'>Please enter a valid phone number <br />with a format similar to: 1 555 123 4567</p>}
+                    </div>
                 </div>
+                <div className='createDividers'></div>
+                <h2>Hours of Operation</h2> {errors.hours && <span>{errors.hours}</span>}
                 <div id='hoursContainer'>
-                    <h2>Hours of Operation</h2>{errors.hours && <span className='errors'>{errors.hours}</span>}
                     <div id='addHoursContainer'>
-                        <img src="https://s3-media0.fl.yelpcdn.com/assets/public/40x40_operation_hours_v2.yji-0bc0d9d4b51e6fcfdc40.svg" alt="picture of clock" />
+                        <div id='hoursIcon'>
+                            <img src="https://s3-media0.fl.yelpcdn.com/assets/public/40x40_operation_hours_v2.yji-0bc0d9d4b51e6fcfdc40.svg" alt="picture of clock" />
+                        </div>
                         <div id='hoursText'>
                             <p>Let your customers know when they can stop by or give you a call.</p>
                             {/* <OpenModalMenuItem
@@ -233,17 +273,14 @@ export default function UpdateBusiness() {
                                 setHours={setHours}
                             /> */}
                             <div className="dayRowContainer">
-                                <div className="dayContainer">
-                                    <p>Hours for the week: </p>
-                                </div>
                                 <div className='dayRangeContainer'>
-                                    <div className='dayOpenContainer'>
+                                    <p>Days of the week: </p>
+                                    <span className='dayOpenContainer'>
                                         <select
                                             name=""
                                             id="openDay"
                                             disabled={allDay}
-                                            value={openDay}
-                                            onChange={e => {setOpenDay(e.target.value)}}
+                                            onChange={e => setOpenDay(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setOpenDayOpen(true)}>
                                             <option
@@ -258,18 +295,17 @@ export default function UpdateBusiness() {
                                             <option value="Fri">Fri</option>
                                             <option value="Sat">Sat</option>
                                         </select>
-                                    </div>
-                                    <div>
+                                    </span>
+                                    <span className='hoursDash'>
                                         <svg width="24" height="24" className="icon_svg">
                                             <rect width="16" height="2" x="4" y="11" rx="1"></rect>
                                         </svg>
-                                    </div>
-                                    <div className='dayCloseContainer'>
+                                    </span>
+                                    <span className='dayCloseContainer'>
                                         <select
                                             name=""
                                             id="closeDay"
                                             disabled={allDay}
-                                            value={closeDay}
                                             onChange={e => setCloseDay(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setCloseDayOpen(true)}>
@@ -282,15 +318,16 @@ export default function UpdateBusiness() {
                                             <option value="Fri">Fri</option>
                                             <option value="Sat">Sat</option>
                                         </select>
-                                    </div>
+                                    </span>
                                 </div>
+
                                 <div className="timeRangeContainer">
+                                    <p>Hours open: </p>
                                     <div className="dayOpenContainer">
                                         <select
                                             name=""
                                             id="openHours"
                                             disabled={allDay}
-                                            value={openHour}
                                             onChange={e => setOpenHour(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setOpenHourOpen(true)}>
@@ -393,7 +430,7 @@ export default function UpdateBusiness() {
                                                 <option value="11:45 PM">11:45 PM</option>
                                         </select>
                                     </div>
-                                    <div>
+                                    <div className='hoursDash'>
                                         <svg width="24" height="24" className="icon_svg">
                                             <rect width="16" height="2" x="4" y="11" rx="1"></rect>
                                         </svg>
@@ -403,7 +440,6 @@ export default function UpdateBusiness() {
                                             name=""
                                             id="closingHours"
                                             disabled={allDay}
-                                            value={closeHour}
                                             onChange={e => setCloseHour(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setCloseHourOpen(true)}>
@@ -518,15 +554,16 @@ export default function UpdateBusiness() {
                         </div>
                     </div>
                 </div>
+                <div className='createDividers'></div>
+                <h2>Service & Price</h2>
                 <div id='catPriceContainer'>
-                    <h2>Service & Price</h2>
                     <div id='categoryContainer'>
-                        <p>What sort of service are you providing?</p>{errors.category && <span className='errors'>{errors.category}</span>}
+                        <p className='createServiceText'>What sort of service are you providing?</p>
+                        {errors.categories && <span>{errors.categories}</span>}
                         <select
                             name=""
                             id="categorySelect"
                             onChange={e => setCategory(e.target.value)}
-                            value={category}
                             required
                             onClick={() => setCategoryOpen(true)}>
                                 <option value=""
@@ -545,11 +582,11 @@ export default function UpdateBusiness() {
                         </select>
                     </div>
                     <div id='priceContainer'>
-                        <p>What prices can customers expect?</p>{errors.price && <span className='errors'>{errors.price}</span>}
+                        <p>What prices can customers expect?</p>
+                        {errors.price && <span>{errors.price}</span>}
                         <select name=""
                             id="priceSelect"
                             onChange={e => setPrice(e.target.value)}
-                            value={price}
                             required
                             onClick={() => setPriceOpen(true)}>
                                 <option value=""
@@ -563,11 +600,11 @@ export default function UpdateBusiness() {
                     </div>
                 </div>
                 <div id='addBusinessBtn'>
-                    <button
-                    type='submit'
-                    disabled={!validPhone}>Save</button>
+                    <button type='submit'
+                    disabled={!validPhone}>Post Business</button>
                 </div>
             </form>
+        </div>
         </div>
     )
 }

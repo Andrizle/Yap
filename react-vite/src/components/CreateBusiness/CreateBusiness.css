@@ -1,9 +1,148 @@
-input::-webkit-outer-spin-button,
+/* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+} */
+
+#createBusinessPage {
+    display: flex;
+    justify-content: center;
 }
 
 #addBusinessContainer {
-    margin: 15px
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 15px;
+    width: 600px;
+}
+
+#bizNameContainer {
+    border: dashed #0399BF 2px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-flow: row;
+}
+
+.bizNameIcon {
+    margin-right: 15px;
+}
+
+#bizNameInputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.createInputs {
+    margin: 10px 0;
+    width: 275px;
+}
+
+#addressContainer {
+    border: dashed #0399BF 2px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#streetSuiteContainer {
+    display: flex;
+    flex-direction: row;
+
+}
+
+#countryZipContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#cityStateContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#cityContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#cityInput {
+    width: 375px;
+}
+
+#stateInput {
+    width: 175px;
+}
+
+.createDividers {
+    border: solid rgb(204, 204, 204) 1px;
+}
+
+#phoneContainer {
+    border: dashed #0399BF 2px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-flow: row;
+}
+
+#phoneIcon {
+    margin-right: 15px;
+    position: relative;
+    top: 15px;
+}
+
+#phoneText {
+    margin-block-start: 0;
+}
+
+#addHoursContainer {
+    border: dashed #0399BF 2px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-flow: row;
+}
+
+#hoursIcon {
+    margin-right: 15px;
+    position: relative;
+    top: 15px;
+}
+
+.dayRangeContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.dayOpenContainer {
+    margin-left: 10px;
+}
+
+.timeRangeContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.hoursDash {
+    position: relative;
+    top: 2px;
+}
+
+#catPriceContainer {
+    border: dashed #0399BF 2px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.createServiceText {
+    margin-block-start: 0;
 }

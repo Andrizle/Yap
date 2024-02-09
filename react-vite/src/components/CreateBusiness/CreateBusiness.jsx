@@ -134,6 +134,7 @@ export default function CreateBusiness() {
                         />
                     </div>
                 </div>
+                <div className='createDividers'></div>
                 <h2>Address</h2>
                 <div id='addressContainer'>
                     <div id='streetSuiteContainer'>

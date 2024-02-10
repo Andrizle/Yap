@@ -1,12 +1,32 @@
+#bizPage {
+    padding: 0 40px;
+}
+
+#catContainer {
+    display: flex;
+    justify-content: center;
+}
+
+
+
 #bizTilesContainer {
     justify-self: center;
 }
 
-.bizTiles {
+.biz {
+    border-radius: 8px;
+}
+
+.biz:hover {
+    box-shadow: 0 0 10px #0000001a;
+}
+
+.allBizTiles {
+    color: black;
     display: flex;
     flex-direction: row;
     height: 271px;
-    color: black;
+    padding: 24px;
     text-decoration: none;
 }
 
@@ -17,6 +37,10 @@
 .bizRatingContainer {
     display: flex;
     margin: 10px 0;
+}
+
+.bizStarDisplay {
+    margin-right: 10px;
 }
 
 .bizReviewCountContainer {
@@ -47,4 +71,10 @@
 
 .bizCityContainer {
     margin: 12px 0;
+}
+
+.allBizTilesDivider {
+    background-color: rgba(235,235,235,1);
+    border-bottom: 1px solid rgba(235,235,235,1);
+    border-color: rgba(235,235,235,1);
 }

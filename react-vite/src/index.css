@@ -26,6 +26,15 @@ p.errors {
     width:fit-content;
 }
 
+.icon_svg {
+    fill: currentColor;
+}
+
+.fas {
+    color: rgb(247, 187, 36);
+    margin-right: 8px;
+}
+
 /* .inputLabel {
     background-color: white;
     margin-left: 10px;

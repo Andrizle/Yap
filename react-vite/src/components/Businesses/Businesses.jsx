@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { thunkFetchBusinesses } from '../../redux/business';
 import './Businesses.css'
 import { Link } from 'react-router-dom';
+import RatingDisplay from './RatingDisplay';
+
 
 function Businesses() {
     const businesses = Object.values(useSelector(state => state.business['allBusinesses']))
@@ -16,11 +18,24 @@ function Businesses() {
 
     return (
         <div id='bizPage'>
+            <div id='catContainer'>
+                <h1 id='catHeader'>Categories</h1>
+                <div id='catTilesContainer'>
+                    <div id='restCatTile'></div>
+                    <div id='shopCatTile'></div>
+                    <div id='nightCatTile'></div>
+                    <div id='activeCatTile'></div>
+                    <div id='beautyCatTile'></div>
+                    <div id='autoCatTile'></div>
+                    <div id='homeCatTile'></div>
+                    <div id='otherCatTile'></div>
+                </div>
+            </div>
             <div id='bizTilesContainer'>
                 {businesses.map(business =>
                     <div key={business.id} className='biz'>
-                        <Link to={`/business/${business.id}`} className='bizTiles' key={business.id}>
-                            <img src={business.icon} alt="" />
+                        <Link to={`/business/${business.id}`} className='allBizTiles' key={business.id}>
+                            <img src={business.icon} className='bizIcon' />
                             <div className='bizDetailsContainer'>
                                 <h2>
                                     {business.name}
@@ -28,6 +43,9 @@ function Businesses() {
                                 {
                                     business.review_count != 0 ?
                                     <div className='bizRatingContainer'>
+                                        <div className='bizStarDisplay'>
+                                            <RatingDisplay stars={business.rating}/>
+                                        </div>
                                          <div>
                                         {business.rating.toFixed(1)}
                                         </div>
@@ -53,7 +71,7 @@ function Businesses() {
                                 </div>
                             </div>
                         </Link>
-
+                        <div className='allBizTilesDivider'></div>
                     </div>
                 )}
             </div>

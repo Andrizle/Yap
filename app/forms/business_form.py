@@ -11,7 +11,7 @@ def price_validation(form, field):
 
 def category_validation(form, field):
     category = field.data
-    choices=['Restaurants', 'Shopping', 'Nightlife', 'Active Life', 'Beauty & Spas', 'Automotive', 'Home Services', 'Coffee & Tea', 'Other']
+    choices=['Restaurants', 'Shopping', 'Nightlife', 'Active Life', 'Beauty & Spas', 'Automotive', 'Home Services', 'Other']
 
     if category not in choices:
         raise ValidationError("Category must be one of the choices from the drop-down menu")

@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { thunkFetchReviews } from "../../redux/reviews";
+import { thunkFetchBusiness } from "../../redux/business";
+import RatingDisplay from "../Businesses/RatingDisplay";
 import OpenModalButton from "../OpenModalButton";
 import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
 import './BusinessReviews.css'
-import { thunkFetchBusiness } from "../../redux/business";
 
 export default function BusinessReviews() {
     const dispatch = useDispatch();
@@ -37,7 +38,12 @@ export default function BusinessReviews() {
             {reviews.sort(compareNumbers).map(review => (
                 <div className="reviewDetails" key={review.id}>
                     <h3 className="reviewer">{review.author?.username}</h3>
-                    <div className="reviewDate">{month(review.createdAt)} {review.created_at.split(' ')[3]}</div>
+                    <div className="bizStarDisplay">
+                        <RatingDisplay stars={review.stars}/>
+                    </div>
+                    <div className="reviewDate">
+                        {month(review.createdAt)} {review.created_at.split(' ')[1]}, {review.created_at.split(' ')[3]}
+                    </div>
                     <div className="reviewText">{review.review}</div>
                     {sessionUser?.id == review.author_id ?
                         <OpenModalButton

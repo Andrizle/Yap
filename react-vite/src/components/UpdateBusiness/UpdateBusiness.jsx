@@ -145,7 +145,7 @@ export default function UpdateBusiness() {
         <div id='createBusinessPage'>
 
         <div id='addBusinessContainer'>
-            <h1>Add A New Business Listing</h1>
+            <h1>Update Your Business Info</h1>
             <form onSubmit={handleSubmit} id='addBusinessForm'>
                 <h2>What is the Name of your Business?</h2>
                 <div id='bizNameContainer'>
@@ -243,14 +243,16 @@ export default function UpdateBusiness() {
                 <h2>Phone Number</h2>{errors.phone && <span>{errors.phone}</span>}
                 <div id='phoneContainer'>
                     <div id='phoneIcon'>
-                        <svg width="24" height="24" class="icon_svg">
+                        <svg width="24" height="24" className="icon_svg">
                             <path d="M13.59 23.07A7 7 0 0 1 8.64 21L3 15.36a7 7 0 0 1 0-9.9l1.39-1.41a1 1 0 0 1 1.42 0l5 5a1 1 0 0 1 0 1.41 2.001 2.001 0 0 0 2.83 2.83 1 1 0 0 1 1.41 0l4.95 5a1 1 0 0 1 0 1.42L18.54 21a7 7 0 0 1-4.95 2.07ZM5.1 6.17l-.71.71a5 5 0 0 0 0 7.07l5.66 5.66a5 5 0 0 0 7.07 0l.71-.71-3.63-3.63a4 4 0 0 1-4.86-.61 4 4 0 0 1-.61-4.86L5.1 6.17Zm12.78 5.95a1 1 0 0 1-1-1 4 4 0 0 0-4-4 1 1 0 0 1 0-2 6 6 0 0 1 6 6 1 1 0 0 1-1 1Zm4.19 0a1 1 0 0 1-1-1 8.19 8.19 0 0 0-8.19-8.19 1 1 0 0 1 0-2c5.625.006 10.184 4.565 10.19 10.19a1 1 0 0 1-1 1Z"></path>
                         </svg>
                     </div>
                     <div>
                         <p id='phoneText'>What&apos;s the best number for customers to reach you at?</p>
                         <input
-                            type="number"
+                            type="text"
+                            inputMode='numeric'
+                            pattern='^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$'
                             value={phone} id="phoneInput"
                             onChange={handlePhoneChange}
                             required
@@ -280,6 +282,7 @@ export default function UpdateBusiness() {
                                             name=""
                                             id="openDay"
                                             disabled={allDay}
+                                            value={openDay}
                                             onChange={e => setOpenDay(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setOpenDayOpen(true)}>
@@ -306,6 +309,7 @@ export default function UpdateBusiness() {
                                             name=""
                                             id="closeDay"
                                             disabled={allDay}
+                                            value={closeDay}
                                             onChange={e => setCloseDay(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setCloseDayOpen(true)}>
@@ -328,6 +332,7 @@ export default function UpdateBusiness() {
                                             name=""
                                             id="openHours"
                                             disabled={allDay}
+                                            value={openHour}
                                             onChange={e => setOpenHour(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setOpenHourOpen(true)}>
@@ -440,6 +445,7 @@ export default function UpdateBusiness() {
                                             name=""
                                             id="closingHours"
                                             disabled={allDay}
+                                            value={closeHour}
                                             onChange={e => setCloseHour(e.target.value)}
                                             required={!allDay}
                                             onClick={() => setCloseHourOpen(true)}>
@@ -547,7 +553,7 @@ export default function UpdateBusiness() {
                                     </div>
                                 </div>
                                 <div>
-                                    <input type="checkbox" name="24/7" onChange={() => {setAllDay(!allDay); setHours('Sun - Sat: 12:00 AM - 12:00AM')}} />
+                                    <input type="checkbox" name="24/7" checked={allDay} onChange={() => {setAllDay(!allDay); setHours('Sun - Sat: 12:00 AM - 12:00AM')}} />
                                     <label htmlFor="24/7">24/7</label>
                                 </div>
                             </div>
@@ -563,6 +569,7 @@ export default function UpdateBusiness() {
                         <select
                             name=""
                             id="categorySelect"
+                            value={category}
                             onChange={e => setCategory(e.target.value)}
                             required
                             onClick={() => setCategoryOpen(true)}>
@@ -577,7 +584,6 @@ export default function UpdateBusiness() {
                                 <option value="Beauty&Spas">Beauty & Spas</option>
                                 <option value="Automotive">Automotive</option>
                                 <option value="HomeServices">HomeServices</option>
-                                <option value="Coffee&Tea">Coffee & Tea</option>
                                 <option value="Other">Other</option>
                         </select>
                     </div>
@@ -586,6 +592,7 @@ export default function UpdateBusiness() {
                         {errors.price && <span>{errors.price}</span>}
                         <select name=""
                             id="priceSelect"
+                            value={price}
                             onChange={e => setPrice(e.target.value)}
                             required
                             onClick={() => setPriceOpen(true)}>
@@ -601,7 +608,8 @@ export default function UpdateBusiness() {
                 </div>
                 <div id='addBusinessBtn'>
                     <button type='submit'
-                    disabled={!validPhone}>Post Business</button>
+                        className='modalBtn'
+                    disabled={!validPhone}>Save</button>
                 </div>
             </form>
         </div>

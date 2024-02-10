@@ -1,7 +1,21 @@
+.singleBusinessContainer {
+    padding: 20px;
+}
+
+.bizIcon {
+    border-radius: 5px;
+    -webkit-user-drag: none;
+}
+
 .bizTile {
     color: black;
     text-decoration: none;
 }
+
+.businessMainContent > * {
+    margin: 10px 0;
+}
+
 
 #writeReviewButtonTextContainer {
     align-items: center;
@@ -14,8 +28,4 @@
     font-size: 16px;
     font-weight: 700;
     padding: 0 10px;
-}
-
-.icon_svg {
-    fill: currentColor;
 }

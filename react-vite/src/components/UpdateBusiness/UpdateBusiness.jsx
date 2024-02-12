@@ -201,7 +201,7 @@ export default function UpdateBusiness() {
                         </label>
                         <label htmlFor="zip_code">Zip code {errors.zip_code && <span>{errors.zip_code}</span>}
                             <input
-                                className='createInputs'
+                                className='createInputs numberInput'
                                 type="number"
                                 name="zip_code"
                                 value={zip_code}

@@ -171,7 +171,7 @@ export default function CreateBusiness() {
                         </label>
                         <label htmlFor="zip_code">Zip code {errors.zip_code && <span>{errors.zip_code}</span>}
                             <input
-                                className='createInputs'
+                                className='createInputs numberInput'
                                 type="number"
                                 name="zip_code"
                                 value={zip_code}
@@ -220,7 +220,9 @@ export default function CreateBusiness() {
                     <div>
                         <p id='phoneText'>What&apos;s the best number for customers to reach you at?</p>
                         <input
-                            type="number"
+                            type="text"
+                            inputMode='numeric'
+                            pattern='^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$'
                             value={phone} id="phoneInput"
                             onChange={handlePhoneChange}
                             required

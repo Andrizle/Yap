@@ -61,6 +61,7 @@ export default function SingleBusiness() {
                     <div>{business.phone}</div>
                 </div>
             </div>
+            <div className="singleBusinessDivider"></div>
             <div className="reviewsContainer">
                 { reviews.length ?
                     (<>

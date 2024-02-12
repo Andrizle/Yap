@@ -16,6 +16,11 @@
     margin: 10px 0;
 }
 
+.singleBusinessDivider {
+    background-color: rgba(235,235,235,1);
+    border-bottom: 1px solid rgba(235,235,235,1);
+    border-color: rgba(235,235,235,1);
+}
 
 #writeReviewButtonTextContainer {
     align-items: center;

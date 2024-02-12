@@ -7,6 +7,7 @@ import OpenModalButton from '../OpenModalButton'
 import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal'
 import './MyReviews.css'
 import UpdateReviewModal from '../UpdateReviewModal/UpdateReviewModal'
+import RatingDisplay from '../Businesses/RatingDisplay'
 
 export default function MyReviews() {
     const reviews = Object.values(useSelector(state => state.reviews.user))
@@ -23,10 +24,12 @@ export default function MyReviews() {
     return (
         <div className='reviewTilesContainer'>
             {reviews.map(review =>
-                <div key={review.id} >
-                    <div className='reviewTiles'>
-                        <div className='reviewBizNameContainer'><h2>{businesses[review.business_id]?.name}</h2></div>
-                        <div className='reviewRatingContainer'>{review.stars}</div>
+                <div key={review.id} className='reviewTiles'>
+                    <div className='reviewBizNameContainer'><h2>{businesses[review.business_id]?.name}</h2></div>
+                    <div className='reviewContentTiles'>
+                        <div className='reviewRatingContainer'>
+                            <RatingDisplay stars={review.stars}/>
+                        </div>
                         <div className='reviewTextContainer'>{review.review}</div>
                     </div>
                     <div className='myReviewButtonsContainer'>
@@ -41,7 +44,6 @@ export default function MyReviews() {
                         />
                     </div>
                 </div>
-
             )}
         </div>
     )

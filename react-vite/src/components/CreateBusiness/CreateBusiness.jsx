@@ -545,10 +545,10 @@ export default function CreateBusiness() {
                                 <option value="Restaurants">Restaurants</option>
                                 <option value="Shopping">Shopping</option>
                                 <option value="Nightlife">Nightlife</option>
-                                <option value="ActiveLife">ActiveLife</option>
+                                <option value="Active Life">ActiveLife</option>
                                 <option value="Beauty & Spas">Beauty & Spas</option>
                                 <option value="Automotive">Automotive</option>
-                                <option value="HomeServices">HomeServices</option>
+                                <option value="Home Services">HomeServices</option>
                                 <option value="Other">Other</option>
                         </select>
                     </div>

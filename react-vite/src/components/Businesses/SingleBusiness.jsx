@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { thunkFetchBusiness } from "../../redux/business";
 import { thunkFetchReviews } from "../../redux/reviews";
+import RatingDisplay from './RatingDisplay'
 import BusinessReviews from "../BusinessReviews"
 import OpenModalButton from "../OpenModalButton";
 import PostReviewModal from "../PostReviewModal";
@@ -26,25 +27,28 @@ export default function SingleBusiness() {
     return (
         <div className="singleBusinessContainer">
             <div className="imagesContainer">
-                <img src={business.icon} alt="" />
+                <img src={business.icon} className="bizIcon" />
             </div>
             <div className="businessDetailsContainer">
-                <div className="businessMainContent">
-                    <div className="businessNameContainer">
-                        <h1 className="businessName">{business.name}</h1>
-                    </div>
-                    {
-                        business.review_count != 0 ?
-                        <div className='bizRatingContainer'>
-                             <div>
-                            {business.rating.toFixed(1)}
-                            </div>
-                            <div className='bizReviewCountContainer'>
-                                ({business.review_count} {business.review_count === 1 ? 'review' : 'reviews'})
-                            </div>
+                <div className="businessNameContainer">
+                    <h1 className="businessName">{business.name}</h1>
+                </div>
+                {
+                    business.review_count != 0 ?
+                    <div className='bizRatingContainer'>
+                        <div className="bizStarDisplay">
+                            <RatingDisplay stars={business.rating}/>
                         </div>
-                        : null
-                    }
+                        <div>
+                            {business.rating.toFixed(1)}
+                        </div>
+                        <div className='bizReviewCountContainer'>
+                            ({business.review_count} {business.review_count === 1 ? 'review' : 'reviews'})
+                        </div>
+                    </div>
+                    : null
+                }
+                <div className="businessMainContent">
                     <div className="businessPriceCategory">
                         <span>{business.price}</span>
                         <span> • </span>
@@ -53,12 +57,11 @@ export default function SingleBusiness() {
                     <div>
                         <span>{business.hours}</span>
                     </div>
-                </div>
-                <div className="businessAddressPhone">
-                    <div>{business.street_address} {business.city}, {business.state} <br /> {business.zip_code}</div>
+                    <div className="singleBizAddressDiv">{business.street_address} {business.city}, {business.state} <br /> {business.zip_code}</div>
                     <div>{business.phone}</div>
                 </div>
             </div>
+            <div className="singleBusinessDivider"></div>
             <div className="reviewsContainer">
                 { reviews.length ?
                     (<>

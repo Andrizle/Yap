@@ -1,12 +1,62 @@
+#bizPage {
+    padding: 0 40px;
+}
+
+#catContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#catTilesContainer {
+    display: grid;
+    grid: auto-flow / repeat(4, 1fr);
+    width: 85%;
+    /* grid-template-columns: repeat(4, 1fr); */
+}
+
+
 #bizTilesContainer {
     justify-self: center;
 }
 
-.bizTiles {
+.catTiles {
+    align-items: center;
+    border: solid 1px rgba(235,235,235,1);
+    border-radius: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 183px;
+    margin: 40px 20px;
+    max-width: 250px;
+    min-width: 87px;
+    padding: 48px 0;
+    width: 90%;
+}
+
+#categoryDivider {
+    background-color: rgba(235,235,235,1);
+    border-bottom: 1px solid rgba(235,235,235,1);
+    border-color: rgba(235,235,235,1);
+    margin: 10px 0;
+}
+
+.biz {
+    border-radius: 8px;
+}
+
+.biz:hover {
+    box-shadow: 0 0 10px #0000001a;
+}
+
+.allBizTiles {
+    color: black;
     display: flex;
     flex-direction: row;
     height: 271px;
-    color: black;
+    padding: 24px;
     text-decoration: none;
 }
 
@@ -17,6 +67,10 @@
 .bizRatingContainer {
     display: flex;
     margin: 10px 0;
+}
+
+.bizStarDisplay {
+    margin-right: 10px;
 }
 
 .bizReviewCountContainer {
@@ -47,4 +101,10 @@
 
 .bizCityContainer {
     margin: 12px 0;
+}
+
+.allBizTilesDivider {
+    background-color: rgba(235,235,235,1);
+    border-bottom: 1px solid rgba(235,235,235,1);
+    border-color: rgba(235,235,235,1);
 }

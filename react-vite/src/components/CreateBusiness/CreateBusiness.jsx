@@ -171,7 +171,7 @@ export default function CreateBusiness() {
                         </label>
                         <label htmlFor="zip_code">Zip code {errors.zip_code && <span>{errors.zip_code}</span>}
                             <input
-                                className='createInputs'
+                                className='createInputs numberInput'
                                 type="number"
                                 name="zip_code"
                                 value={zip_code}
@@ -213,14 +213,16 @@ export default function CreateBusiness() {
                 <h2>Phone Number</h2>{errors.phone && <span>{errors.phone}</span>}
                 <div id='phoneContainer'>
                     <div id='phoneIcon'>
-                        <svg width="24" height="24" class="icon_svg">
+                        <svg width="24" height="24" className="icon_svg">
                             <path d="M13.59 23.07A7 7 0 0 1 8.64 21L3 15.36a7 7 0 0 1 0-9.9l1.39-1.41a1 1 0 0 1 1.42 0l5 5a1 1 0 0 1 0 1.41 2.001 2.001 0 0 0 2.83 2.83 1 1 0 0 1 1.41 0l4.95 5a1 1 0 0 1 0 1.42L18.54 21a7 7 0 0 1-4.95 2.07ZM5.1 6.17l-.71.71a5 5 0 0 0 0 7.07l5.66 5.66a5 5 0 0 0 7.07 0l.71-.71-3.63-3.63a4 4 0 0 1-4.86-.61 4 4 0 0 1-.61-4.86L5.1 6.17Zm12.78 5.95a1 1 0 0 1-1-1 4 4 0 0 0-4-4 1 1 0 0 1 0-2 6 6 0 0 1 6 6 1 1 0 0 1-1 1Zm4.19 0a1 1 0 0 1-1-1 8.19 8.19 0 0 0-8.19-8.19 1 1 0 0 1 0-2c5.625.006 10.184 4.565 10.19 10.19a1 1 0 0 1-1 1Z"></path>
                         </svg>
                     </div>
                     <div>
                         <p id='phoneText'>What&apos;s the best number for customers to reach you at?</p>
                         <input
-                            type="number"
+                            type="text"
+                            inputMode='numeric'
+                            pattern='^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$'
                             value={phone} id="phoneInput"
                             onChange={handlePhoneChange}
                             required
@@ -544,10 +546,9 @@ export default function CreateBusiness() {
                                 <option value="Shopping">Shopping</option>
                                 <option value="Nightlife">Nightlife</option>
                                 <option value="ActiveLife">ActiveLife</option>
-                                <option value="Beauty&Spas">Beauty & Spas</option>
+                                <option value="Beauty & Spas">Beauty & Spas</option>
                                 <option value="Automotive">Automotive</option>
                                 <option value="HomeServices">HomeServices</option>
-                                <option value="Coffee&Tea">Coffee & Tea</option>
                                 <option value="Other">Other</option>
                         </select>
                     </div>

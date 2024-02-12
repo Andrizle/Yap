@@ -46,13 +46,13 @@ function ProfileButton() {
 
       {user ? (
         <div id="profileBtn">
-          <button onClick={toggleMenu}>
-            <i className="fas fa-user-circle" />
-          </button>
+          <div onClick={toggleMenu} id="profileIconContainer">
+            <i className="fas fa-user-circle" id="profileIcon"/>
+          </div>
           {showMenu && (
             <div className={"profile-dropdown"} ref={ulRef}>
-                <>
-                  <div>{user.username}</div>
+                <div className="profileDropdownContent">
+                  <div className="profileDropdownUsername">Hello, {user.username}</div>
                   <div>{user.email}</div>
                   <div>
                     <NavLink to='/business/current' onClick={() => closeMenu()}>Manage Businesses</NavLink>
@@ -61,7 +61,7 @@ function ProfileButton() {
                   <div>
                     <button onClick={logout}>Log Out</button>
                   </div>
-                </>
+                </div>
             </div>
           )}
         </div>

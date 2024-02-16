@@ -230,25 +230,25 @@ def seed_reviews():
     auto1 = Review (
         review = "Excellent service! They resolved my car's issue efficiently.",
         stars = 5,
-        business_id = 8,
+        business_id = 9,
         author_id = 1
     )
     auto2 = Review (
         review = "Professional mechanics and fair pricing. Happy with the quality of work.",
         stars = 4,
-        business_id = 8,
+        business_id = 9,
         author_id = 2
     )
     auto3 = Review (
         review = "Took my car in for maintenance. The staff was courteous and knowledgeable.",
         stars = 4,
-        business_id = 8,
+        business_id = 9,
         author_id = 3
     )
     auto4 = Review (
         review = "Had my brakes checked here. Quick service and good attention to detail.",
         stars = 3,
-        business_id = 8,
+        business_id = 9,
         author_id = 4
     )
 
@@ -260,25 +260,25 @@ def seed_reviews():
     city1 = Review(
         review = "Disappointed with the service. My car wasn't ready on time, and the staff seemed overwhelmed.",
         stars = 2,
-        business_id = 9,
+        business_id = 10,
         author_id = 2
     )
     city2 = Review(
         review = "Average experience overall. The prices were high, and the service was slow.",
         stars = 3,
-        business_id = 9,
+        business_id = 10,
         author_id = 3
     )
     city3 = Review(
         review = "Not impressed with the quality of work. Had to bring my car back for further repairs.",
         stars = 2,
-        business_id = 9,
+        business_id = 10,
         author_id = 4
     )
     city4 = Review(
         review = "Had issues with communication. It took several attempts to get updates on my car.",
         stars = 3,
-        business_id = 9,
+        business_id = 10,
         author_id = 5
     )
 
@@ -286,6 +286,248 @@ def seed_reviews():
     db.session.add(city2)
     db.session.add(city3)
     db.session.add(city4)
+
+    tire1 = Review (
+        review = "Had a great experience here. The staff was knowledgeable and helped me find the perfect tires for my car.",
+        stars = 5,
+        business_id = 8,
+        author_id = 1
+    )
+    tire2 = Review (
+        review = "Disappointed with the service. They didn't have the tires I needed in stock, and the wait time was long.",
+        stars = 2,
+        business_id = 8,
+        author_id = 3
+    )
+    tire3 = Review (
+        review = "Average experience. The prices were reasonable, but the staff seemed disorganized.",
+        stars = 3,
+        business_id = 8,
+        author_id = 4
+    )
+    tire4 = Review (
+        review = "Satisfied with the tire installation. Quick service and decent prices.",
+        stars = 4,
+        business_id = 8,
+        author_id = 5
+    )
+
+    db.session.add(tire1)
+    db.session.add(tire3)
+    db.session.add(tire2)
+    db.session.add(tire4)
+
+    #Nightlife
+
+    velvet1 = Review(
+        review = "Great atmosphere and excellent cocktails. Perfect spot for a night out with friends.",
+        stars = 5,
+        business_id = 11,
+        author_id = 5
+    )
+    velvet2 = Review(
+        review = "Friendly staff and crazy good vibes. Enjoyed the live music performance.",
+        stars = 4,
+        business_id = 11,
+        author_id = 2
+    )
+    velvet3 = Review(
+        review = "Average experience. The drinks were a bit overpriced for the quality.",
+        stars = 3,
+        business_id = 11,
+        author_id = 3
+    )
+    velvet4 = Review(
+        review = "Disappointed with the service. The wait time for drinks was too long.",
+        stars = 2,
+        business_id = 11,
+        author_id = 4
+    )
+
+    db.session.add(velvet1)
+    db.session.add(velvet2)
+    db.session.add(velvet3)
+    db.session.add(velvet4)
+
+    neon1 = Review(
+        review = "Amazing club with great music and energetic atmosphere. Had a blast!",
+        stars = 5,
+        business_id = 12,
+        author_id = 1
+    )
+    neon2 = Review(
+        review = "Had a fantastic time dancing the night away. The DJ played awesome tracks!",
+        stars = 5,
+        business_id = 12,
+        author_id = 5
+    )
+    neon3 = Review(
+        review = "Decent club, but the crowd was a bit rowdy. Drinks were reasonably priced.",
+        stars = 3,
+        business_id = 12,
+        author_id = 3
+    )
+    neon4 = Review(
+        review = "Average experience. The club was overcrowded, and the music was too loud.",
+        stars = 3,
+        business_id = 12,
+        author_id = 4
+    )
+
+    db.session.add(neon1)
+    db.session.add(neon2)
+    db.session.add(neon3)
+    db.session.add(neon4)
+
+    moonlight1 = Review(
+        review = "Lovely bar with a relaxing vibe. Enjoyed the outdoor seating and tasty cocktails.",
+        stars = 4,
+        business_id = 13,
+        author_id = 1
+    )
+    moonlight2 = Review(
+        review = "Great spot for a casual evening. The food was delicious, and the staff was friendly.",
+        stars = 4,
+        business_id = 13,
+        author_id = 2
+    )
+    moonlight3 = Review(
+        review = "Average experience. The service was slow, and the food portions were small for the price.",
+        stars = 3,
+        business_id = 13,
+        author_id = 5
+    )
+    moonlight4 = Review(
+        review = "Disappointed with the quality of food. The menu options were limited.",
+        stars = 2,
+        business_id = 13,
+        author_id = 4
+    )
+
+    db.session.add(moonlight1)
+    db.session.add(moonlight2)
+    db.session.add(moonlight3)
+    db.session.add(moonlight4)
+
+    fitZone1 = Review(
+        review = "Love this gym! Great equipment and friendly staff.",
+        stars = 5,
+        business_id = 14,
+        author_id = 3
+    )
+    fitZone2 = Review(
+        review = "Clean and spacious gym. The classes offered are fantastic.",
+        stars = 4,
+        business_id = 14,
+        author_id = 4
+    )
+    fitZone3 = Review(
+        review = "Decent gym, but could use more variety in equipment.",
+        stars = 3,
+        business_id = 14,
+        author_id = 5
+    )
+    fitZone4 = Review(
+        review = "Not satisfied with the cleanliness of the gym. Equipment maintenance is lacking.",
+        stars = 2,
+        business_id = 14,
+        author_id = 2
+    )
+
+    db.session.add(fitZone1)
+    db.session.add(fitZone2)
+    db.session.add(fitZone3)
+    db.session.add(fitZone4)
+
+    adventure1 = Review(
+        review = "Had an amazing experience trekking with this company. Highly recommended!",
+        stars = 5,
+        business_id = 15,
+        author_id = 1
+    )
+    adventure2 = Review(
+        review = "Professional guides and breathtaking views. A must-do adventure!",
+        stars = 5,
+        business_id = 15,
+        author_id = 3
+    )
+    adventure3 = Review(
+        review = "Enjoyed the trek, but the organization could be improved.",
+        stars = 3,
+        business_id = 15,
+        author_id = 4
+    )
+    adventure4 = Review(
+        review = "Disappointed with the lack of communication regarding the itinerary.",
+        stars = 2,
+        business_id = 15,
+        author_id = 5
+    )
+
+    db.session.add(adventure1)
+    db.session.add(adventure2)
+    db.session.add(adventure3)
+    db.session.add(adventure4)
+
+    glow1 = Review(
+        review = "Had a wonderful experience at Glow Beauty Spa! The staff was professional and attentive. Will definitely be returning.",
+        stars = 5,
+        business_id = 16,
+        author_id = 5
+    )
+    glow2 = Review(
+        review = "Amazing service! I got a facial and massage, and I left feeling rejuvenated. Highly recommend Glow Beauty Spa!",
+        stars = 5,
+        business_id = 16,
+        author_id = 2
+    )
+    glow3 = Review(
+        review = "Disappointed with my experience. The atmosphere was nice, but the quality of the service didn't meet my expectations.",
+        stars = 2,
+        business_id = 16,
+        author_id = 3
+    )
+    glow4 = Review(
+        review = "Decent service. The staff was friendly, but the prices were a bit steep for the quality of the treatments.",
+        stars = 3,
+        business_id = 16,
+        author_id = 4
+    )
+
+    db.session.add(glow1)
+    db.session.add(glow2)
+    db.session.add(glow3)
+    db.session.add(glow4)
+
+    tranquil1 = Review(
+        review = "Tranquil Serenity Salon is my go-to place for haircuts! The stylists are talented, and the atmosphere is relaxing.",
+        stars = 5,
+        business_id = 17,
+        author_id = 5
+    )
+    tranquil2 = Review(
+        review = "Had a great experience getting my nails done here. The salon was clean, and the staff was professional.",
+        stars = 4,
+        business_id = 17,
+        author_id = 4
+    )
+    tranquil3 = Review(
+        review = "Not impressed with the service. The stylist seemed rushed and didn't listen to what I wanted for my hair.",
+        stars = 2,
+        business_id = 17,
+        author_id = 3
+    )
+    tranquil4 = Review(
+        review = "Average experience. The salon was understaffed, and the wait time was longer than expected.",
+        stars = 3,
+        business_id = 17,
+        author_id = 1
+    )
+
+    db.session.add(tranquil1)
+    db.session.add(tranquil2)
+    db.session.add(tranquil3)
+    db.session.add(tranquil4)
 
     db.session.commit()
 

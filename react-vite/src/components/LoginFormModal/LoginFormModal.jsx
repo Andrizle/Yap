@@ -8,7 +8,6 @@ function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [cls, setCls] = useState(true)
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 

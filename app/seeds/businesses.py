@@ -4,6 +4,7 @@ from sqlalchemy.sql import text
 
 # Adds a demo business, you can add other businesses here if you want
 def seed_businesses():
+    #restaurants
     savor = Business(
           name = "Savor Bistro",
           category = "Restaurants",
@@ -87,6 +88,77 @@ def seed_businesses():
     db.session.add(mediterranean)
     db.session.add(green)
     db.session.add(flavors)
+
+    #Automotive
+    speed = Business(
+        name = "Speedy Wheels Auto Shop",
+        category = "Automotive",
+        phone = "+1 (555) 111-1111",
+        location = "789 Broadway Street, Cityville, State",
+        street_address = "789 Broadway Street",
+        country = "United States",
+        zip_code = 10005,
+        city = "Cityville",
+        state = "CA",
+        owner_id = 3
+    )
+    elite = Business(
+        name = "Elite Auto Services",
+        category = "Automotive",
+        phone = "+1 (555) 222-2222",
+        location = "456 Oak Street, Townsville, State",
+        street_address = "456 Oak Street",
+        country = "United States",
+        zip_code = 20010,
+        city = "Townsville",
+        state = "TX",
+        owner_id = 4
+    )
+    tire = Business(
+        name = "Tire Masters",
+        category = "Automotive",
+        phone = "+1 (555) 333-3333",
+        location = "123 Maple Avenue, Villagetown, State",
+        street_address = "123 Maple Avenue",
+        country = "United States",
+        zip_code = 30015,
+        city = "Villagetown",
+        state = "NY",
+        owner_id = 2
+    )
+    auto = Business(
+        name = "AutoTech Solutions",
+        category = "Automotive",
+        phone = "+1 (555) 444-4444",
+        location = "567 Pine Street, Hamletville, State",
+        street_address = "567 Pine Street",
+        country = "United States",
+        zip_code = 40020,
+        city = "Hamletville",
+        state = "FL",
+        owner_id = 5
+    )
+    city = Business(
+        name = "City Motors",
+        category = "Automotive",
+        phone = "+1 (555) 555-5555",
+        location = "901 Elm Street, Countryside, State",
+        street_address = "901 Elm Street",
+        country = "United States",
+        zip_code = 50025,
+        city = "Countryside",
+        state = "CA",
+        owner_id = 1
+    )
+
+    db.session.add(speed)
+    db.session.add(elite)
+    db.session.add(tire)
+    db.session.add(auto)
+    db.session.add(city)
+
+
+
     db.session.commit()
 
 

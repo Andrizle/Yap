@@ -4,6 +4,7 @@ from sqlalchemy.sql import text
 
 # Adds a demo business, you can add other businesses here if you want
 def seed_businesses():
+    #restaurants
     savor = Business(
           name = "Savor Bistro",
           category = "Restaurants",
@@ -87,6 +88,383 @@ def seed_businesses():
     db.session.add(mediterranean)
     db.session.add(green)
     db.session.add(flavors)
+
+    #Automotive
+    speed = Business(
+        name = "Speedy Wheels Auto Shop",
+        category = "Automotive",
+        price = '$$',
+        hours = "Mon - Fri : 10:00 AM - 7:00 PM",
+        phone = "+1 (555) 111-1111",
+        street_address = "789 Broadway Street",
+        country = "United States",
+        zip_code = 10005,
+        city = "Cityville",
+        state = "CA",
+        owner_id = 3
+    )
+    elite = Business(
+        name = "Elite Auto Services",
+        category = "Automotive",
+        price = '$$$',
+        hours = "Mon - Fri : 9:00 AM - 6:00 PM",
+        phone = "+1 (555) 222-2222",
+        street_address = "456 Oak Street",
+        country = "United States",
+        zip_code = 20010,
+        city = "Townsville",
+        state = "TX",
+        owner_id = 4
+    )
+    tire = Business(
+        name = "Tire Masters",
+        category = "Automotive",
+        price = '$$$',
+        hours = "Mon - Thurs : 8:00 AM - 5:00 PM",
+        phone = "+1 (555) 333-3333",
+        street_address = "123 Maple Avenue",
+        country = "United States",
+        zip_code = 30015,
+        city = "Villagetown",
+        state = "NY",
+        owner_id = 2
+    )
+    auto = Business(
+        name = "AutoTech Solutions",
+        category = "Automotive",
+        price = '$$$',
+        hours = "Mon - Thurs : 7:00 AM - 4:00 PM",
+        phone = "+1 (555) 444-4444",
+        street_address = "567 Pine Street",
+        country = "United States",
+        zip_code = 40020,
+        city = "Hamletville",
+        state = "FL",
+        owner_id = 5
+    )
+    city = Business(
+        name = "City Motors",
+        category = "Automotive",
+        price = '$$$$',
+        hours = "Mon - Sat : 11:00 AM - 8:00 PM",
+        phone = "+1 (555) 555-5555",
+        street_address = "901 Elm Street",
+        country = "United States",
+        zip_code = 50025,
+        city = "Countryside",
+        state = "CA",
+        owner_id = 1
+    )
+
+    db.session.add(speed)
+    db.session.add(elite)
+    db.session.add(tire)
+    db.session.add(auto)
+    db.session.add(city)
+
+    #Nightlife
+
+    velvet = Business(
+        name = "The Velvet Lounge",
+        category = "Nightlife",
+        price = '$$$$',
+        hours = "Sun - Sat : 5:30 PM - 12:30 AM",
+        phone = "+1 (555) 123-4567",
+        street_address = "123 Main Street",
+        country = "United States",
+        zip_code = 10001,
+        city = "Cityville",
+        state = "CA",
+        owner_id = 1
+    )
+    neon = Business(
+        name = "Neon Nights Club",
+        category = "Nightlife",
+        price = '$$',
+        hours = "Fri - Sun : 9:00 PM - 4:00 AM",
+        phone = "+1 (555) 987-6543",
+        street_address = "456 Broadway Avenue",
+        country = "United States",
+        zip_code = 20010,
+        city = "Townsville",
+        state = "TX",
+        owner_id = 2
+    )
+    moonlight = Business(
+        name = "Moonlight Bar & Grill",
+        category = "Nightlife",
+        price = '$$$',
+        hours = "Tues - Sun : 11:00 AM - 11:00 PM",
+        phone = "+1 (555) 567-8901",
+        street_address = "789 Ocean Drive",
+        country = "United States",
+        zip_code = 30015,
+        city = "Beachtown",
+        state = "FL",
+        owner_id = 3
+    )
+
+    db.session.add(velvet)
+    db.session.add(neon)
+    db.session.add(moonlight)
+
+    #Active Life
+
+    fitZone = Business(
+        name = "FitZone Gym",
+        category = "Active Life",
+        price = '$$$',
+        hours = "Sun - Sat : 6:00 AM - 10:00 PM",
+        phone = "+1 (555) 123-4567",
+        street_address = "789 Fitness Avenue",
+        country = "United States",
+        zip_code = 10010,
+        city = "Cityville",
+        state = "CA",
+        owner_id = 1
+    )
+    adventure = Business(
+        name = "Adventure Trekking Co.",
+        category = "Active Life",
+        price = '$$',
+        hours = "Mon - Thurs : 11:00 AM - 10:00 PM",
+        phone = "+1 (555) 987-6543",
+        street_address = "456 Adventure Trail",
+        country = "United States",
+        zip_code = 20020,
+        city = "Townsville",
+        state = "TX",
+        owner_id = 2
+    )
+
+    db.session.add(fitZone)
+    db.session.add(adventure)
+
+    #Beauty & Spas
+
+    glow = Business(
+        name = "Glow Beauty Spa",
+        category = "Beauty & Spas",
+        price = '$$$$',
+        hours = "Sat - Fri : 11:00 AM - 8:00 PM",
+        phone = "+1 (555) 111-2222",
+        street_address = "789 Radiant Avenue",
+        country = "United States",
+        zip_code = 10010,
+        city = "Cityville",
+        state = "CA",
+        owner_id = 1
+    )
+    tranquil = Business(
+        name = "Tranquil Serenity Salon",
+        category = "Beauty & Spas",
+        price = '$$$',
+        hours = "Fri - Wed : 7:30 AM - 8:30 PM",
+        phone = "+1 (555) 333-4444",
+        street_address = "456 Blissful Street",
+        country = "United States",
+        zip_code = 20020,
+        city = "Townsville",
+        state = "TX",
+        owner_id = 2
+    )
+
+    db.session.add(glow)
+    db.session.add(tranquil)
+
+    #Shopping
+    fashion = Business(
+        name = "Fashion Forward Boutique",
+        category = "Shopping",
+        price = '$$$',
+        hours = "Mon - Fri : 10:00 AM - 7:00 PM",
+        phone = "+1 (555) 111-2222",
+        street_address = "789 Trendy Street",
+        country = "United States",
+        zip_code = 10010,
+        city = "Cityville",
+        state = "CA",
+        owner_id = 1
+    )
+    tech = Business(
+        name = "Tech Haven Electronics",
+        category = "Shopping",
+        price = '$$$$',
+        hours = "Mon - Fri : 9:00 AM - 6:00 PM",
+        phone = "+1 (555) 333-4444",
+        street_address = "456 Tech Street",
+        country = "United States",
+        zip_code = 20020,
+        city = "Townsville",
+        state = "TX",
+        owner_id = 2
+    )
+    greenT = Business(
+        name = "Green Thumb Garden Center",
+        category = "Shopping",
+        price = '$$',
+        hours = "Mon - Fri : 9:00 AM - 5:00 PM",
+        phone = "+1 (555) 555-6666",
+        street_address = "123 Garden Avenue",
+        country = "United States",
+        zip_code = 30030,
+        city = "Greenville",
+        state = "FL",
+        owner_id = 3
+    )
+    bookworm = Business(
+        name = "Bookworm Bookstore",
+        category = "Shopping",
+        price = '$$$$',
+        hours = "Mon - Fri : 9:00 AM - 5:00 PM",
+        phone = "+1 (555) 777-8888",
+        street_address = "789 Literary Lane",
+        country = "United States",
+        zip_code = 40040,
+        city = "Booktown",
+        state = "NY",
+        owner_id = 4
+    )
+    home = Business(
+        name = "Home Harmony Furniture",
+        category = "Shopping",
+        price = '$$$',
+        hours = "Mon - Fri : 10:00 AM - 8:00 PM",
+        phone = "+1 (555) 999-0000",
+        street_address = "456 Comfort Street",
+        country = "United States",
+        zip_code = 50050,
+        city = "Homestead",
+        state = "CA",
+        owner_id = 5
+    )
+
+    db.session.add(fashion)
+    db.session.add(tech)
+    db.session.add(greenT)
+    db.session.add(bookworm)
+    db.session.add(home)
+
+    #Home Services
+
+    handy = Business(
+        name = "Handy Home Repairs",
+        category = "Home Services",
+        price = '$',
+        hours = "Mon - Fri : 6:00 AM - 5:00 PM",
+        phone = "+1 (555) 111-2222",
+        street_address = "789 Fixit Street",
+        country = "United States",
+        zip_code = 10010,
+        city = "Cityville",
+        state = "CA",
+        owner_id = 1
+    )
+    sparkle = Business(
+        name = "Sparkle Cleaners",
+        category = "Home Services",
+        price = '$$',
+        hours = "Mon - Fri : 7:00 AM - 4:00 PM",
+        phone = "+1 (555) 333-4444",
+        street_address = "456 Shine Avenue",
+        country = "United States",
+        zip_code = 20020,
+        city = "Townsville",
+        state = "TX",
+        owner_id = 2
+    )
+    land = Business(
+        name = "Green Thumb Landscaping",
+        category = "Home Services",
+        price = '$$$',
+        hours = "Mon - Fri : 5:00 AM - 3:00 PM",
+        phone = "+1 (555) 555-6666",
+        street_address = "123 Garden Avenue",
+        country = "United States",
+        zip_code = 30030,
+        city = "Greenville",
+        state = "FL",
+        owner_id = 3
+    )
+
+    db.session.add(handy)
+    db.session.add(sparkle)
+    db.session.add(land)
+
+    #Other
+
+    cozy = Business(
+        name = "Cozy Corner Cafe",
+        category = "Other",
+        price = '$$',
+        hours = "Sun - Sat : 6:00 AM - 2:00 PM",
+        phone = "+1 (555) 111-2222",
+        street_address = "789 Brew Avenue",
+        country = "United States",
+        zip_code = 10010,
+        city = "Cityville",
+        state = "CA",
+        owner_id = 1
+    )
+    paws = Business(
+        name = "Paws & Whiskers Pet Store",
+        category = "Other",
+        price = '$$$',
+        hours = "Wed - Sun : 9:00 AM - 5:00 PM",
+        phone = "+1 (555) 333-4444",
+        street_address = "456 Pet Street",
+        country = "United States",
+        zip_code = 20020,
+        city = "Townsville",
+        state = "TX",
+        owner_id = 2
+    )
+    dream = Business(
+        name = "Dream Home Realty",
+        category = "Other",
+        price = '$$',
+        hours = "Mon - Fri : 9:00 AM - 5:00 PM",
+        phone = "+1 (555) 555-6666",
+        street_address = "123 Dream Avenue",
+        country = "United States",
+        zip_code = 30030,
+        city = "Greenville",
+        state = "FL",
+        owner_id = 3
+    )
+    sunset = Business(
+        name = "Sunset View Hotel",
+        category = "Other",
+        price = '$$',
+        hours = "Sun - Sat : 12:00 AM - 12:00 AM",
+        phone = "+1 (555) 777-8888",
+        street_address = "789 Seaside Drive",
+        country = "United States",
+        zip_code = 40040,
+        city = "Beachtown",
+        state = "SC",
+        owner_id = 4
+    )
+    healthy = Business(
+        name = "Healthy Heart Clinic",
+        category = "Other",
+        price = '$$$$',
+        hours = "Mon - Fri : 8:00 AM - 4:00 PM",
+        phone = "+1 (555) 999-0000",
+        street_address = "456 Wellness Avenue",
+        country = "United States",
+        zip_code = 50050,
+        city = "Healthville",
+        state = "CA",
+        owner_id = 5
+    )
+
+    db.session.add(cozy)
+    db.session.add(paws)
+    db.session.add(dream)
+    db.session.add(sunset)
+    db.session.add(healthy)
+
     db.session.commit()
 
 

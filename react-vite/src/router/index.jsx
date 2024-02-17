@@ -8,6 +8,7 @@ import UpdateBusiness from '../components/UpdateBusiness/UpdateBusiness';
 import MyBusinesses from '../components/Businesses/MyBusinesses';
 import SingleBusiness from '../components/Businesses/SingleBusiness';
 import MyReviews from '../components/MyReviews';
+import Search from '../components/Search/Search';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignupFormPage />,
+      },
+      {
+        path: 'search',
+        element: <Search />
       },
       {
         path: "/review/current",

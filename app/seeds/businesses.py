@@ -311,6 +311,110 @@ def seed_businesses():
     db.session.add(bookworm)
     db.session.add(home)
 
+    #Home Services
+
+    handy = Business(
+        name = "Handy Home Repairs",
+        category = "Home Services",
+        phone = "+1 (555) 111-2222",
+        street_address = "789 Fixit Street",
+        country = "United States",
+        zip_code = 10010,
+        city = "Cityville",
+        state = "CA",
+        owner_id = 1
+    )
+    sparkle = Business(
+        name = "Sparkle Cleaners",
+        category = "Home Services",
+        phone = "+1 (555) 333-4444",
+        street_address = "456 Shine Avenue",
+        country = "United States",
+        zip_code = 20020,
+        city = "Townsville",
+        state = "TX",
+        owner_id = 2
+    )
+    land = Business(
+        name = "Green Thumb Landscaping",
+        category = "Home Services",
+        phone = "+1 (555) 555-6666",
+        street_address = "123 Garden Avenue",
+        country = "United States",
+        zip_code = 30030,
+        city = "Greenville",
+        state = "FL",
+        owner_id = 3
+    )
+
+    db.session.add(handy)
+    db.session.add(sparkle)
+    db.session.add(land)
+
+    #Other
+
+    cozy = Business(
+        name = "Cozy Corner Cafe",
+        category = "Other",
+        phone = "+1 (555) 111-2222",
+        street_address = "789 Brew Avenue",
+        country = "United States",
+        zip_code = 10010,
+        city = "Cityville",
+        state = "CA",
+        owner_id = 1
+    )
+    paws = Business(
+        name = "Paws & Whiskers Pet Store",
+        category = "Other",
+        phone = "+1 (555) 333-4444",
+        street_address = "456 Pet Street",
+        country = "United States",
+        zip_code = 20020,
+        city = "Townsville",
+        state = "TX",
+        owner_id = 2
+    )
+    dream = Business(
+        name = "Dream Home Realty",
+        category = "Other",
+        phone = "+1 (555) 555-6666",
+        street_address = "123 Dream Avenue",
+        country = "United States",
+        zip_code = 30030,
+        city = "Greenville",
+        state = "FL",
+        owner_id = 3
+    )
+    sunset = Business(
+        name = "Sunset View Hotel",
+        category = "Other",
+        phone = "+1 (555) 777-8888",
+        street_address = "789 Seaside Drive",
+        country = "United States",
+        zip_code = 40040,
+        city = "Beachtown",
+        state = "NY",
+        owner_id = 4
+    )
+    healthy = Business(
+        name = "Healthy Heart Clinic",
+        category = "Other",
+        phone = "+1 (555) 999-0000",
+        street_address = "456 Wellness Avenue",
+        country = "United States",
+        zip_code = 50050,
+        city = "Healthville",
+        state = "CA",
+        owner_id = 5
+    )
+
+    db.session.add(cozy)
+    db.session.add(paws)
+    db.session.add(dream)
+    db.session.add(sunset)
+    db.session.add(healthy)
+
     db.session.commit()
 
 

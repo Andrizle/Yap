@@ -28,7 +28,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'search',
-        element: <Search />
+        children:[
+        {
+          path: ":category",
+          element: <Search />
+        }]
       },
       {
         path: "/review/current",

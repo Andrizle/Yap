@@ -20,6 +20,15 @@ def single_business(id):
     else:
         return { 'errors': {'message': 'Business Not Found'}}, 404
 
+#Get all businesses filtered by category
+@business_routes.route('/<cat>')
+def cat_businesses(cat):
+
+    if cat in ['Restaurants', 'Shopping', 'Nightlife', 'Active Life', 'Beauty & Spas', 'Automotive', 'Home Services', 'Other']:
+        businesses= Business.query.filter(Business.category == cat).all()
+        return { 'businesses': [business.to_dict() for business in businesses]}
+    else:
+        return { 'errors': {'message': 'Category not valid'}}
 
 #Get all businesses owned by the currently logged in user
 @business_routes.route('/current')

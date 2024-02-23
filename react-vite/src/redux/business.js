@@ -1,5 +1,6 @@
 //types - every variable must be unique
 const LOAD_BUSINESSES = 'businesses/getBusinesses'
+const LOAD_CAT_BUSINESSES = 'businesses/getCatBusinesses'
 const LOAD_OWNED_BUSINESSES = 'businesses/getOwnedBusinesses'
 const LOAD_BUSINESS = 'businesses/getBusiness'
 
@@ -14,6 +15,11 @@ const loadBusinesses = businesses => ({
     type: LOAD_BUSINESSES,
     businesses
 });
+
+const loadCatBusinesses = businesses => ({
+    type: LOAD_CAT_BUSINESSES,
+    businesses
+})
 
 const loadOwnedBusinesses = businesses => ({
     type: LOAD_OWNED_BUSINESSES,
@@ -52,6 +58,18 @@ export const thunkFetchBusinesses = () => async dispatch => {
         return businesses
     }
 };
+
+export const thunkFetchCatBusinesses = (cat) => async dispatch => {
+    const response = await fetch(`/api/businesses/${cat}`)
+
+    if (response.ok) {
+        const businesses = await response.json();
+
+        dispatch(loadCatBusinesses(businesses.businesses))
+
+        return businesses
+    }
+}
 
 export const thunkFetchBusiness =  businessId => async dispatch => {
     const response = await fetch(`/api/businesses/${businessId}`)
@@ -128,6 +146,7 @@ export const thunkDeleteBusiness = businessId => async dispatch => {
 const initialState = {
     allBusinesses: {},
     ownedBusinesses: {},
+    catBusinesses: {},
 }
 
 const businessReducer = (state = initialState, action) => {
@@ -142,6 +161,16 @@ const businessReducer = (state = initialState, action) => {
             //initialize new state, spread in old state, and replace old allBusinesses with newAllBusinesses
             const newState = {...state, allBusinesses: newAllBusinesses}
             return newState;
+        }
+        case LOAD_CAT_BUSINESSES: {
+            const newCatBusinesses = {};
+
+            action.businesses.forEach(business => {
+                newCatBusinesses[business.id] = business
+            });
+
+            const newState = {...state, catBusinesses: newCatBusinesses}
+            return newState
         }
         case LOAD_OWNED_BUSINESSES: {
             //initialize new owned businesses state

@@ -22,15 +22,16 @@ function DeleteReviewModal({review}) {
       <h1 id='deleteHeader'>Confirm Delete</h1>
       <div className='deleteModalContent'>
         <p id='deleteConfirmText'>Are you sure you want to delete this review?</p>
-        <button className='bigButton' id='deleteButton'
-        onClick={handleClick}
-        >Yes (Delete Review)</button>
-        <button
-        className='bigButton' id='dontDeleteButton'
-        onClick={closeModal}
-        >No (Keep Review)</button>
+        <div className='deleteModalButtonsContainer'>
+          <button
+          className='modalBtn' id='dontDeleteButton'
+          onClick={closeModal}
+          >Keep Review</button>
+          <button className='modalBtn redBtn' id='deleteButton'
+          onClick={handleClick}
+          >Remove Review</button>
+        </div>
       </div>
-
     </div>
   );
 }

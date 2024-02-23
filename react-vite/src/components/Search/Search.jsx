@@ -1,18 +1,50 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { thunkFetchBusinesses } from '../../redux/business';
-import { Link } from 'react-router-dom';
+import { thunkFetchCatBusinesses } from '../../redux/business';
+import { Link, useParams } from 'react-router-dom';
 import { RatingDisplay } from '../Businesses';
 
 export default function Search () {
-    const businesses = Object.values(useSelector(state => state.business['allBusinesses']))
+    const businesses = Object.values(useSelector(state => state.business.catBusinesses))
     const dispatch = useDispatch();
+    const {category} = useParams();
+    const [catParam, setCatParam] = useState('')
 
     useEffect(() => {
-        dispatch(thunkFetchBusinesses())
-    }, [dispatch])
+        if (category === 'restaurants') {
+            setCatParam('Restaurants')
+        }
+        if (category === 'shopping') {
+            setCatParam('Shopping')
+        }
+        if (category === 'nightlife') {
+            setCatParam('Nightlife')
+        }
+        if (category === 'activeLife') {
+            setCatParam('Active Life')
+        }
+        if (category === 'beauty&spas') {
+            setCatParam('Beauty & Spas')
+        }
+        if (category === 'automotive') {
+            setCatParam('Automotive')
+        }
+        if (category === 'homeServices') {
+            setCatParam('Home Services')
+        }
+        if (category === 'other') {
+            setCatParam('Other')
+        }
 
-    if (!businesses) return null;
+    }, [category])
+
+    useEffect(() => {
+        if (catParam) {
+            dispatch(thunkFetchCatBusinesses(catParam))
+        }
+    }, [dispatch, catParam, category])
+
+    if (businesses[0].category != catParam) return null;
 
     return (
         <div>

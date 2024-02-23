@@ -16,6 +16,7 @@ export default function SingleBusiness() {
     const business = useSelector(state => state.business.allBusinesses[businessId])
     const reviews = Object.values(useSelector(state => state.reviews.business))
 
+
     useEffect(() => {
         dispatch(thunkFetchBusiness(businessId))
         dispatch(thunkFetchReviews(businessId))

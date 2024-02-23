@@ -44,7 +44,7 @@ export default function Search () {
         }
     }, [dispatch, catParam, category])
 
-    if (businesses[0].category != catParam) return null;
+    if (businesses[0]?.category != catParam) return null;
 
     return (
         <div>

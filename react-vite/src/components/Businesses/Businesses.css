@@ -1,5 +1,6 @@
 #bizPage {
-    padding: 0 40px;
+    margin: 0 20%;
+    width: 60%;
 }
 
 #catContainer {
@@ -34,6 +35,10 @@
     min-width: 87px;
     padding: 48px 0;
     width: 90%;
+}
+
+.catTiles:hover {
+    box-shadow: 0 0 10px #0000001a;
 }
 
 #categoryDivider {

@@ -8,14 +8,20 @@
 }
 
 .myBizTiles {
+    border: solid 1px rgba(235,235,235,1);
+    border-radius: 10px;
     padding: 15px;
-    width: 300px;
+    margin: 15px;
+    width: 90%;
 }
 
 .bizTiles {
     color: black;
+    cursor: pointer;
+    height: 100%;
     padding: 15px;
     text-decoration: none;
+    width: 100%;
 }
 
 #myBizButtons {

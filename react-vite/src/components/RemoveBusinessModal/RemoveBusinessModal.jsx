@@ -16,14 +16,16 @@ function RemoveBusinessModal({businessId}) {
     <div id='deleteModal'>
       <h1 id='deleteHeader'>Confirm Delete</h1>
       <div className='deleteModalContent'>
-        <p id='deleteConfirmText'>Are you sure you want to remove your business?</p>
-        <button className='bigButton' id='deleteButton'
-        onClick={handleClick}
-        >Yes (Remove Business)</button>
-        <button
-        className='bigButton' id='dontDeleteButton'
-        onClick={closeModal}
-        >No (Keep Business)</button>
+        <p id='deleteConfirmText'>Are you sure you want to delete this business?</p>
+        <div className='deleteModalButtonsContainer'>
+          <button
+          className='modalBtn' id='dontDeleteButton'
+          onClick={closeModal}
+          >Keep Business</button>
+          <button className='modalBtn redBtn' id='deleteButton'
+          onClick={handleClick}
+          >Remove Business</button>
+        </div>
       </div>
     </div>
   );

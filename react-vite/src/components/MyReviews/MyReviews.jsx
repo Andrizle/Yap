@@ -34,11 +34,11 @@ export default function MyReviews() {
                     </div>
                     <div className='myReviewButtonsContainer'>
                             <OpenModalButton
-                                className='redBtn'
                                 buttonText='Update'
                                 modalComponent={<UpdateReviewModal reviewId={review.id} business={businesses[review.business_id]}/>}
                             />
                         <OpenModalMenuItem
+                            className='redBtn'
                             itemText="Delete"
                             modalComponent={<DeleteReviewModal review={review} />}
                         />

@@ -26,7 +26,7 @@ def review_images(id):
 #Post an image to a review and business by review ID
 @review_routes.route('/<int:id>/images', methods=['POST'])
 @login_required
-def post_review_image():
+def post_review_image(id):
     review = Review.query.get(id)
     business = Business.query.get(review.business_id)
     form = ImageForm()

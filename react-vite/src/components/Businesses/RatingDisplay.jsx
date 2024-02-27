@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const RatingDisplay = ({ stars, onChange, type }) => {
+const RatingDisplay = ({ stars, type }) => {
   const [activeRating, setActiveRating] = useState(stars)
 
   useEffect(() => {

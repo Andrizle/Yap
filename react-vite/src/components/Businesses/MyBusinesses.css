@@ -24,6 +24,11 @@
     width: 100%;
 }
 
+.bizImages {
+    border-radius: 7px;
+    width: 100%;
+}
+
 #myBizButtons {
     display: flex;
 }

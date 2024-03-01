@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Business, Review, Image, db
 from app.forms import BusinessForm, ReviewForm, ImageForm
+from app.api.aws_helpers import (upload_file_to_s3, get_unique_filename, remove_file_from_s3)
 
 business_routes = Blueprint('businesses', __name__)
 
@@ -20,15 +21,6 @@ def single_business(id):
     else:
         return { 'errors': {'message': 'Business Not Found'}}, 404
 
-#Get all businesses filtered by category
-@business_routes.route('/<cat>')
-def cat_businesses(cat):
-
-    if cat in ['Restaurants', 'Shopping', 'Nightlife', 'Active Life', 'Beauty & Spas', 'Automotive', 'Home Services', 'Other']:
-        businesses= Business.query.filter(Business.category == cat).all()
-        return { 'businesses': [business.to_dict() for business in businesses]}
-    else:
-        return { 'errors': {'message': 'Category not valid'}}
 
 #Get all businesses owned by the currently logged in user
 @business_routes.route('/current')
@@ -53,8 +45,6 @@ def business_reviews(id):
     else:
         return {'reviews': []}
 
-
-
 #Get all images for a business by business ID
 @business_routes.route('/<int:id>/images')
 def business_images(id):
@@ -65,8 +55,6 @@ def business_images(id):
     else:
         return {'errors': {'message': "Business Not Found"}}, 404
 
-
-
 # Create New Business
 @business_routes.route('/new', methods=['POST'])
 @login_required
@@ -75,11 +63,23 @@ def create_business():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = current_user.to_dict()
+        image = form.data['icon']
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print(upload)
+
+        if 'url' not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when you tried to upload
+        # so you send back that error message (and you printed it above)
+            return {'errors': {'message': 'error with upload'}}, 401
+
+        url = upload['url']
 
         business = Business(
             owner_id = user['id'],
             name = form.data["name"],
-            icon = form.data["icon"],
+            icon = url,
             category = form.data["category"],
             price = form.data["price"],
             review_count = form.data['rating'],
@@ -92,13 +92,23 @@ def create_business():
             city = form.data["city"],
             state = form.data["state"],
             hours = form.data["hours"],
-            )
+        )
 
         db.session.add(business)
         db.session.commit()
 
         return business.to_dict()
     return {'errors': form.errors}, 400
+
+#Get all businesses filtered by category
+@business_routes.route('/<cat>')
+def cat_businesses(cat):
+
+    if cat in ['Restaurants', 'Shopping', 'Nightlife', 'Active Life', 'Beauty & Spas', 'Automotive', 'Home Services', 'Other']:
+        businesses= Business.query.filter(Business.category == cat).all()
+        return { 'businesses': [business.to_dict() for business in businesses]}
+    else:
+        return { 'errors': {'message': 'Category not valid'}}
 
 #Post a review to a business by business ID
 @business_routes.route('/<int:id>/reviews', methods=['POST'])

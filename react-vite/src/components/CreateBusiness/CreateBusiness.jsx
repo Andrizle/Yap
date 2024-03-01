@@ -32,7 +32,6 @@ export default function CreateBusiness() {
     const navigate = useNavigate();
     const currentUser = useSelector(state => state.session.user)
     const [name, setName] = useState("")
-    const [icon, setIcon] = useState("")
     const [category, setCategory] = useState("")
     const [price, setPrice] = useState("")
     const [phone, setPhone] = useState("")
@@ -43,6 +42,9 @@ export default function CreateBusiness() {
     const [zip_code, setZip_code] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
+
+    const [imageLoading, setImageLoading] = useState(false);
+    const [icon, setIcon] = useState(null)
 
     //state variables regarding the hours of operation section
     const [hours, setHours] = useState('')
@@ -83,30 +85,33 @@ export default function CreateBusiness() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const formData = new FormData();
+
+        formData.append("icon", icon)
+        formData.append("owner_id", currentUser.id)
+        formData.append("name", name)
+        formData.append("category", category)
+        formData.append("price", price)
+        formData.append("phone", phone)
+        formData.append("street_address", street_address)
+        formData.append("suite_unit", suite_unit)
+        formData.append("country", country)
+        formData.append("zip_code", zip_code)
+        formData.append("city", city)
+        formData.append("state", state)
+        formData.append("hours", hours)
+
+        setImageLoading(true);
 
 
-        const backendResponse = await dispatch(thunkCreateBusiness({
-            owner_id: currentUser.id,
-            name,
-            category,
-            price,
-            phone,
-            street_address,
-            suite_unit,
-            country,
-            zip_code,
-            city,
-            state,
-            hours,
-            // is_open_now
-        }))
+        const backendResponse = await dispatch(thunkCreateBusiness(formData))
         .catch(async res => {
             console.log(res)
-            setErrors(res)});
+            return setErrors(res)});
 
-        if (!backendResponse?.errors) {
-            console.log(backendResponse)
-            navigate(`/business/current`)
+        if (backendResponse && !backendResponse.errors) {
+            console.log('in navigation block ',backendResponse)
+            navigate(`/`)
         }
 
     }
@@ -116,7 +121,7 @@ export default function CreateBusiness() {
 
         <div id='addBusinessContainer'>
             <h1>Add A New Business Listing</h1>
-            <form onSubmit={handleSubmit} id='addBusinessForm'>
+            <form onSubmit={handleSubmit} encType="multipart/form-data" id='addBusinessForm'>
                 <h2>What is the Name of your Business?</h2>
                 <div id='bizNameContainer'>
                     <div className='bizNameIcon'>
@@ -130,6 +135,25 @@ export default function CreateBusiness() {
                             name="name"
                             value={name}
                             onChange={e => setName(e.target.value)}
+                            required
+                        />
+                    </div>
+                </div>
+                <div className='createDividers'></div>
+                <h2>Add a Preview Photo</h2>
+                <div id='bizNameContainer'>
+                    <div className='bizNameIcon'>
+                        <img className="" height="40" width="40" src="https://s3-media0.fl.yelpcdn.com/assets/public/40x40_add_photos_v2.yji-b3ffe3d530062cb147cb.svg"/>
+                    </div>
+                    <div id='bizNameInputContainer'>
+                        <label htmlFor="photo">Photos are one of the biggest factors consumers use to evaluate
+                        a business. Make sure your photo shows your business at its best. {errors.name && <span>{errors.name}</span>}</label>
+                        <input
+                            className='createInputs'
+                            type="file"
+                            name="photo"
+                            accept='image/*'
+                            onChange={e => setIcon(e.target.files[0])}
                             required
                         />
                     </div>
@@ -545,7 +569,7 @@ export default function CreateBusiness() {
                                 <option value="Restaurants">Restaurants</option>
                                 <option value="Shopping">Shopping</option>
                                 <option value="Nightlife">Nightlife</option>
-                                <option value="Active Life">ActiveLife</option>
+                                <option value="Active Life">Active Life</option>
                                 <option value="Beauty & Spas">Beauty & Spas</option>
                                 <option value="Automotive">Automotive</option>
                                 <option value="Home Services">HomeServices</option>
@@ -573,6 +597,7 @@ export default function CreateBusiness() {
                 <div id='addBusinessBtn'>
                     <button type='submit'
                     disabled={!validPhone}>Post Business</button>
+                    {(imageLoading)&& <p>Loading...</p>}
                 </div>
             </form>
         </div>

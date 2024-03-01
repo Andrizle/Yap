@@ -98,8 +98,7 @@ export const thunkFetchMyBusinesses = () => async dispatch => {
 export const thunkCreateBusiness = business => async dispatch => {
     const response = await fetch('/api/businesses/new', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(business)
+        body:business
     })
 
     if (response.ok) {
@@ -107,10 +106,10 @@ export const thunkCreateBusiness = business => async dispatch => {
 
         dispatch(receiveBusiness(business))
 
-        return business
     } else {
-        console.log('in thunk create error handling', response)
+        console.log('There was an error making your post!', await response.json())
     }
+    return business
 }
 
 export const thunkEditBusiness = (businessId, business) => async dispatch => {

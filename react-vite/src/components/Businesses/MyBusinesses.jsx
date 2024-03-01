@@ -30,8 +30,8 @@ function MyBusinesses() {
                 {businesses.length ? businesses.map(business =>
                     <div key={business.id} className='myBizTiles'>
                         <Link to={`/business/${business.id}`} className='bizTiles' key={business.id}>
-                            <div>
-                                <img src={business.icon} alt="" />
+                            <div className='myBizImgContainer'>
+                                <img src={business.icon} className='bizImages' />
                             </div>
                             <div className='bizDetailsContainer'>
                                 <h2>

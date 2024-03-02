@@ -36,6 +36,22 @@ input::-webkit-inner-spin-button {
     flex-direction: column;
 }
 
+#dropZone {
+    cursor: pointer;
+}
+
+.uploadImgPreviewsContainer {
+    display: flex;
+    flex-flow: row;
+    width: 100px;
+}
+
+.uploadImgPreviews {
+    border-radius: 16px;
+    margin: 5px;
+    max-width: 100%;
+}
+
 .createInputs {
     margin: 10px 0;
     width: 275px;

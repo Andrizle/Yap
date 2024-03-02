@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { thunkCreateBusiness } from '../../redux/business';
+import Dropzone from 'react-dropzone';
 import './CreateBusiness.css'
 // import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 // import HoursOfOperation from '../HourOfOperationModal/HoursOfOperation';
@@ -43,8 +44,10 @@ export default function CreateBusiness() {
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
 
+    //images
     const [imageLoading, setImageLoading] = useState(false);
-    const [icon, setIcon] = useState(null)
+    const [icon, setIcon] = useState(null);
+    const [droppedFiles, setDroppedFiles] = useState([])
 
     //state variables regarding the hours of operation section
     const [hours, setHours] = useState('')
@@ -148,14 +151,33 @@ export default function CreateBusiness() {
                     <div id='bizNameInputContainer'>
                         <label htmlFor="photo">Photos are one of the biggest factors consumers use to evaluate
                         a business. Make sure your photo shows your business at its best. {errors.name && <span>{errors.name}</span>}</label>
-                        <input
+                        <Dropzone id='dropZone' onDrop={acceptedFiles => setDroppedFiles([...droppedFiles, ...acceptedFiles])}>
+                          {({getRootProps, getInputProps}) => (
+                            <section>
+                                <div className='uploadImgPreviewsContainer'>
+                                {droppedFiles && droppedFiles.map(file => {
+                                    const newImageURL = URL.createObjectURL(file)
+                                    return (
+                                            <img src={newImageURL} className='uploadImgPreviews' />
+                                            )
+                                        })}
+                                </div>
+                              <div {...getRootProps()}>
+                                <input {...getInputProps()} />
+                                <p>Drag 'n' drop some files here, or click to select files</p>
+                              </div>
+                            </section>
+                          )}
+                        </Dropzone>
+                        {/* <input
                             className='createInputs'
                             type="file"
                             name="photo"
                             accept='image/*'
-                            onChange={e => setIcon(e.target.files[0])}
+                            onChange={e => {setIcon(e.target.files[0]); console.log(e, e.target.files)}}
                             required
-                        />
+                            multiple
+                        /> */}
                     </div>
                 </div>
                 <div className='createDividers'></div>

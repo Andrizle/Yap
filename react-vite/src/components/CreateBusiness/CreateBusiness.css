@@ -52,6 +52,53 @@ input::-webkit-inner-spin-button {
     max-width: 100%;
 }
 
+.file-inputs-container {
+    position: relative; /* This allows the elements within it to be positioned without taking this element out of the document flow. As it's parent is NOT positioned, it only effects the children. */
+    margin-bottom: 32px;
+  }
+
+  /*
+    As the htmlFor property requires a unique id, here we simply add a 2 to the end of the original id name. Unless you are allowing multiple images, this is not actually necessary.
+    One file input could be named anything that you desire. Just note that if you have multiple, they all need different names!
+  */
+
+  /* #post-image-input2 {
+    visibility: hidden;
+  } */
+
+  /*
+    As before, we simply style the label as a button
+    In this configuration, the button itself will also provide the thumbnail.
+  */
+
+  .file-input-labels-noname {
+    position: absolute;
+    top: -48px;
+    right: 0px;
+    display: block;
+    border-radius: 6px;
+    color: var(--minimal-border);
+    background-color: var(--minimal-background);
+    width: 120px;
+    height: 120px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .file-input-labels-noname:hover {
+    cursor: pointer;
+  }
+
+  /*
+    In this configuration, I've chosen to put the border on the image tag.
+  */
+
+  .thumbnails-noname {
+    width: 120px;
+    height: 120px;
+    border: 2px solid var(--minimal-border);
+    border-radius: 6px;
+  }
+
 .createInputs {
     margin: 10px 0;
     width: 275px;

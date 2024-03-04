@@ -47,7 +47,7 @@ export default function CreateBusiness() {
     //images
     const [imageLoading, setImageLoading] = useState(false);
     const [icon, setIcon] = useState(null);
-    const [droppedFiles, setDroppedFiles] = useState([])
+    const [displayImage, setDisplayImage] = useState(null);
 
     //state variables regarding the hours of operation section
     const [hours, setHours] = useState('')
@@ -119,6 +119,17 @@ export default function CreateBusiness() {
 
     }
 
+    const handleImageSelect = e => {
+        e.stopPropagation();
+
+        const newImageURL = URL.createObjectURL(e.target.files[0])
+
+        setIcon(e.target.files[0])
+        setDisplayImage(newImageURL)
+
+
+    }
+
     return (
         <div id='createBusinessPage'>
 
@@ -149,9 +160,9 @@ export default function CreateBusiness() {
                         <img className="" height="40" width="40" src="https://s3-media0.fl.yelpcdn.com/assets/public/40x40_add_photos_v2.yji-b3ffe3d530062cb147cb.svg"/>
                     </div>
                     <div id='bizNameInputContainer'>
-                        <label htmlFor="photo">Photos are one of the biggest factors consumers use to evaluate
-                        a business. Make sure your photo shows your business at its best. {errors.name && <span>{errors.name}</span>}</label>
-                        <Dropzone id='dropZone' onDrop={acceptedFiles => setDroppedFiles([...droppedFiles, ...acceptedFiles])}>
+                        <div htmlFor="photo">Photos are one of the biggest factors consumers use to evaluate
+                        a business. Make sure your photo shows your business at its best. {errors.name && <span>{errors.name}</span>}</div>
+                        {/* <Dropzone id='dropZone' onDrop={acceptedFiles => setDroppedFiles([...droppedFiles, ...acceptedFiles])}>
                           {({getRootProps, getInputProps}) => (
                             <section>
                                 <div className='uploadImgPreviewsContainer'>
@@ -168,16 +179,23 @@ export default function CreateBusiness() {
                               </div>
                             </section>
                           )}
-                        </Dropzone>
-                        {/* <input
+                        </Dropzone> */}
+                        <div className="file-inputs-container">
+                          <input type="file" accept="image/png, image/jpeg, image/jpg" id="post-image-input2" onChange={handleImageSelect}></input>
+                          <label htmlFor="post-image-input2" className="file-input-labels-noname"><img src={displayImage} className="thumbnails-noname"></img></label>
+                        </div>
+                        {/* <div className='uploadImgContainer'>
+                           <input
                             className='createInputs'
                             type="file"
                             name="photo"
-                            accept='image/*'
-                            onChange={e => {setIcon(e.target.files[0]); console.log(e, e.target.files)}}
+                            accept='image/png, image/jpg, image/jpeg, image/tif, image/tiff, image/bmp'
+                            onChange={e => {handleImageSelect; console.log(e, e.target.files)}}
                             required
                             multiple
-                        /> */}
+                            />
+                        </div> */}
+
                     </div>
                 </div>
                 <div className='createDividers'></div>

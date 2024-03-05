@@ -109,7 +109,6 @@ export default function CreateBusiness() {
 
         const backendResponse = await dispatch(thunkCreateBusiness(formData))
         .catch(async res => {
-            console.log(res)
             return setErrors(res)});
 
         if (backendResponse && !backendResponse.errors) {

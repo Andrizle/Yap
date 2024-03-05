@@ -53,8 +53,9 @@ input::-webkit-inner-spin-button {
 }
 
 .file-inputs-container {
-    position: relative; /* This allows the elements within it to be positioned without taking this element out of the document flow. As it's parent is NOT positioned, it only effects the children. */
-    margin-bottom: 32px;
+    align-items: end;
+    display: flex;
+    justify-content: space-between;
   }
 
   /*
@@ -72,10 +73,7 @@ input::-webkit-inner-spin-button {
   */
 
   .file-input-labels-noname {
-    position: absolute;
-    top: -48px;
-    right: 0px;
-    display: block;
+    margin-top: 10px;
     border-radius: 6px;
     color: var(--minimal-border);
     background-color: var(--minimal-background);

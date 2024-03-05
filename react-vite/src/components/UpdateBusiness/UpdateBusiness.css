@@ -1,0 +1,17 @@
+.edit-file-inputs-container {
+    display: flex;
+}
+
+.edit-file-input-labels-noname {
+    left: 0;
+    margin-top: 10px;
+    position: relative;
+}
+
+.edit-file-input-labels-noname:hover {
+    cursor: pointer;
+  }
+
+#edit-image-input2 {
+    visibility: hidden;
+}

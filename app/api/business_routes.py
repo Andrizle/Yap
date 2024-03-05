@@ -174,10 +174,26 @@ def update_business(id):
     form = BusinessForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        icon = form.data['icon']
+
+
         if user["id"] == business.owner_id:
+            if icon is not None:
+                remove_file_from_s3(business.icon)
+                icon.filename = get_unique_filename(icon.filename)
+                upload = upload_file_to_s3(icon)
+                print(upload)
+
+                if 'url' not in upload:
+                # if the dictionary doesn't have a url key
+                # it means that there was an error when you tried to upload
+                # so you send back that error message (and you printed it above)
+                    return {'errors': {'message': 'error with upload'}}, 401
+
+                url = upload['url']
+                business.icon = url
 
             business.name = form.name.data
-            business.icon = 'https://s3-media0.fl.yelpcdn.com/assets/public/default_biz_avatar_44x44_v2@2x.yji-ae7f90b9345a64b4c0bd.png'
             business.category = form.category.data
             business.price = form.price.data
             business.review_count = form.review_count.data or 0
@@ -209,6 +225,7 @@ def delete_business(id):
     business_to_delete = business.to_dict()
 
     if user["id"] == business_to_delete['owner_id']:
+        remove_file_from_s3(business.icon)
         db.session.delete(business)
         db.session.commit()
         return {'message': "Successfully deleted"}

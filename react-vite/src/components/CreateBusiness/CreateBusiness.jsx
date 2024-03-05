@@ -113,7 +113,6 @@ export default function CreateBusiness() {
             return setErrors(res)});
 
         if (backendResponse && !backendResponse.errors) {
-            console.log('in navigation block ',backendResponse)
             navigate(`/`)
         }
 
@@ -181,21 +180,11 @@ export default function CreateBusiness() {
                           )}
                         </Dropzone> */}
                         <div className="file-inputs-container">
-                          <input type="file" accept="image/png, image/jpeg, image/jpg" id="post-image-input2" onChange={handleImageSelect}></input>
+                          <input type="file" accept="image/png, image/jpeg, image/jpg" id="post-image-input2" onChange={handleImageSelect} required></input>
+                          {displayImage &&
                           <label htmlFor="post-image-input2" className="file-input-labels-noname"><img src={displayImage} className="thumbnails-noname"></img></label>
+                          }
                         </div>
-                        {/* <div className='uploadImgContainer'>
-                           <input
-                            className='createInputs'
-                            type="file"
-                            name="photo"
-                            accept='image/png, image/jpg, image/jpeg, image/tif, image/tiff, image/bmp'
-                            onChange={e => {handleImageSelect; console.log(e, e.target.files)}}
-                            required
-                            multiple
-                            />
-                        </div> */}
-
                     </div>
                 </div>
                 <div className='createDividers'></div>

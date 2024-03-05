@@ -5,6 +5,7 @@
 .bizIcon {
     border-radius: 5px;
     -webkit-user-drag: none;
+    width: 330px;
 }
 
 .bizTile {

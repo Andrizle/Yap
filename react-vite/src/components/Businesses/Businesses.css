@@ -65,6 +65,10 @@
     text-decoration: none;
 }
 
+.bizIcon {
+    width: 330px;
+}
+
 .bizDetailsContainer {
     margin: 0 20px;
 }

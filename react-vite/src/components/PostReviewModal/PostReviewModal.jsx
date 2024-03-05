@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { thunkPostReview } from '../../redux/reviews';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import RatingInput from './RatingInput';
 import './PostReviewModal.css';
 import { thunkFetchBusinesses } from '../../redux/business';

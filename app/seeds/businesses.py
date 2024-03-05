@@ -6,20 +6,19 @@ from sqlalchemy.sql import text
 def seed_businesses():
     #restaurants
     savor = Business(
-          name = "Savor Bistro",
-          category = "Restaurants",
-          price = "$$$",
-          phone = "1 (555) 123-4567",
-          street_address = "123 Main Street",
-          suite_unit = '',
-          country = 'United States',
-          zip_code = '55123',
-          city = "Cityville",
-          state = "LA",
-          hours = "Mon - Sat: 11:00 AM - 9:00 PM",
-          owner_id = 2,
-          rating = 0,
-          review_count = 0
+        name = "Savor Bistro",
+        category = "Restaurants",
+        price = "$$$",
+        phone = "1 (555) 123-4567",
+        street_address = "123 Main Street",
+        suite_unit = '',
+        country = 'United States',
+        zip_code = '55123',
+        city = "Cityville",
+        state = "LA",
+        hours = "Mon - Sat: 11:00 AM - 9:00 PM",
+        owner_id = 2,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/savorBistro.jpg'
     )
     demo_biz = Business(
         name = "Crispy Delights",
@@ -34,8 +33,8 @@ def seed_businesses():
         state = "FL",
         hours = "Mon - Fri : 10:00 AM - 7:00 PM",
         owner_id = 1,
-        rating = 0,
-        review_count = 0)
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/crispyDelight.jpg'
+    )
     flavors = Business(
         name = "Flavors of Fusion",
         category = "Restaurants",
@@ -49,8 +48,8 @@ def seed_businesses():
         state = "TX",
         hours = "Tues - Sun : 12:00 PM - 8:00 PM",
         owner_id = 2,
-        rating = 0,
-        review_count = 0)
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/flavorsFusion.jpg'
+    )
     green = Business(
         name = "The Green Platter",
         category = "Restaurants",
@@ -64,8 +63,8 @@ def seed_businesses():
         state = "CA",
         hours = "Wed - Sat : 5:00 PM - 11:00 PM",
         owner_id = 3,
-        rating = 0,
-        review_count = 0)
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/greenPlatter.jpg'
+    )
     mediterranean = Business(
         name = "Mediterranean Breeze",
         category = "Restaurants",
@@ -79,8 +78,7 @@ def seed_businesses():
         state = "NY",
         hours = "Thurs - Mon : 1:00 PM - 10:00 PM",
         owner_id = 1,
-        rating = 0,
-        review_count = 0
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/medibreeze.jpg'
     )
 
     db.session.add(demo_biz)
@@ -101,7 +99,8 @@ def seed_businesses():
         zip_code = 10005,
         city = "Cityville",
         state = "CA",
-        owner_id = 3
+        owner_id = 3,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/speedyWheels.jpg'
     )
     elite = Business(
         name = "Elite Auto Services",
@@ -114,7 +113,8 @@ def seed_businesses():
         zip_code = 20010,
         city = "Townsville",
         state = "TX",
-        owner_id = 4
+        owner_id = 4,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/eliteAuto.jpg'
     )
     tire = Business(
         name = "Tire Masters",
@@ -127,7 +127,8 @@ def seed_businesses():
         zip_code = 30015,
         city = "Villagetown",
         state = "NY",
-        owner_id = 2
+        owner_id = 2,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/tireMasters.jpg'
     )
     auto = Business(
         name = "AutoTech Solutions",
@@ -140,7 +141,8 @@ def seed_businesses():
         zip_code = 40020,
         city = "Hamletville",
         state = "FL",
-        owner_id = 5
+        owner_id = 5,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/autoTech.jpg'
     )
     city = Business(
         name = "City Motors",
@@ -153,7 +155,8 @@ def seed_businesses():
         zip_code = 50025,
         city = "Countryside",
         state = "CA",
-        owner_id = 1
+        owner_id = 1,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/cityMotors.jpg'
     )
 
     db.session.add(speed)
@@ -175,7 +178,8 @@ def seed_businesses():
         zip_code = 10001,
         city = "Cityville",
         state = "CA",
-        owner_id = 1
+        owner_id = 1,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/velvetNights.jpg'
     )
     neon = Business(
         name = "Neon Nights Club",
@@ -188,7 +192,8 @@ def seed_businesses():
         zip_code = 20010,
         city = "Townsville",
         state = "TX",
-        owner_id = 2
+        owner_id = 2,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/neonNights.jpg'
     )
     moonlight = Business(
         name = "Moonlight Bar & Grill",
@@ -201,7 +206,8 @@ def seed_businesses():
         zip_code = 30015,
         city = "Beachtown",
         state = "FL",
-        owner_id = 3
+        owner_id = 3,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/moonlight.jpg'
     )
 
     db.session.add(velvet)
@@ -221,7 +227,8 @@ def seed_businesses():
         zip_code = 10010,
         city = "Cityville",
         state = "CA",
-        owner_id = 1
+        owner_id = 1,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/fitzone.jpg'
     )
     adventure = Business(
         name = "Adventure Trekking Co.",
@@ -234,7 +241,8 @@ def seed_businesses():
         zip_code = 20020,
         city = "Townsville",
         state = "TX",
-        owner_id = 2
+        owner_id = 2,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/adventure.jpg'
     )
 
     db.session.add(fitZone)
@@ -253,7 +261,8 @@ def seed_businesses():
         zip_code = 10010,
         city = "Cityville",
         state = "CA",
-        owner_id = 1
+        owner_id = 1,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/glowSpa.jpg'
     )
     tranquil = Business(
         name = "Tranquil Serenity Salon",
@@ -266,7 +275,8 @@ def seed_businesses():
         zip_code = 20020,
         city = "Townsville",
         state = "TX",
-        owner_id = 2
+        owner_id = 2,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/tranquil.jpg'
     )
 
     db.session.add(glow)
@@ -284,7 +294,8 @@ def seed_businesses():
         zip_code = 10010,
         city = "Cityville",
         state = "CA",
-        owner_id = 1
+        owner_id = 1,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/fashionForward.jpg'
     )
     tech = Business(
         name = "Tech Haven Electronics",
@@ -297,7 +308,8 @@ def seed_businesses():
         zip_code = 20020,
         city = "Townsville",
         state = "TX",
-        owner_id = 2
+        owner_id = 2,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/techHaven.jpg'
     )
     greenT = Business(
         name = "Green Thumb Garden Center",
@@ -310,7 +322,8 @@ def seed_businesses():
         zip_code = 30030,
         city = "Greenville",
         state = "FL",
-        owner_id = 3
+        owner_id = 3,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/greenThumb.jpg'
     )
     bookworm = Business(
         name = "Bookworm Bookstore",
@@ -323,7 +336,8 @@ def seed_businesses():
         zip_code = 40040,
         city = "Booktown",
         state = "NY",
-        owner_id = 4
+        owner_id = 4,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/bookworm.jpg'
     )
     home = Business(
         name = "Home Harmony Furniture",
@@ -336,7 +350,8 @@ def seed_businesses():
         zip_code = 50050,
         city = "Homestead",
         state = "CA",
-        owner_id = 5
+        owner_id = 5,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/homeHarmony.jpg'
     )
 
     db.session.add(fashion)
@@ -358,7 +373,8 @@ def seed_businesses():
         zip_code = 10010,
         city = "Cityville",
         state = "CA",
-        owner_id = 1
+        owner_id = 1,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/handyHome.jpg'
     )
     sparkle = Business(
         name = "Sparkle Cleaners",
@@ -371,7 +387,8 @@ def seed_businesses():
         zip_code = 20020,
         city = "Townsville",
         state = "TX",
-        owner_id = 2
+        owner_id = 2,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/sparkleCleaners.jpg'
     )
     land = Business(
         name = "Green Thumb Landscaping",
@@ -384,7 +401,8 @@ def seed_businesses():
         zip_code = 30030,
         city = "Greenville",
         state = "FL",
-        owner_id = 3
+        owner_id = 3,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/greenThumbLand.jpg'
     )
 
     db.session.add(handy)
@@ -404,7 +422,8 @@ def seed_businesses():
         zip_code = 10010,
         city = "Cityville",
         state = "CA",
-        owner_id = 1
+        owner_id = 1,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/cozyCafe.jpg'
     )
     paws = Business(
         name = "Paws & Whiskers Pet Store",
@@ -417,7 +436,8 @@ def seed_businesses():
         zip_code = 20020,
         city = "Townsville",
         state = "TX",
-        owner_id = 2
+        owner_id = 2,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/paws.jpg'
     )
     dream = Business(
         name = "Dream Home Realty",
@@ -430,7 +450,8 @@ def seed_businesses():
         zip_code = 30030,
         city = "Greenville",
         state = "FL",
-        owner_id = 3
+        owner_id = 3,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/dreamHome.jpg'
     )
     sunset = Business(
         name = "Sunset View Hotel",
@@ -443,7 +464,8 @@ def seed_businesses():
         zip_code = 40040,
         city = "Beachtown",
         state = "SC",
-        owner_id = 4
+        owner_id = 4,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/sunset.jpg'
     )
     healthy = Business(
         name = "Healthy Heart Clinic",
@@ -456,7 +478,8 @@ def seed_businesses():
         zip_code = 50050,
         city = "Healthville",
         state = "CA",
-        owner_id = 5
+        owner_id = 5,
+        icon = 'https://andrizlebuckets.s3.us-west-1.amazonaws.com/healthyHeart.jpg'
     )
 
     db.session.add(cozy)

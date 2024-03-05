@@ -32,10 +32,10 @@ import './UpdateBusiness.css'
 export default function UpdateBusiness() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const currentUser = useSelector(state => state.session.user)
     const { businessId } = useParams();
     const business = useSelector(state => state.business.allBusinesses[businessId])
     const [name, setName] = useState("")
-    const [icon, setIcon] = useState("")
     const [category, setCategory] = useState("")
     const [price, setPrice] = useState("")
     const [phone, setPhone] = useState("")
@@ -46,6 +46,12 @@ export default function UpdateBusiness() {
     const [zip_code, setZip_code] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
+
+    //images
+    const [imageLoading, setImageLoading] = useState(false);
+    const [icon, setIcon] = useState(null);
+    const [displayImage, setDisplayImage] = useState(null);
+
 
     //state variables for regarding the hours of operation section
     const [hours, setHours] = useState('')
@@ -96,6 +102,7 @@ export default function UpdateBusiness() {
             setZip_code(business.zip_code)
             setCity(business.city)
             setState(business.state)
+            setDisplayImage(business.icon)
 
             const hoursArr = business.hours.split(' ')
 
@@ -114,31 +121,45 @@ export default function UpdateBusiness() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const updatedBusiness = {
-            name,
-            category,
-            price,
-            phone,
-            street_address,
-            suite_unit,
-            country,
-            zip_code,
-            city,
-            state,
-            hours,
-            // is_open_now
-        }
+        const formData = new FormData();
+
+        formData.append("icon", icon)
+        formData.append("owner_id", currentUser.id)
+        formData.append("name", name)
+        formData.append("category", category)
+        formData.append("price", price)
+        formData.append("phone", phone)
+        formData.append("street_address", street_address)
+        formData.append("suite_unit", suite_unit)
+        formData.append("country", country)
+        formData.append("zip_code", zip_code)
+        formData.append("city", city)
+        formData.append("state", state)
+        formData.append("hours", hours)
+
+        setImageLoading(true);
 
 
 
-        const backendResponse = await dispatch(thunkEditBusiness(businessId, updatedBusiness))
+        const backendResponse = await dispatch(thunkEditBusiness(businessId, formData))
 
 
-        if (!backendResponse.errors) {
+        if (backendResponse && !backendResponse.errors) {
             navigate('/business/current')
         } else {
             setErrors(backendResponse.errors)
         }
+    }
+
+    const handleImageSelect = e => {
+        e.stopPropagation();
+
+        const newImageURL = URL.createObjectURL(e.target.files[0])
+
+        setIcon(e.target.files[0])
+        setDisplayImage(newImageURL)
+
+
     }
 
     return (
@@ -162,6 +183,40 @@ export default function UpdateBusiness() {
                             onChange={e => setName(e.target.value)}
                             required
                         />
+                    </div>
+                </div>
+                <div className='createDividers'></div>
+                <h2>Change Preview Photo</h2>
+                <div id='bizNameContainer'>
+                    <div className='bizNameIcon'>
+                        <img className="" height="40" width="40" src="https://s3-media0.fl.yelpcdn.com/assets/public/40x40_add_photos_v2.yji-b3ffe3d530062cb147cb.svg"/>
+                    </div>
+                    <div id='bizNameInputContainer'>
+                        <div htmlFor="photo">Click on the thumbnail below if you'd like to upload a new preview image. {errors.name && <span>{errors.name}</span>}</div>
+                        {/* <Dropzone id='dropZone' onDrop={acceptedFiles => setDroppedFiles([...droppedFiles, ...acceptedFiles])}>
+                          {({getRootProps, getInputProps}) => (
+                            <section>
+                                <div className='uploadImgPreviewsContainer'>
+                                {droppedFiles && droppedFiles.map(file => {
+                                    const newImageURL = URL.createObjectURL(file)
+                                    return (
+                                            <img src={newImageURL} className='uploadImgPreviews' />
+                                            )
+                                        })}
+                                </div>
+                              <div {...getRootProps()}>
+                                <input {...getInputProps()} />
+                                <p>Drag 'n' drop some files here, or click to select files</p>
+                              </div>
+                            </section>
+                          )}
+                        </Dropzone> */}
+                        <div className="edit-file-inputs-container">
+                          <label htmlFor="edit-image-input2" className="edit-file-input-labels-noname">
+                            <img src={displayImage} className="thumbnails-noname"></img>
+                            <input type="file" accept="image/png, image/jpeg, image/jpg" id="edit-image-input2" onChange={handleImageSelect}></input>
+                        </label>
+                        </div>
                     </div>
                 </div>
                 <div className='createDividers'></div>
@@ -239,6 +294,7 @@ export default function UpdateBusiness() {
                         </div>
                     </div>
                 </div>
+
                     <div className='createDividers'></div>
                 <h2>Phone Number</h2>{errors.phone && <span>{errors.phone}</span>}
                 <div id='phoneContainer'>
@@ -610,6 +666,7 @@ export default function UpdateBusiness() {
                     <button type='submit'
                         className='modalBtn'
                     disabled={!validPhone}>Save</button>
+                    {(imageLoading)&& <p>Loading...</p>}
                 </div>
             </form>
         </div>

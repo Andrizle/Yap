@@ -15,11 +15,13 @@ Current features:
 - Signup and Login
 - Display, create, update and delete businesses (Main feature)
 - Display, create, update and delete reviews for businesses (secondary feature)
+- Businesses can be filtered by category
 
 Soon to be implemented:
-- Search functionality where businesses can be searched for by keywords or filtered by categories
+- Search functionality where businesses can be searched for by keywords
 - Display, upload, update and delete images for business. Images can be uploaded to a business by the owner, or by other users writing a review for the business
 - Google API so that users can easily find directions to each business
+- Display, create, update and delete items/services the business offers which will be optional, and conditionally rendered
 
 
 

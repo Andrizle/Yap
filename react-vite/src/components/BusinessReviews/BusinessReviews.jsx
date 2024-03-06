@@ -5,7 +5,9 @@ import { thunkFetchReviews } from "../../redux/reviews";
 import { thunkFetchBusiness } from "../../redux/business";
 import RatingDisplay from "../Businesses/RatingDisplay";
 import OpenModalButton from "../OpenModalButton";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
+import UpdateReviewModal from '../UpdateReviewModal'
 import './BusinessReviews.css'
 
 export default function BusinessReviews() {
@@ -13,7 +15,7 @@ export default function BusinessReviews() {
     const { businessId } = useParams();
     const sessionUser = useSelector(state => state.session.user)
     const reviews = Object.values(useSelector(state => state.reviews.business))
-    const business = useSelector(state => state.business)
+    const business = useSelector(state => state.business.allBusinesses[businessId])
 
     function compareNumbers(a, b) {
         return b.id - a.id;
@@ -24,7 +26,7 @@ export default function BusinessReviews() {
             dispatch(thunkFetchBusiness(businessId))
         }, [dispatch, businessId, business.review_count])
 
-    if (!reviews) return null;
+    if (!reviews || !business) return null;
 
     const month = date => {
         const newDate = Date(date)
@@ -46,10 +48,18 @@ export default function BusinessReviews() {
                     </div>
                     <div className="reviewText">{review.review}</div>
                     {sessionUser?.id == review.author_id ?
-                        <OpenModalButton
-                            buttonText='Delete'
-                            modalComponent={<DeleteReviewModal review={review} />}
-                        /> :
+                        <div className='reviewButtonsContainer'>
+                            <OpenModalButton
+                                buttonText='Update'
+                                modalComponent={<UpdateReviewModal reviewId={review.id} business={business} stSlice='business'/>}
+                            />
+                            <OpenModalMenuItem
+                                className='redBtn'
+                                itemText="Delete"
+                                modalComponent={<DeleteReviewModal review={review} />}
+                            />
+                        </div>
+                        :
                         null
                     }
                 </div>

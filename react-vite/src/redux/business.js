@@ -108,7 +108,7 @@ export const thunkCreateBusiness = business => async dispatch => {
 
         return business
     } else {
-        console.log('There was an error making your post!', await response.json())
+        // console.log('There was an error making your post!', await response.json())
         return response.json();
     }
 }
@@ -127,7 +127,7 @@ export const thunkEditBusiness = (businessId, business) => async dispatch => {
 
         return business
     } else {
-        console.log('There was an error editing your post!', await response.json())
+        // console.log('There was an error editing your post!', await response.json())
         return response.json();
     }
 }

@@ -11,3 +11,12 @@
 .reviewDate {
     margin: 10px 0;
 }
+
+.reviewButtonsContainer {
+    display: flex;
+    padding: 10px 0;
+}
+
+.reviewButtonsContainer > * {
+    margin-right: 8px;
+}

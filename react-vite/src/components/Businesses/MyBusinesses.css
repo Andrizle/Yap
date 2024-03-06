@@ -24,8 +24,14 @@
     width: 100%;
 }
 
-.bizImages {
+.myBizImgContainer {
     border-radius: 7px;
+    height: 375px;
+    overflow-y: hidden;
+}
+
+.bizImages {
+    min-height: 100%;
     width: 100%;
 }
 

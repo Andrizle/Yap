@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react';
 import RatingInput from '../PostReviewModal/RatingInput';
 import './UpdateReviewModal.css';
 
-export default function UpdateReviewModal({reviewId, business}) {
+export default function UpdateReviewModal({reviewId, business, stSlice}) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user)
-    const review = useSelector(state => state.reviews.user[reviewId])
+    const review = useSelector(state => state.reviews[stSlice][reviewId])
     const { closeModal } = useModal();
     const [reviewText, setReviewText] = useState('');
     const [stars, setStars] = useState('');
@@ -22,10 +22,10 @@ export default function UpdateReviewModal({reviewId, business}) {
     }, [review])
 
     useEffect(() => {
-        if (review.length < 10 || !stars) {
+        if (review?.length < 10 || !stars) {
             setAllow(true)
         } else {setAllow(false)}
-    }, [review.length, stars])
+    }, [review?.length, stars])
 
     const updateReview = e => setReviewText(e.target.value)
 
@@ -54,6 +54,7 @@ export default function UpdateReviewModal({reviewId, business}) {
     const onChange = (num) => {
         setStars(parseInt(num));
       };
+
 
     return (
         <div id='reviewModal'>

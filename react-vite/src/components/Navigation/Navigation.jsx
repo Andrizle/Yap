@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import { useSelector } from "react-redux";
-import ReactSearchBox from "react-search-box"
+// import ReactSearchBox from "react-search-box"
 import "./Navigation.css";
 
 function Navigation() {
   const sessionUser = useSelector(state => state.session.user)
-  const businesses = useSelector(state => state.business.allBusinesses)
+  // const businesses = useSelector(state => state.business.allBusinesses)
 
   return (
     <div>
@@ -16,7 +16,7 @@ function Navigation() {
             <img src='/yap logo.png' id="webLogo" />
           </NavLink>
         </div>
-        <div id="searchBarContainer">
+        {/* <div id="searchBarContainer">
           <div id="searchBarDiv" target={document.getElementById('searchInput')}>
             <label id="searchInputContainer"
               onClick={() => {throw alert('Feature coming soon')}}>
@@ -36,7 +36,7 @@ function Navigation() {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* <div id="searchBarContainer">
           <div id="searchBarDiv" target={document.getElementById('searchInput')}>

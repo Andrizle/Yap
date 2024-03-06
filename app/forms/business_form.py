@@ -21,7 +21,7 @@ def category_validation(form, field):
 
 class BusinessForm(FlaskForm):
     name = StringField('Business name', validators=[DataRequired(), Length(max=128, message="Length of server name must be less than 128 characters")])
-    icon =FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    icon =FileField("Image File", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     category = StringField('category', validators=[category_validation])
     price = StringField('price expense', validators=[DataRequired(), price_validation])
     review_count = IntegerField('review count')

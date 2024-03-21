@@ -192,7 +192,7 @@ export default function UpdateBusiness() {
                         <img className="" height="40" width="40" src="https://s3-media0.fl.yelpcdn.com/assets/public/40x40_add_photos_v2.yji-b3ffe3d530062cb147cb.svg"/>
                     </div>
                     <div id='bizNameInputContainer'>
-                        <div htmlFor="photo">Click on the thumbnail below if you'd like to upload a new preview image. {errors.name && <span>{errors.name}</span>}</div>
+                        <div htmlFor="photo">Click on the thumbnail below if you&apos;d like to upload a new preview image. {errors.name && <span>{errors.name}</span>}</div>
                         {/* <Dropzone id='dropZone' onDrop={acceptedFiles => setDroppedFiles([...droppedFiles, ...acceptedFiles])}>
                           {({getRootProps, getInputProps}) => (
                             <section>

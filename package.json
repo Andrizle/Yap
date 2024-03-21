@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@react-google-maps/api": "^2.19.3",
     "react-dropzone": "^14.2.3",
     "react-search-box": "^3.0.0"
   }

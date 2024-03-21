@@ -4,6 +4,8 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 
 const MapPageA= () => {
+  const googleKey = process.env.REACT_APP_GOOGLE_MAPS_KEY
+  console.log(process.env.REACT_APP_GOOGLE_MAPS_KEY)
 
 
 //This sets the center of the map. This must be set BEFORE the map loads
@@ -14,8 +16,8 @@ const [currentPosition, setCurrentPosition] = useState({lat:43.11016617798622,ln
 
 const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: process.env.REACT_APP_MAPS_KEY
-  })
+    googleMapsApiKey: googleKey
+})
 
   const containerStyle = {
     width: '800px',

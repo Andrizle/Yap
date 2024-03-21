@@ -4,6 +4,7 @@ import { thunkFetchBusinesses } from '../../redux/business';
 import './Businesses.css'
 import { Link, useNavigate } from 'react-router-dom';
 import RatingDisplay from './RatingDisplay';
+import MapPageA from '../GoogleMaps/GoogleMaps';
 
 
 function Businesses() {
@@ -74,49 +75,54 @@ function Businesses() {
                 </div>
             </div>
             <div id='categoryDivider'></div>
-            <div id='bizTilesContainer'>
-                {businesses.map(business =>
-                    <div key={business.id} className='biz'>
-                        <Link to={`/business/${business.id}`} className='allBizTiles' key={business.id}>
-                            <img src={business.icon} className='bizIcon' />
-                            <div className='bizDetailsContainer'>
-                                <h2>
-                                    {business.name}
-                                </h2>
-                                {
-                                    business.review_count != 0 ?
-                                    <div className='bizRatingContainer'>
-                                        <div className='bizStarDisplay'>
-                                            <RatingDisplay stars={business.rating}/>
+            <div>
+                <div id='bizTilesContainer'>
+                    {businesses.map(business =>
+                        <div key={business.id} className='biz'>
+                            <Link to={`/business/${business.id}`} className='allBizTiles' key={business.id}>
+                                <img src={business.icon} className='bizIcon' />
+                                <div className='bizDetailsContainer'>
+                                    <h2>
+                                        {business.name}
+                                    </h2>
+                                    {
+                                        business.review_count != 0 ?
+                                        <div className='bizRatingContainer'>
+                                            <div className='bizStarDisplay'>
+                                                <RatingDisplay stars={business.rating}/>
+                                            </div>
+                                            <div>
+                                            {business.rating.toFixed(1)}
+                                            </div>
+                                            <div className='bizReviewCountContainer'>
+                                                ({business.review_count} {business.review_count === 1 ? 'review' : 'reviews'})
+                                            </div>
                                         </div>
-                                         <div>
-                                        {business.rating.toFixed(1)}
+                                        : null
+                                    }
+                                    <div className='bizCatPriceContainer'>
+                                        <div className='bizCategoryContainer'>
+                                        {business.category}
                                         </div>
-                                        <div className='bizReviewCountContainer'>
-                                            ({business.review_count} {business.review_count === 1 ? 'review' : 'reviews'})
+                                        <div className='bizPriceContainer'>
+                                            {business.price}
                                         </div>
                                     </div>
-                                    : null
-                                }
-                                <div className='bizCatPriceContainer'>
-                                    <div className='bizCategoryContainer'>
-                                    {business.category}
+                                    <div className='bizCityContainer'>
+                                        {business.city}
                                     </div>
-                                    <div className='bizPriceContainer'>
-                                        {business.price}
+                                    <div>
+                                        {business.hours}
                                     </div>
                                 </div>
-                                <div className='bizCityContainer'>
-                                    {business.city}
-                                </div>
-                                <div>
-                                    {business.hours}
-                                </div>
-                            </div>
-                        </Link>
-                        <div className='allBizTilesDivider'></div>
-                    </div>
-                )}
+                            </Link>
+                            <div className='allBizTilesDivider'></div>
+                        </div>
+                    )}
+                </div>
+                <div id='bizGoogleMap'>
+                    <MapPageA />
+                </div>
             </div>
             </div>
         </div>
